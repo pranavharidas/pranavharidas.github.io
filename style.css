@@ -224,8 +224,8 @@ p.leading-relaxed {
     color: #334155; /* slate-700 */
 }
 
-/* KaTeX display math centering */
-.katex-display {
+/* MathJax Styling */
+.math {
     text-align: center;
     margin: 1em 0;
 }
