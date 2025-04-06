@@ -224,11 +224,14 @@ p.leading-relaxed {
     color: #334155; /* slate-700 */
 }
 
-/* MathJax Styling */
-.math {
-    text-align: center;
-    margin: 1em 0;
-}
+
+/* Center MathJax display math */
+        .display-math {
+            text-align: center;
+            margin: 1em 0;
+            overflow-x: auto; /* Allow horizontal scrolling if needed */
+        }
+
 
 /* Button styling */
 .btn {
