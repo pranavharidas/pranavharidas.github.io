@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pranav Haridas - Personal Webpage</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558fYv3mQP6rjrcSoGmgmqWxLuvUj+ggMCYYVcX+75RaLbfVkDu/3QVI" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1jxWxwkS3WAZWw" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script> <style>
+        /* Custom CSS for Pranav Haridas's Personal Webpage */
+
+        /* Base body styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9; /* slate-100 */
+            color: #1e293b; /* slate-800 */
+            margin-top: 5rem; /* Add margin to prevent content overlap with fixed nav */
+        }
+
+        /* Main content container styling */
+        .main-container {
+            max-width: 56rem; /* max-w-4xl */
+            margin: 2rem auto;
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Deeper shadow */
+            overflow: hidden; /* Ensure child elements respect border radius */
+            border: 1px solid #e2e8f0; /* slate-200 */
+        }
+
+        /* Header styling */
+        .page-header {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1); /* Gradient background */
+            color: white;
+            padding: 2rem 1.5rem; /* More padding */
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* Bold */
+            margin-bottom: 0.25rem;
+        }
+        .page-header p {
+            font-size: 1.25rem; /* text-xl */
+            color: #e0f2fe; /* Lighter text color */
+            font-weight: 300; /* Lighter font weight */
+        }
+
+        /* Navigation Menu Styling */
+        .top-nav {
+            background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+            backdrop-filter: blur(8px); /* Blur effect for modern look */
+            -webkit-backdrop-filter: blur(8px); /* Safari support */
+            border-bottom: 1px solid #e2e8f0; /* slate-200 */
+            position: fixed; /* Stick to the top */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50; /* Ensure it's above other content */
+            padding: 0.75rem 1rem; /* Padding */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+        }
+        .top-nav ul {
+            max-width: 56rem; /* Align with main container width */
+            margin: 0 auto; /* Center the list */
+            display: flex;
+            justify-content: center; /* Center items */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 0.5rem 1.5rem; /* Spacing between items */
+            list-style: none;
+            padding: 0;
+        }
+        .top-nav a {
+            color: #475569; /* secondary color (slate-600) */
+            font-weight: 500; /* medium */
+            text-decoration: none;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem; /* rounded-md */
+            transition: background-color 0.2s ease, color 0.2s ease;
+            border-bottom: none; /* Override general link style */
+        }
+        .top-nav a:hover,
+        .top-nav a.active { /* Style for hover and potentially active link */
+            background-color: #e0f2fe; /* primary-light */
+            color: #0369a1; /* primary-dark */
+        }
+        /* Remove hover border from nav links */
+        .top-nav a:hover {
+            border-bottom: none;
+        }
+
+
+        /* Section styling */
+        section {
+            padding: 2rem 1.5rem; /* Increased top/bottom padding */
+            margin-bottom: 0;
+            border-bottom: 1px solid #e2e8f0; /* slate-200 */
+            scroll-margin-top: 6rem; /* Offset for fixed header when jumping to ID */
+        }
+        section:last-child {
+            border-bottom: none;
+        }
+
+        /* Section headings */
+        section h2 {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 600; /* semibold */
+            color: #0369a1; /* primary-dark */
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e0f2fe; /* primary-light */
+            display: inline-block;
+        }
+        section h3 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600;
+            color: #0ea5e9; /* primary */
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* List styling */
+        .styled-list {
+            list-style: none; /* Remove default */
+            padding-left: 0.5rem;
+        }
+        .styled-list li {
+            margin-bottom: 0.85rem;
+            padding-left: 1.25rem; /* Indent for custom bullet */
+            position: relative;
+        }
+        .styled-list li::before { /* Custom bullet point */
+            content: '•';
+            color: #0ea5e9; /* primary */
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1.25em; /* Adjust position */
+            position: absolute;
+            left: 0.75rem; /* Align with padding */
+            top: 0.1em; /* Adjust vertical alignment */
+        }
+
+        /* Specific styling for ordered list (publications) */
+        .publication-list {
+            list-style: none;
+            counter-reset: publication-counter;
+            padding-left: 0.5rem;
+        }
+        .publication-list li {
+            counter-increment: publication-counter;
+            margin-bottom: 1rem;
+            padding-left: 2rem; /* Indent for number */
+            position: relative;
+        }
+        .publication-list li::before {
+            content: counter(publication-counter) ".";
+            position: absolute;
+            left: 0.5rem;
+            top: 0.1rem;
+            font-weight: 600;
+            color: #475569; /* secondary color */
+            width: 1.5rem;
+        }
+
+        /* General Link styling */
+        a {
+            color: #0ea5e9; /* primary */
+            text-decoration: none;
+            transition: color 0.2s ease, border-bottom 0.2s ease;
+            border-bottom: 1px solid transparent;
+        }
+        a:hover {
+            color: #0369a1; /* primary-dark */
+            border-bottom: 1px solid #0ea5e9;
+        }
+
+        /* Specific Link styling within lists */
+        .publication-list a, .course-list a {
+             word-break: break-word;
+             margin-left: 0.5rem;
+        }
+        .publication-list a:hover, .course-list a:hover {
+            background-color: #e0f2fe; /* primary-light */
+            border-radius: 0.25rem;
+            padding: 0.1rem 0.2rem;
+            margin: -0.1rem -0.2rem; /* Adjust margin to keep layout stable */
+            border-bottom: none; /* Remove underline on hover for these specific links */
+        }
+
+        /* Address styling */
+        address {
+            font-style: normal;
+            line-height: 1.6;
+            color: #334155; /* slate-700 */
+        }
+        address strong {
+            color: #1e293b; /* slate-800 */
+        }
+
+        /* Paragraph text styling */
+        p.leading-relaxed {
+            line-height: 1.7;
+            color: #334155; /* slate-700 */
+        }
+
+        /* KaTeX display math centering */
+        .katex-display {
+            text-align: center;
+            margin: 1em 0;
+        }
+
+        /* Responsive adjustments for nav */
+        @media (max-width: 640px) {
+            .top-nav ul {
+                justify-content: flex-start; /* Align left on small screens */
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            body {
+                margin-top: 7rem; /* Adjust margin for potentially taller wrapped nav */
+            }
+             section {
+                scroll-margin-top: 8rem; /* Adjust scroll margin */
+            }
+        }
+    </style>
+
+    <script>
+        // Configure Tailwind CSS (can still be used alongside embedded CSS)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': {
+                            light: '#e0f2fe',
+                            DEFAULT: '#0ea5e9',
+                            dark: '#0369a1'
+                        },
+                        'secondary': '#475569',
+                        'accent': '#f59e0b'
+                    },
+                    // Other Tailwind customizations can go here
+                }
+            }
+        }
+    </script>
+
+</head>
+<body> <nav class="top-nav">
+        <ul>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#teaching">Teaching</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#experience">Experience</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-container">
+
+        <header class="page-header">
+            <h1>Pranav Haridas</h1>
+            <p>Assistant Professor</p>
+        </header>
+
+        <div> <section id="contact">
+                <h2>Contact Information</h2>
+                <address> <p>Kerala School of Mathematics,</p>
+                    <p>Kunnamangalam,</p>
+                    <p>Kozhikode - 673571,</p>
+                    <p>India</p>
+                    <p class="mt-3"> <strong>Email:</strong>
+                        <span>pranav at ksom dot res dot in</span>
+                    </p>
+                </address>
+            </section>
+
+            <section id="research">
+                <h2>Research</h2>
+                <p class="leading-relaxed mb-6"> My research interests broadly lie in Complex Analysis. Currently, I am studying one point one degree quadrature domains in higher dimensions and their properties. In a joint project with Jaikrishnan, I am studying proper holomorphic mappings between domains in several complex variables (SCV). I am also exploring the interplay between SCV and Teichmüller theory with Chitrabhanu.
+                </p>
+
+                <h3>Publications</h3>
+                <ol class="publication-list"> <li>
+                        Quadrature domains in \( C^n \), Computational Methods and Function Theory 15, 2015 (with Kaushal Verma).
+                        <a href="http://link.springer.com/article/10.1007%2Fs40315-014-0090-y" target="_blank">[Link]</a>
+                    </li>
+                    <li>
+                        Comments on the Green’s function of a planar domain, Analysis and Mathematical Physics 8, 2018 (with Diganta Borah, and Kaushal Verma).
+                        <a href="https://link.springer.com/article/10.1007/s13324-017-0177-5" target="_blank">[Link]</a>
+                    </li>
+                    <li>
+                        A 1-point poly-quadrature domain of order 1 not biholomorphic to a complete circular domain, Analysis and Mathematical Physics 9, 2019 (with Jaikrishnan Janardhanan).
+                        <a href="https://link.springer.com/article/10.1007/s13324-018-0263-3" target="_blank">[Link]</a>
+                    </li>
+                    <li>
+                        A note on the smoothness of the Minkowski function, Complex Variables and Elliptic Equations 66, 2021 (with Jaikrishnan Janardhanan).
+                        <a href="https://www.tandfonline.com/eprint/EZJUTCNFXHTH7ATTNDRE/full?target=10.1080/17476933.2020.1727898" target="_blank">[Link]</a>
+                    </li>
+                    <li>
+                         Proper holomorphic mappings of quasi-balanced domains in \( C^3 \), Complex Analysis and its synergies 9, 7 2023 (with Jaikrishnan Janardhanan).
+                        <a href="https://doi.org/10.1007/s40627-023-00117-7" target="_blank">[Link/DOI]</a>
+                    </li>
+                </ol>
+            </section>
+
+            <section id="teaching">
+                <h2>Teaching</h2>
+                 <h3>Courses</h3>
+                <ul class="styled-list course-list"> <li>Riemann Surfaces (Fall 2018 at Chennai Mathematical Institute)</li>
+                    <li>Linear Algebra and Numerical Analysis (Spring 2016 and Spring 2017 at Indian Institute of Technology Madras)</li>
+                    <li>Linear Algebra (Fall 2020 in the online portal Swayam Central. Please <a href="https://nptel.ac.in/courses/111106135" target="_blank">click here</a> for the online lectures)</li>
+                    <li>Complex Analysis (Spring 2020 in the online portal Swayam Central. Please <a href="https://nptel.ac.in/courses/111106141" target="_blank">click here</a> for the online lectures)</li>
+                    <li>Topology (Fall 2020 at Kerala School of Mathematics)</li>
+                    <li>Complex Analysis (Spring 2021 at Kerala School of Mathematics)</li>
+                    <li>Differential Geometry (Fall 2021 and Spring 2022 at Kerala School of Mathematics)</li>
+                    <li>Algebraic Topology (Fall 2022 at Kerala School of Mathematics)</li>
+                    <li>Differential Equations (Spring 2023 at Kerala School of Mathematics)</li>
+                </ul>
+                 <p class="leading-relaxed mt-6"> In this semester I am offering a course on Algebraic Topology at Kerala School of Mathematics.
+                 </p>
+            </section>
+
+            <section id="education">
+                <h2>Education</h2>
+                <ul class="styled-list"> <li>B.Math(Hons.) from Indian Statistical Institute, Bangalore</li>
+                    <li>ALGANT Masters from Università di Padova and Université Paris-Sud</li>
+                    <li>PhD from Indian Institute of Science, Bangalore</li>
+                </ul>
+            </section>
+
+            <section id="experience"> <h2>Post-doctoral experience</h2>
+                <p class="leading-relaxed"> I was a Research Associate at Indian Institute of Science, Bangalore from July 2015 to June 2016. Thereafter, I was a post-doctoral fellow at Indian Institute of Technology Madras from July 2016 to June 2018 and Chennai Mathematical Institute from July 2018 to February 2019.
+                </p>
+            </section>
+
+        </div> </div> <script>
+        // Simple script to highlight active nav link based on scroll position
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.top-nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                // Adjust offset based on nav height + some buffer
+                // Consider section visibility more accurately
+                const scrollPosition = pageYOffset;
+                const navHeightOffset = 80; // Approximate height of nav bar + buffer
+                
+                // Check if the top of the section is within the viewport (considering nav offset)
+                // and if the bottom of the section is also below the top offset point
+                if (scrollPosition >= sectionTop - navHeightOffset && scrollPosition < sectionTop + sectionHeight - navHeightOffset) {
+                     current = section.getAttribute('id');
+                }
+                // If scrolled past the last section, keep it active
+                else if (scrollPosition >= sections[sections.length - 1].offsetTop - navHeightOffset) {
+                     current = sections[sections.length - 1].getAttribute('id');
+                }
+
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+             // Default to first link if near top and no section is 'current'
+            if (pageYOffset < 200 && !current) {
+                 navLinks.forEach(link => link.classList.remove('active'));
+                 if(navLinks.length > 0 && navLinks[0]) navLinks[0].classList.add('active');
+            } else if (!current && navLinks.length > 0 && navLinks[0]) {
+                 // If scrolled down but somehow no section is active, keep first active
+                 // This handles edge cases, might need refinement depending on layout
+                 // Check if any link is already active before forcing the first one
+                 let isActive = false;
+                 navLinks.forEach(link => { if (link.classList.contains('active')) isActive = true; });
+                 if (!isActive && navLinks[0]) navLinks[0].classList.add('active');
+            }
+        });
+        // Initial check on load
+        window.dispatchEvent(new Event('scroll'));
+    </script>
+
+</body>
+</html>
+
