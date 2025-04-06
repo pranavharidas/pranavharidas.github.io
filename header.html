@@ -146,13 +146,7 @@
             const mobileMenuCloseButton = document.getElementById('mobile-menu-close-button');
 
             function toggleMobileMenu() {
-                if (mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.remove('hidden');
-                    mobileMenu.classList.add('visible');
-                } else {
-                    mobileMenu.classList.remove('visible');
-                    mobileMenu.classList.add('hidden');
-                }
+                mobileMenu.classList.toggle('visible');
             }
 
             if (mobileMenuButton && mobileMenu) {
@@ -200,7 +194,7 @@
             <button id="mobile-menu-button" aria-label="Toggle Navigation">
                 <i class="fa fa-bars"></i>
             </button>
-            <nav id="nav-menu" class="hidden">
+            <nav id="nav-menu" class="nav-menu">
                 <button id="mobile-menu-close-button" aria-label="Close Menu">
                     <i class="fa fa-close"></i>
                 </button>
@@ -214,3 +208,4 @@
     <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 mt-[60px]">
         </main>
 </body>
+</html>
