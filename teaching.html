@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teaching - Pranav Haridas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> </head>
+<body class="bg-slate-100 text-slate-800 antialiased">
+
+    <nav id="main-nav" class="top-nav fixed w-full top-0 left-0 bg-white/90 backdrop-blur-md z-50 shadow-sm border-b border-slate-200">
+        <ul class="flex justify-center flex-wrap gap-x-4 sm:gap-x-6 py-3 px-4 max-w-5xl mx-auto">
+            <li><a href="https://pranavharidas.github.io/" class="text-slate-600 hover:text-sky-600 font-medium px-3 py-2 rounded-md transition-colors duration-200 ease-in-out">Home</a></li>
+            <li><a href="https://pranavharidas.github.io/research" class="text-slate-600 hover:text-sky-600 font-medium px-3 py-2 rounded-md transition-colors duration-200 ease-in-out">Research</a></li>
+            <li><a href="https://pranavharidas.github.io/teaching" class="text-slate-600 hover:text-sky-600 font-medium px-3 py-2 rounded-md transition-colors duration-200 ease-in-out">Teaching</a></li>
+            <li><a href="https://pranavharidas.github.io/resources" class="text-slate-600 hover:text-sky-600 font-medium px-3 py-2 rounded-md transition-colors duration-200 ease-in-out">Resources</a></li>
+         </ul>
+    </nav>
+
+    <div class="main-container max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <header class="mb-10 sm:mb-16 text-center">
+            <h1 class="mt-8 text-2xl sm:text-3xl font-bold text-sky-800 mb-2">Teaching</h1>
+        </header>
+
+        <section id="teaching" class="bg-white rounded-xl shadow-lg overflow-hidden p-6 sm:p-8 space-y-6">
+            <div class="space-y-4">
+                <h3 class="text-xl font-semibold text-sky-600">Courses</h3>
+                <ul class="list-none pl-8 space-y-2 styled-list">
+                    <li class="text-slate-700 leading-relaxed">Differential Equations (Spring 2023 at Kerala School of Mathematics)</li>
+                    <li class="text-slate-700 leading-relaxed">Algebraic Topology (Fall 2022 at Kerala School of Mathematics)</li>
+                    <li class="text-slate-700 leading-relaxed">Differential Geometry (Fall 2021 and Spring 2022 at Kerala School of Mathematics)</li>
+                    <li class="text-slate-700 leading-relaxed">Complex Analysis (Spring 2021 at Kerala School of Mathematics)</li>
+                    <li class="text-slate-700 leading-relaxed">Topology (Fall 2020 at Kerala School of Mathematics)</li>
+                    <li class="text-slate-700 leading-relaxed">Complex Analysis (Spring 2020 in the online portal Swayam Central. Please click <a href="https://swayam.gov.in/">here</a> for the online lectures)</li>
+                    <li class="text-slate-700 leading-relaxed">Linear Algebra (Fall 2020 in the online portal Swayam Central. Please click <a href="https://swayam.gov.in/">here</a> for the online lectures)</li>
+                    <li class="text-slate-700 leading-relaxed">Linear Algebra and Numerical Analysis (Spring 2016 and Spring 2017 at Indian Institute of Technology Madras)</li>
+                    <li class="text-slate-700 leading-relaxed">Riemann Surfaces (Fall 2018 at Chennai Mathematical Institute)</li>
+                </ul>
+            </div>
+
+            <div class="space-y-4">
+                <p class="text-lg text-slate-600 leading-relaxed">
+                    In this semester I am offering a course on Algebraic Topology at Kerala School of Mathematics.
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <footer class="text-center py-6 mt-12 border-t border-slate-200">
+        <p class="text-sm text-slate-500">© <span id="current-year"></span> Pranav Haridas. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // --- Set Current Year in Footer ---
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
