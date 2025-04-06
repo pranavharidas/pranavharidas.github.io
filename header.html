@@ -2,7 +2,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script>
         MathJax = {
@@ -30,7 +30,7 @@
             left: 0;
             width: 100%;
             background-color: rgba(255, 255, 255, 0.9);
-            backdrop-blur: 10px;
+            backdrop-blur: 5px;
             z-index: 50;
             border-bottom: 1px solid rgba(229, 231, 235, 0.7);
         }
@@ -42,19 +42,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
         }
 
         .site-title {
             color: #2d3748;
             font-semibold;
-            font-size: 1.5rem;
-            transition: color 0.2s ease-in-out;
-        }
-
-        .site-title:hover {
-            color: #1a5293;
+            font-size: 1.25rem;
         }
 
         .nav-menu {
@@ -67,18 +62,16 @@
             font-medium;
             padding: 0.5rem;
             border-radius: 0.375rem;
-            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+            transition: color 0.2s ease-in-out;
         }
 
         .nav-link:hover {
             color: #1e40af;
-            background-color: rgba(229, 231, 235, 0.3);
         }
 
         .nav-link.active {
             color: #1e40af;
             font-semibold;
-            background-color: rgba(229, 231, 235, 0.5);
         }
 
         #mobile-menu-button {
@@ -86,12 +79,10 @@
             color: #4a5568;
             padding: 0.5rem;
             border-radius: 0.375rem;
-            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
         }
 
         #mobile-menu-button:hover {
             color: #1e40af;
-            background-color: rgba(229, 231, 235, 0.3);
         }
 
         #mobile-menu {
@@ -100,7 +91,7 @@
             top: 100%;
             right: 0;
             background-color: rgba(255, 255, 255, 0.9);
-            backdrop-blur: 10px;
+            backdrop-blur: 5px;
             shadow-md;
             border-radius: 0.375rem;
             border: 1px solid rgba(229, 231, 235, 0.7);
@@ -118,7 +109,6 @@
             color: #4a5568;
             font-medium;
             border-bottom: 1px solid rgba(229, 231, 235, 0.7);
-            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
         }
 
         #mobile-menu .menu-item:last-child {
@@ -127,13 +117,11 @@
 
         #mobile-menu .menu-item:hover {
             color: #1e40af;
-            background-color: rgba(229, 231, 235, 0.3);
         }
 
         #mobile-menu .menu-item.active {
             color: #1e40af;
             font-semibold;
-            background-color: rgba(229, 231, 235, 0.5);
         }
 
         @media (max-width: 768px) {
