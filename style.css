@@ -228,6 +228,7 @@ p.leading-relaxed {
 .math {
     text-align: center;
     margin: 1em 0;
+    overflow-x: auto; /* Add horizontal scrollbar for long equations on small screens */
 }
 
 /* Button styling */
