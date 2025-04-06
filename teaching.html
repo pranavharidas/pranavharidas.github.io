@@ -6,14 +6,34 @@
     <title>Teaching Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
         }
     </style>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                packages: ['base', 'ams']
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/ams']
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body class="bg-gray-100">
-    <div data-include="base_layout.html"></div>
+    <div data-include="header.html"></div>
 
     <main class="container mx-auto py-10 px-4">
         <div class="text-center mb-8">
@@ -28,8 +48,8 @@
                     <li class="text-slate-700 leading-relaxed">Differential Geometry (Fall 2021 and Spring 2022 at Kerala School of Mathematics)</li>
                     <li class="text-slate-700 leading-relaxed">Complex Analysis (Spring 2021 at Kerala School of Mathematics)</li>
                     <li class="text-slate-700 leading-relaxed">Topology (Fall 2020 at Kerala School of Mathematics)</li>
-                    <li class="text-slate-700 leading-relaxed">Complex Analysis (Spring 2020 in the online portal Swayam Central. Please click <a href="https://swayam.gov.in/">here</a> for the online lectures)</li>
-                    <li class="text-slate-700 leading-relaxed">Linear Algebra (Fall 2020 in the online portal Swayam Central. Please click <a href="https://swayam.gov.in/">here</a> for the online lectures)</li>
+                    <li class="text-slate-700 leading-relaxed">Complex Analysis (Spring 2020 in the online portal Swayam Central. Please click <a href="https://nptel.ac.in/courses/111106141" target="_blank" class="text-sky-600 hover:text-sky-800 hover:underline decoration-sky-300 underline-offset-2 transition duration-150 ease-in-out">here</a> for the online lectures)</li>
+                    <li class="text-slate-700 leading-relaxed">Linear Algebra (Fall 2020 in the online portal Swayam Central. Please click <a href="https://nptel.ac.in/courses/111106135" target="_blank" class="text-sky-600 hover:text-sky-800 hover:underline decoration-sky-300 underline-offset-2 transition duration-150 ease-in-out">here</a> for the online lectures)</li>
                     <li class="text-slate-700 leading-relaxed">Linear Algebra and Numerical Analysis (Spring 2016 and Spring 2017 at Indian Institute of Technology Madras)</li>
                     <li class="text-slate-700 leading-relaxed">Riemann Surfaces (Fall 2018 at Chennai Mathematical Institute)</li>
                 </ul>
@@ -40,7 +60,9 @@
                 </p>
             </div>
         </section>
-        </main>
+    </main>
+
+    <div data-include="footer.html"></div>
 
     <script>
     // Simple script to include HTML content.  For production, you'd use a server-side include or a more robust client-side solution.
@@ -81,11 +103,11 @@
 
                         const lastSection = sections[sections.length - 1];
                         if (scrollPosition + window.innerHeight >= document.documentElement.scrollHeight - 50) {
-                                currentSectionId = lastSection.getAttribute('id');
+                            currentSectionId = lastSection.getAttribute('id');
                         }
 
                         if (scrollPosition < sections[0].offsetTop - navHeight * 2) {
-                                currentSectionId = sections[0].getAttribute('id');
+                            currentSectionId = sections[0].getAttribute('id');
                         }
 
 
@@ -103,9 +125,8 @@
                     // --- Set Current Year ---
                     const yearSpan = document.getElementById('current-year');
                     if(yearSpan){
-                         yearSpan.textContent = new Date().getFullYear();
+                        yearSpan.textContent = new Date().getFullYear();
                     }
-
 
                 })
                 .catch(error => {
