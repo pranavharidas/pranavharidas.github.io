@@ -29,35 +29,49 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0);
-            backdrop-blur: 0px;
-            z-index: 50;
-            border-bottom: none;
-            transition: background-color 0.3s ease-in-out, backdrop-blur 0.3s ease-in-out, border-bottom-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-            transform: translateY(-100%);
-        }
-
-        #main-nav.visible {
             background-color: rgba(255, 255, 255, 0.9);
             backdrop-blur: 10px;
+            z-index: 50;
             border-bottom: 1px solid rgba(229, 231, 235, 0.7);
-            transform: translateY(0);
         }
 
-        #main-nav.hidden {
-             transform: translateY(-100%);
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .site-title {
+            color: #2d3748;
+            font-semibold;
+            font-size: 1.5rem;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .site-title:hover {
+            color: #1a5293;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1.5rem;
         }
 
         .nav-link {
             color: #4a5568;
             font-medium;
-            padding: 0.75rem 1rem;
+            padding: 0.5rem;
             border-radius: 0.375rem;
             transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
         }
 
         .nav-link:hover {
-            color: #2b6cb0;
+            color: #1e40af;
             background-color: rgba(229, 231, 235, 0.3);
         }
 
@@ -67,15 +81,16 @@
             background-color: rgba(229, 231, 235, 0.5);
         }
 
-        .mobile-menu-button {
+        #mobile-menu-button {
+            display: none;
             color: #4a5568;
             padding: 0.5rem;
             border-radius: 0.375rem;
             transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
         }
 
-        .mobile-menu-button:hover {
-            color: #2b6cb0;
+        #mobile-menu-button:hover {
+            color: #1e40af;
             background-color: rgba(229, 231, 235, 0.3);
         }
 
@@ -111,7 +126,7 @@
         }
 
         #mobile-menu .menu-item:hover {
-            color: #2b6cb0;
+            color: #1e40af;
             background-color: rgba(229, 231, 235, 0.3);
         }
 
@@ -121,42 +136,21 @@
             background-color: rgba(229, 231, 235, 0.5);
         }
 
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            #mobile-menu-button {
+                display: block;
+            }
+        }
     </style>
     <script>
-        let lastScrollTop = 0;
-        let isMenuVisible = false;
-
-        const handleScroll = () => {
-            const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const navElement = document.getElementById('main-nav');
-
-            if (currentScrollTop > lastScrollTop) {
-                // Scrolling down
-                if (isMenuVisible) {
-                    navElement.classList.remove('visible');
-                    navElement.classList.add('hidden');
-                    isMenuVisible = false;
-                }
-            } else if (currentScrollTop === 0) {
-                navElement.classList.remove('hidden');
-                navElement.classList.add('visible');
-                isMenuVisible = true;
-            }
-            else {
-                // Scrolling up
-                navElement.classList.remove('hidden');
-                navElement.classList.add('visible');
-                isMenuVisible = true;
-            }
-            lastScrollTop = currentScrollTop;
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
         document.addEventListener('DOMContentLoaded', () => {
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
-             const navLinks = document.querySelectorAll('.nav-link');
+            const navLinks = document.querySelectorAll('.nav-link');
             const mobileMenuItems = document.querySelectorAll('.menu-item');
 
             if (mobileMenuButton && mobileMenu) {
@@ -173,7 +167,7 @@
                 }
             });
 
-             function updateActiveNavLink() {
+            function updateActiveNavLink() {
                 const sections = document.querySelectorAll('section[id]');
                 let currentSectionId = '';
                 sections.forEach(section => {
@@ -199,45 +193,37 @@
             }
 
             window.addEventListener('scroll', updateActiveNavLink);
+            window.addEventListener('load', updateActiveNavLink);
 
 
         });
     </script>
 </head>
 <body class="bg-slate-100 text-slate-800 antialiased">
-    <header>
-        <nav id="main-nav" class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md z-50 shadow-sm border-b border-slate-200">
-            <div class="max-w-5xl mx-auto px-4">
-                <div class="flex justify-between items-center py-2">
-                    <a href="https://pranavharidas.github.io/" class="text-slate-800 hover:text-sky-700 font-semibold text-xl transition-colors duration-200 ease-in-out">
-                        Pranav Haridas
-                    </a>
-                    <div class="hidden md:flex space-x-4">
-                        <a href="https://pranavharidas.github.io/" class="nav-link">Home</a>
-                        <a href="https://pranavharidas.github.io/research" class="nav-link">Research</a>
-                        <a href="https://pranavharidas.github.io/teaching" class="nav-link">Teaching</a>
-                        <a href="https://pranavharidas.github.io/resources" class="nav-link">Resources</a>
-                    </div>
-                    <div class="md:hidden">
-                        <button id="mobile-menu-button" class="mobile-menu-button" aria-label="Toggle Navigation">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                            </svg>
-                        </button>
-                        <div id="mobile-menu" class="hidden">
-                            <div class="px-2 py-2 space-y-2">
-                                <a href="https://pranavharidas.github.io/" class="menu-item">Home</a>
-                                <a href="https://pranavharidas.github.io/research" class="menu-item">Research</a>
-                                <a href="https://pranavharidas.github.io/teaching" class="menu-item">Teaching</a>
-                                <a href="https://pranavharidas.github.io/resources" class="menu-item">Resources</a>
-                            </div>
-                        </div>
-                    </div>
+    <header id="main-nav">
+        <div class="nav-container">
+            <a href="https://pranavharidas.github.io/" class="site-title">Pranav Haridas</a>
+            <button id="mobile-menu-button" class="md:hidden" aria-label="Toggle Navigation">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+            <nav class="nav-menu">
+                <a href="https://pranavharidas.github.io/" class="nav-link">Home</a>
+                <a href="https://pranavharidas.github.io/research" class="nav-link">Research</a>
+                <a href="https://pranavharidas.github.io/teaching" class="nav-link">Teaching</a>
+                <a href="https://pranavharidas.github.io/resources" class="nav-link">Resources</a>
+            </nav>
+            <div id="mobile-menu" class="hidden">
+                <div class="px-2 py-2 space-y-2">
+                    <a href="https://pranavharidas.github.io/" class="menu-item">Home</a>
+                    <a href="https://pranavharidas.github.io/research" class="menu-item">Research</a>
+                    <a href="https://pranavharidas.github.io/teaching" class="menu-item">Teaching</a>
+                    <a href="https://pranavharidas.github.io/resources" class="menu-item">Resources</a>
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
     <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 mt-[60px]">
         </main>
-
 </body>
