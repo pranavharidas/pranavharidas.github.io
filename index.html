@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pranav Haridas - Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script>
         MathJax = {
@@ -24,12 +24,13 @@
                     addNoWrap: [10, (doc) => {
                         for (const node of doc.walkTree(node => node.type === 'mjx-container')) {
                             node.style.whiteSpace = 'nowrap';
-                            //  Prevent line breaks in the container and its children.
-                            node.style.display = 'inline-block';
+                            node.style.display = 'inline-flex';
+                            node.style.alignItems = 'center';
                             for (const child of node.childNodes) {
                                 if (child instanceof HTMLElement) {
-                                     child.style.whiteSpace = 'nowrap';
-                                     child.style.display = 'inline-block';
+                                    child.style.whiteSpace = 'nowrap';
+                                    child.style.display = 'inline-flex';
+                                    child.style.alignItems = 'center';
                                 }
                             }
                         }
@@ -38,20 +39,26 @@
             },
             startup: {
                 pageReady() {
-                    //  Get the MathJax output and apply white-space: nowrap to all of it
                     const mjxCss = document.createTextNode(`
                         .mjx-container {
                             white-space: nowrap !important;
-                            display: inline-block !important;
+                            display: inline-flex !important;
+                            align-items: center !important;
                         }
                         .mjx-container * {
                             white-space: nowrap !important;
-                            display: inline-block !important;
+                            display: inline-flex !important;
+                            align-items: center !important;
                         }
                     `);
                     const style = document.createElement('style');
                     style.appendChild(mjxCss);
                     document.head.appendChild(style);
+
+                    // Initial MathJax rendering on page load
+                    MathJax.typesetPromise().then(() => {
+                        console.log("Initial MathJax typesetting complete");
+                    });
                 }
             }
         };
@@ -62,15 +69,81 @@
     <style>
       .mjx-container {
         white-space: nowrap;
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
       }
+      body {
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        line-height: 1.7; /* Adjust as needed */
+      }
+
+      h1 {
+        font-size: 2.5rem;  /* slightly larger */
+        font-weight: 700;
+        color: #2d3748; /* Slightly darker heading color */
+        margin-bottom: 2rem;
+      }
+
+      h2 {
+        font-size: 2rem; /* slightly larger */
+        font-weight: 600;
+        color: #4a5568;
+        margin-bottom: 1.5rem;
+      }
+
+      h3 {
+        font-size: 1.5rem; /* larger */
+        font-weight: 600;
+        color: #1a5293; /* more vibrant blue */
+        margin-bottom: 1rem;
+      }
+
+      p {
+        font-size: 1.1rem;  /* Increased font size for body text */
+        color: #4a5568; /* Slightly darker body text */
+        margin-bottom: 1.5rem;  /* increased paragraph spacing */
+        line-height: 1.7;
+      }
+
+      ul, ol {
+        margin-left: 2rem;
+        margin-bottom: 1.5rem;
+        list-style-position: outside;
+      }
+
+      li {
+        font-size: 1.1rem;
+        color: #4a5568;
+        margin-bottom: 0.5rem; /* Increased list item spacing */
+        line-height: 1.7;
+      }
+
+      a {
+        color: #4299e1; /* Sky 600 */
+        text-decoration: none;
+        transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+        border-bottom: 1px solid transparent;
+      }
+
+      a:hover {
+        color: #2b6cb0; /* Sky 800 */
+        border-bottom-color: #4299e1;
+      }
+
+      .publication-list li {
+          margin-bottom: 0.75rem;
+      }
+
+
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 font-inter">
     <div data-include="header.html"></div>
 
     <main class="container mx-auto py-10 px-4 mt-[60px]">
         <section class="bg-white rounded-lg shadow-md p-6 mb-6" id="about-us">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">Pranav Haridas</h1>
             <p class="text-gray-700 leading-relaxed">
                 I am currently an Assistant Professor at Kerala School of Mathematics.
             </p>
@@ -145,37 +218,6 @@
             <p class="text-slate-700 leading-relaxed mt-6">
                 In this semester I am offering a course on Algebraic Topology at Kerala School of Mathematics.
             </p>
-        </section>
-
-        <section class="bg-white rounded-lg shadow-md p-6 mb-6" id="resources">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Resources</h2>
-            <p class="text-lg text-slate-600 leading-relaxed">
-                I have compiled below a few of my favourite onilne resources, especially video lectures found on the web.
-            </p>
-
-            <div class="space-y-4">
-                <h3 class="text-xl font-semibold text-sky-600">Lectures on Combinatorics</h3>
-                <p class="text-slate-700 leading-relaxed">
-                    Prof. Timothy Gowers offered a course on Combinatorics in the Part III Mathematics course at Cambridge in the Michaelmas term of 2020. The videos can be found <a href="https://www.youtube.com/playlist?list=PLOft35kj95aYT2SgFbYwEOavJ7gagmCVZ">here</a>. The lecture notes for this course can be found <a href="https://drive.google.com/file/d/1V778zHQTx4XE8FxDgznt2jTshZzxAFot/view">here</a>.
-                </p>
-            </div>
-
-            <div class="space-y-4">
-                <h3 class="text-xl font-semibold text-sky-600">Lectures on Algebraic Topology</h3>
-                <p class="text-slate-700 leading-relaxed">
-                    <a href="https://www.youtube.com/playlist?list=PL_bVGic_CrGs5bOLW_RR-8Y2RM09Fyg_0">Here</a> is a set of lectures on Algebraic Topology by Prof. Siddhartha Gadgil offered at the Indian Institute of Science, Bangalore in Fall 2020.
-                </p>
-                <p class="text-slate-700 leading-relaxed">
-                    Dr. Pierre Albin from the University of Illinois at Urbana-Champaign offered a course on Algebraic Topology. The course more or less follows the route taken by Allen Hatcher in his book "Algebraic Topology". The lectures can be found <a href="https://www.youtube.com/watch?v=XxFGokyYo6g&list=PLpRLWqLFLVTCL15U6N3o35g4uhMSBVA2b">here</a>.
-                </p>
-            </div>
-
-            <div class="space-y-4">
-                <h3 class="text-xl font-semibold text-sky-600">Lectures on the Geometric Anatomy of Theoretical Physics</h3>
-                <p class="text-slate-700 leading-relaxed">
-                    Dr. Frederic P Schuller delivered a series of lectures titled "Lectures on the Geometric Anatomy of Theoretical Physics". The lecture series involves building the foundational mathematics needed for theoretical physics (which includes Classical Mechanics, Electromagnetism, Quantum Mechanics, Statistical Physics, Relativity). These lectures start from Logic and pave its way into Bundle Theory eventually. These lectures will be an excellent source to learn the material generally involved in a Topology and Geometry course in Mathematics. A link to the playlist for this course is given <a href="https://www.youtube.com/playlist?list=PLPH7f_7ZlzxTi6kS4vCmv4ZKm9u8g5yic">here</a>.
-                </p>
-            </div>
         </section>
 
         <section class="bg-white rounded-lg shadow-md p-6 mb-6" id="education">
