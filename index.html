@@ -11,61 +11,21 @@
         MathJax = {
             tex: {
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
-                TagSide: "left",
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
                 processEscapes: true,
-                packages: {'[+]': ['amsmath', 'amsthm', 'amssymb']}
-            },
-            svg: {
-                fontCache: 'global'
+                packages: ['base', 'ams']
             },
             options: {
-                renderActions: {
-                    //  Priority 10:  Modify the MathJax output just before rendering to SVG.
-                    addNoWrap: [10, (doc) => {
-                        for (const node of doc.walkTree(node => node.type === 'mjx-container')) {
-                            node.style.whiteSpace = 'nowrap';
-                            node.style.display = 'inline-flex';
-                            node.style.alignItems = 'center';
-                            for (const child of node.childNodes) {
-                                if (child instanceof HTMLElement) {
-                                    child.style.whiteSpace = 'nowrap';
-                                    child.style.display = 'inline-flex';
-                                    child.style.alignItems = 'center';
-                                }
-                            }
-                        }
-                    }],
-                }
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
             },
-            startup: {
-                pageReady() {
-                    const mjxCss = document.createTextNode(`
-                        .mjx-container {
-                            white-space: nowrap !important;
-                            display: inline-flex !important;
-                            align-items: center !important;
-                        }
-                        .mjx-container * {
-                            white-space: nowrap !important;
-                            display: inline-flex !important;
-                            align-items: center !important;
-                        }
-                    `);
-                    const style = document.createElement('style');
-                    style.appendChild(mjxCss);
-                    document.head.appendChild(style);
-
-                    // Initial MathJax rendering on page load
-                    MathJax.typesetPromise().then(() => {
-                        console.log("Initial MathJax typesetting complete");
-                    });
-                }
+            loader: {
+                load: ['[tex]/ams']
             }
         };
     </script>
-    <script type="text/javascript" id="MathJax-script" async
-            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
-    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
       .mjx-container {
         white-space: nowrap;
@@ -149,7 +109,7 @@
             </p>
             <div class="flex flex-col md:flex-row gap-6 md:gap-8 items-center md:items-start">
                 <div class="flex-1 text-center md:text-left">
-                    <h2 class="text-2xl font-semibold text-sky-700 mb-4 border-b border-sky-100 pb-2 inline-block">Contact Information</h2>
+                    <h2 class="text-2xl font-semibold text-sky-700 mb-4 border-b border-sky-100 pb-2 inline-block">Contact</h2>
                     <address class="not-italic text-slate-700 space-y-1 text-base leading-relaxed">
                         <p>Kerala School of Mathematics,</p>
                         <p>Kunnamangalam,</p>
