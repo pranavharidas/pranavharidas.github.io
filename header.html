@@ -1,86 +1,72 @@
-<header class="fixed top-0 left-0 w-full z-50 bg-white bg-opacity-95 backdrop-blur-md border-b border-gray-200 shadow-sm">
-    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-        <a href="https://pranavharidas.github.io/" class="text-xl font-semibold text-gray-800">Pranav Haridas</a>
-        <button id="hamburger-button" class="lg:hidden text-gray-600 hover:text-gray-800 focus:outline-none focus:shadow-outline p-2 rounded-md" aria-label="Toggle Navigation">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-        </button>
-        <nav class="hidden lg:flex space-x-6">
-            <a href="https://pranavharidas.github.io/" class="nav-link text-gray-700 hover:text-blue-600 transition duration-300">Home</a>
-            <a href="https://pranavharidas.github.io/research" class="nav-link text-gray-700 hover:text-blue-600 transition duration-300">Research</a>
-            <a href="https://pranavharidas.github.io/teaching" class="nav-link text-gray-700 hover:text-blue-600 transition duration-300">Teaching</a>
-            <a href="https://pranavharidas.github.io/resources" class="nav-link text-gray-700 hover:text-blue-600 transition duration-300">Resources</a>
-        </nav>
-    </div>
-</header>
-<div id="off-canvas-menu" class="off-canvas-menu fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-50 overflow-y-auto">
-    <div class="p-4">
-        <div class="flex justify-end mb-4">
-            <button id="close-menu-button" class="text-gray-600 hover:text-gray-800 focus:outline-none focus:shadow-outline p-2 rounded-md" aria-label="Close Menu">
-                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pranav Haridas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .navbar-brand {
+            font-size: 1.85rem;
+            font-weight: bold;
+        }
+        .nav-link {
+            font-size: 1.1rem;
+        }
+        .dropdown-menu .dropdown-item{
+          font-size: 1.1rem;
+        }
+
+    </style>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                packages: ['base', 'ams']
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/ams']
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="bg-gray-100">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://pranavharidas.github.io/">Pranav Haridas</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://pranavharidas.github.io/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://pranavharidas.github.io/research">Research</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://pranavharidas.github.io/teaching">Teaching</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="https://pranavharidas.github.io/resources">Resources</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <nav class="block space-y-4">
-            <a href="https://pranavharidas.github.io/" class="nav-link block text-gray-700 hover:text-blue-600 transition duration-300 p-2 rounded-md">Home</a>
-            <a href="https://pranavharidas.github.io/research" class="nav-link block text-gray-700 hover:text-blue-600 transition duration-300 p-2 rounded-md">Research</a>
-            <a href="https://pranavharidas.github.io/teaching" class="nav-link block text-gray-700 hover:text-blue-600 transition duration-300 p-2 rounded-md">Teaching</a>
-            <a href="https://pranavharidas.github.io/resources" class="nav-link block text-gray-700 hover:text-blue-600 transition duration-300 p-2 rounded-md">Resources</a>
-        </nav>
-    </div>
-</div>
-<div id="fade-overlay" class="fade-overlay fixed top-0 left-0 w-full h-full bg-black z-40"></div>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const hamburgerButton = document.getElementById('hamburger-button');
-    const closeMenuButton = document.getElementById('close-menu-button');
-    const offCanvasMenu = document.getElementById('off-canvas-menu');
-    const fadeOverlay = document.getElementById('fade-overlay');
-    const navLinks = document.querySelectorAll('.nav-link');
+    </nav>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 
-    function toggleMenu() {
-        offCanvasMenu.classList.toggle('active');
-        fadeOverlay.classList.toggle('active');
-        document.body.classList.toggle('overflow-hidden'); // Prevent scrolling when menu is open
-    }
-
-    hamburgerButton.addEventListener('click', toggleMenu);
-    closeMenuButton.addEventListener('click', toggleMenu);
-    fadeOverlay.addEventListener('click', toggleMenu);
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            // If it's the hamburger menu, close it on item click.
-            if (offCanvasMenu.classList.contains('active')) {
-                toggleMenu();
-            }
-            // Handle active link state if needed
-            navLinks.forEach(nl => nl.classList.remove('active'));
-            link.classList.add('active');
-        });
-    });
-
-    // Update active nav link on scroll (optional)
-    function updateActiveNavLink() {
-        const sections = document.querySelectorAll('section[id]'); // Add IDs to your sections
-        let currentSectionId = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (window.scrollY >= sectionTop - 100 && window.scrollY < sectionTop + sectionHeight - 100) {
-                currentSectionId = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').slice(1) === currentSectionId) {
-                link.classList.add('active');
-            }
-        });
-    }
-   // window.addEventListener('scroll', updateActiveNavLink); // Removed: Causing error with provided HTML
-});
-</script>
