@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +9,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gray-100">
-    <div data-include="base_layout.html"></div>
+    <div data-include="header.html"></div>
 
-    <main class="container mx-auto py-10 px-4">
-
+    <main class="container mx-auto py-10 px-4 mt-[60px]">
         <section class="bg-white rounded-lg shadow-md p-6 mb-6" id="about-us">
             <p class="text-gray-700 leading-relaxed">
                 I am currently an Assistant Professor at Kerala School of Mathematics.
@@ -138,6 +137,8 @@
         </section>
     </main>
 
+    <div data-include="footer.html"></div>
+
     <script>
     // Simple script to include HTML content.  For production, you'd use a server-side include or a more robust client-side solution.
     document.addEventListener('DOMContentLoaded', () => {
@@ -148,61 +149,6 @@
                 .then(response => response.text())
                 .then(html => {
                     element.outerHTML = html; // Replace the element with the fetched content.
-                    // --- Navigation Active State Scrollspy ---
-                    const sections = document.querySelectorAll('section[id]');
-                    const navLinks = document.querySelectorAll('.top-nav a');
-                    const navHeight = document.getElementById('main-nav')?.offsetHeight || 60;
-
-                    const activateNavLink = (id) => {
-                        navLinks.forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href') === `#${id}`) {
-                                link.classList.add('active');
-                            }
-                        });
-                    };
-
-                    const onScroll = () => {
-                        let currentSectionId = '';
-                        const scrollPosition = window.pageYOffset;
-
-                        sections.forEach(section => {
-                            const sectionTop = section.offsetTop;
-                            const activationOffset = navHeight * 1.5;
-
-                            if (scrollPosition >= sectionTop - activationOffset) {
-                                currentSectionId = section.getAttribute('id');
-                            }
-                        });
-
-                        const lastSection = sections[sections.length - 1];
-                        if (scrollPosition + window.innerHeight >= document.documentElement.scrollHeight - 50) {
-                            currentSectionId = lastSection.getAttribute('id');
-                        }
-
-                        if (scrollPosition < sections[0].offsetTop - navHeight * 2) {
-                            currentSectionId = sections[0].getAttribute('id');
-                        }
-
-
-                        if (currentSectionId) {
-                            activateNavLink(currentSectionId);
-                        } else if (navLinks.length > 0) {
-                            activateNavLink(sections[0].getAttribute('id'));
-                        }
-                    };
-
-                    window.addEventListener('scroll', onScroll);
-                    window.addEventListener('load', onScroll);
-
-
-                    // --- Set Current Year ---
-                    const yearSpan = document.getElementById('current-year');
-                    if(yearSpan){
-                        yearSpan.textContent = new Date().getFullYear();
-                    }
-
-
                 })
                 .catch(error => {
                     console.error('Error fetching include:', error);
