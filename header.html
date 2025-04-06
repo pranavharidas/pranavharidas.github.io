@@ -60,8 +60,15 @@
         }
 
         .nav-menu {
-            display: none;
+            display: flex;
             gap: 2rem;
+            justify-content: center; /* Center the menu items */
+            flex: 1; /* Allow the menu to take up available space */
+            margin: 0; /* Reset default margin */
+        }
+
+        .nav-menu.mobile-menu {
+            display: none;
             position: fixed;
             top: 0;
             right: 0;
@@ -75,12 +82,12 @@
             z-index: 100;
             overflow-y: auto;
             flex-direction: column;
+            padding-top: 4rem;
         }
 
-        .nav-menu.visible {
+        .nav-menu.mobile-menu.visible {
             transform: translateX(0);
             display: flex;
-            padding-top: 4rem;
         }
 
 
@@ -114,6 +121,7 @@
             border-radius: 0.375rem;
             transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
             z-index: 101;
+            display: none; /* Hide on larger screens */
         }
 
         #mobile-menu-button:hover {
@@ -137,6 +145,20 @@
             background-color: rgba(229, 231, 235, 0.3);
         }
 
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none; /* Hide the horizontal menu on small screens */
+            }
+            .nav-menu.mobile-menu {
+                display: none;
+            }
+            #mobile-menu-button {
+                display: block; /* Show the hamburger button on small screens */
+            }
+            .nav-container {
+                justify-content: space-between; /* Push title and button to the edges */
+            }
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -194,10 +216,16 @@
             <button id="mobile-menu-button" aria-label="Toggle Navigation">
                 <i class="fa fa-bars"></i>
             </button>
-            <nav id="nav-menu" class="nav-menu">
+            <nav id="nav-menu" class="nav-menu mobile-menu">
                 <button id="mobile-menu-close-button" aria-label="Close Menu">
                     <i class="fa fa-close"></i>
                 </button>
+                <a href="https://pranavharidas.github.io/" class="nav-link">Home</a>
+                <a href="https://pranavharidas.github.io/research" class="nav-link">Research</a>
+                <a href="https://pranavharidas.github.io/teaching" class="nav-link">Teaching</a>
+                <a href="https://pranavharidas.github.io/resources" class="nav-link">Resources</a>
+            </nav>
+             <nav id="nav-menu" class="nav-menu large-screen-menu">
                 <a href="https://pranavharidas.github.io/" class="nav-link">Home</a>
                 <a href="https://pranavharidas.github.io/research" class="nav-link">Research</a>
                 <a href="https://pranavharidas.github.io/teaching" class="nav-link">Teaching</a>
