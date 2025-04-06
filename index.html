@@ -6,23 +6,14 @@
     <title>My Webpage</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gray-100">
     <div data-include="base_layout.html"></div>
 
     <main class="container mx-auto py-10 px-4">
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-semibold text-blue-700">Welcome to My Webpage</h1>
-            <p class="text-gray-600 mt-2">This page uses the shared base layout.</p>
-        </div>
 
-        <section class="bg-white rounded-lg shadow-md p-6 mb-6">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">About Us</h2>
+        <section class="bg-white rounded-lg shadow-md p-6 mb-6" id="about-us">
             <p class="text-gray-700 leading-relaxed">
                 I am currently an Assistant Professor at Kerala School of Mathematics.
             </p>
@@ -49,7 +40,7 @@
             </div>
         </section>
 
-        <section  class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <section class="bg-white rounded-lg shadow-md p-6 mb-6" id="research">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">Research</h2>
             <p class="text-slate-700 leading-relaxed mb-6">My research interests broadly lie in Complex Analysis. Currently, I am studying surface braid groups and, more generally, the mapping class group of hyperbolic surfaces with <a href="https://www.niser.ac.in/~chitrabhanu/">Chitrabhanu Chaudhuri</a>. I am also exploring the complex analytic properties of Teichmüller spaces.</p>
 
@@ -80,7 +71,7 @@
             </ol>
         </section>
 
-        <section  class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <section class="bg-white rounded-lg shadow-md p-6 mb-6" id="teaching">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">Teaching</h2>
             <h3 class="text-xl font-semibold text-sky-600 mb-4">Courses</h3>
             <ul class="styled-list list-outside space-y-3 text-slate-700 pl-6">
@@ -99,7 +90,7 @@
             </p>
         </section>
 
-        <section class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <section class="bg-white rounded-lg shadow-md p-6 mb-6" id="resources">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">Resources</h2>
             <p class="text-lg text-slate-600 leading-relaxed">
                 I have compiled below a few of my favourite onilne resources, especially video lectures found on the web.
@@ -130,22 +121,22 @@
             </div>
         </section>
 
-        <section class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <section class="bg-white rounded-lg shadow-md p-6 mb-6" id="education">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">Education</h2>
             <ul class="styled-list list-outside space-y-3 text-slate-700 pl-6">
-                 <li>B.Math(Hons.) from Indian Statistical Institute, Bangalore</li>
+                <li>B.Math(Hons.) from Indian Statistical Institute, Bangalore</li>
                 <li>ALGANT Masters from Università di Padova and Université Paris-Sud</li>
                 <li>PhD from Indian Institute of Science, Bangalore</li>
             </ul>
         </section>
 
-        <section class="bg-white rounded-lg shadow-md p-6">
+        <section class="bg-white rounded-lg shadow-md p-6" id="post-doctoral-experience">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">Post-doctoral Experience</h2>
             <p class="text-slate-700 leading-relaxed">
                 I was a Research Associate at Indian Institute of Science, Bangalore from July 2015 to June 2016. Thereafter, I was a post-doctoral fellow at Indian Institute of Technology Madras from July 2016 to June 2018 and Chennai Mathematical Institute from July 2018 to February 2019.
             </p>
         </section>
-        </main>
+    </main>
 
     <script>
     // Simple script to include HTML content.  For production, you'd use a server-side include or a more robust client-side solution.
@@ -160,7 +151,7 @@
                     // --- Navigation Active State Scrollspy ---
                     const sections = document.querySelectorAll('section[id]');
                     const navLinks = document.querySelectorAll('.top-nav a');
-                    const navHeight = document.getElementById('main-nav')?.offsetHeight || 70;
+                    const navHeight = document.getElementById('main-nav')?.offsetHeight || 60;
 
                     const activateNavLink = (id) => {
                         navLinks.forEach(link => {
@@ -186,11 +177,11 @@
 
                         const lastSection = sections[sections.length - 1];
                         if (scrollPosition + window.innerHeight >= document.documentElement.scrollHeight - 50) {
-                                currentSectionId = lastSection.getAttribute('id');
+                            currentSectionId = lastSection.getAttribute('id');
                         }
 
                         if (scrollPosition < sections[0].offsetTop - navHeight * 2) {
-                                currentSectionId = sections[0].getAttribute('id');
+                            currentSectionId = sections[0].getAttribute('id');
                         }
 
 
@@ -208,7 +199,7 @@
                     // --- Set Current Year ---
                     const yearSpan = document.getElementById('current-year');
                     if(yearSpan){
-                         yearSpan.textContent = new Date().getFullYear();
+                        yearSpan.textContent = new Date().getFullYear();
                     }
 
 
