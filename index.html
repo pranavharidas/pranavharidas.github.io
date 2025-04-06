@@ -7,6 +7,64 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                TagSide: "left",
+                processEscapes: true,
+                packages: {'[+]': ['amsmath', 'amsthm', 'amssymb']}
+            },
+            svg: {
+                fontCache: 'global'
+            },
+            options: {
+                renderActions: {
+                    //  Priority 10:  Modify the MathJax output just before rendering to SVG.
+                    addNoWrap: [10, (doc) => {
+                        for (const node of doc.walkTree(node => node.type === 'mjx-container')) {
+                            node.style.whiteSpace = 'nowrap';
+                            //  Prevent line breaks in the container and its children.
+                            node.style.display = 'inline-block';
+                            for (const child of node.childNodes) {
+                                if (child instanceof HTMLElement) {
+                                     child.style.whiteSpace = 'nowrap';
+                                     child.style.display = 'inline-block';
+                                }
+                            }
+                        }
+                    }],
+                }
+            },
+            startup: {
+                pageReady() {
+                    //  Get the MathJax output and apply white-space: nowrap to all of it
+                    const mjxCss = document.createTextNode(`
+                        .mjx-container {
+                            white-space: nowrap !important;
+                            display: inline-block !important;
+                        }
+                        .mjx-container * {
+                            white-space: nowrap !important;
+                            display: inline-block !important;
+                        }
+                    `);
+                    const style = document.createElement('style');
+                    style.appendChild(mjxCss);
+                    document.head.appendChild(style);
+                }
+            }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+    <style>
+      .mjx-container {
+        white-space: nowrap;
+        display: inline-block;
+      }
+    </style>
 </head>
 <body class="bg-gray-100">
     <div data-include="header.html"></div>
@@ -65,7 +123,7 @@
                     <a href="https://link.springer.com/article/10.1007/s13324-017-0177-5" target="_blank" class="text-sky-600 hover:text-sky-800 hover:underline decoration-sky-300 underline-offset-2 transition duration-150 ease-in-out ml-1">[Link]</a>
                 </li>
                 <li>
-                    Quadrature domains in \( \textbf{C}^n \), Computational Methods and Function Theory 15, 2015 (with Kaushal Verma). <a href="http://link.springer.com/article/10.1007%2Fs40315-014-0090-y" target="_blank" class="text-sky-600 hover:text-sky-800 hover:underline decoration-sky-300 underline-offset-2 transition duration-150 ease-in-out ml-1">[Link]</a>
+                    Quadrature domains in \( \textbf{C}^n \), Computational Methods and Function Theory 15, 2015 (with Kaushal Verma). <a href="http://link.springer.com/article/10.1007%2Fs40315-014-0090-y" target="_blank" target="_blank" class="text-sky-600 hover:text-sky-800 hover:underline decoration-sky-300 underline-offset-2 transition duration-150 ease-in-out ml-1">[Link]</a>
                 </li>
             </ol>
         </section>
