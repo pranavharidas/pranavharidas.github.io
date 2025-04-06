@@ -6,6 +6,7 @@
     <title>Resources Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -13,7 +14,7 @@
     </style>
 </head>
 <body class="bg-gray-100">
-    <div data-include="base_layout.html"></div>
+    <div data-include="header.html"></div>
 
     <main class="container mx-auto py-10 px-4">
         <div class="text-center mb-8">
@@ -28,28 +29,30 @@
             <div class="space-y-4">
                 <h3 class="text-xl font-semibold text-sky-600">Lectures on Combinatorics</h3>
                 <p class="text-slate-700 leading-relaxed">
-                    Prof. Timothy Gowers offered a course on Combinatorics in the Part III Mathematics course at Cambridge in the Michaelmas term of 2020. The videos can be found <a href="https://www.youtube.com/playlist?list=PLOft35kj95aYT2SgFbYwEOavJ7gagmCVZ">here</a>. The lecture notes for this course can be found <a href="https://drive.google.com/file/d/1V778zHQTx4XE8FxDgznt2jTshZzxAFot/view">here</a>.
+                    Prof. Timothy Gowers offered a course on Combinatorics in the Part III Mathematics course at Cambridge in the Michaelmas term of 2020. The videos can be found <a href="https://www.youtube.com/playlist?list=PLOft35kj95aYT2SgFbYwEOavJ7gagmCVZ" target="_blank" class="text-sky-600 hover:text-sky-800 hover:underline decoration-sky-300 underline-offset-2 transition duration-150 ease-in-out">here</a>. The lecture notes for this course can be found <a href="https://drive.google.com/file/d/1V778zHQTx4XE8FxDgznt2jTshZzxAFot/view" target="_blank" class="text-sky-600 hover:text-sky-800 hover:underline decoration-sky-300 underline-offset-2 transition duration-150 ease-in-out">here</a>.
                 </p>
             </div>
 
             <div class="space-y-4">
                 <h3 class="text-xl font-semibold text-sky-600">Lectures on Algebraic Topology</h3>
                 <p class="text-slate-700 leading-relaxed">
-                    <a href="https://www.youtube.com/playlist?list=PL_bVGic_CrGs5bOLW_RR-8Y2RM09Fyg_0">Here</a> is a set of lectures on Algebraic Topology by Prof. Siddhartha Gadgil offered at the Indian Institute of Science, Bangalore in Fall 2020.
+                    <a href="https://www.youtube.com/playlist?list=PL_bVGic_CrGs5bOLW_RR-8Y2RM09Fyg_0" target="_blank" class="text-sky-600 hover:text-sky-800 hover:underline decoration-sky-300 underline-offset-2 transition duration-150 ease-in-out">Here</a> is a set of lectures on Algebraic Topology by Prof. Siddhartha Gadgil offered at the Indian Institute of Science, Bangalore in Fall 2020.
                 </p>
                 <p class="text-slate-700 leading-relaxed">
-                    Dr. Pierre Albin from the University of Illinois at Urbana-Champaign offered a course on Algebraic Topology. The course more or less follows the route taken by Allen Hatcher in his book "Algebraic Topology". The lectures can be found <a href="https://www.youtube.com/watch?v=XxFGokyYo6g&list=PLpRLWqLFLVTCL15U6N3o35g4uhMSBVA2b">here</a>.
+                    Dr. Pierre Albin from the University of Illinois at Urbana-Champaign offered a course on Algebraic Topology. The course more or less follows the route taken by Allen Hatcher in his book "Algebraic Topology". The lectures can be found <a href="https://www.youtube.com/watch?v=XxFGokyYo6g&list=PLpRLWqLFLVTCL15U6N3o35g4uhMSBVA2b" target="_blank" class="text-sky-600 hover:text-sky-800 hover:underline decoration-sky-300 underline-offset-2 transition duration-150 ease-in-out">here</a>.
                 </p>
             </div>
 
             <div class="space-y-4">
                 <h3 class="text-xl font-semibold text-sky-600">Lectures on the Geometric Anatomy of Theoretical Physics</h3>
                 <p class="text-slate-700 leading-relaxed">
-                    Dr. Frederic P Schuller delivered a series of lectures titled "Lectures on the Geometric Anatomy of Theoretical Physics". The lecture series involves building the foundational mathematics needed for theoretical physics (which includes Classical Mechanics, Electromagnetism, Quantum Mechanics, Statistical Physics, Relativity). These lectures start from Logic and pave its way into Bundle Theory eventually. These lectures will be an excellent source to learn the material generally involved in a Topology and Geometry course in Mathematics. A link to the playlist for this course is given <a href="https://www.youtube.com/playlist?list=PLPH7f_7ZlzxTi6kS4vCmv4ZKm9u8g5yic">here</a>.
+                    Dr. Frederic P Schuller delivered a series of lectures titled "Lectures on the Geometric Anatomy of Theoretical Physics". The lecture series involves building the foundational mathematics needed for theoretical physics (which includes Classical Mechanics, Electromagnetism, Quantum Mechanics, Statistical Physics, Relativity). These lectures start from Logic and pave its way into Bundle Theory eventually. These lectures will be an excellent source to learn the material generally involved in a Topology and Geometry course in Mathematics. A link to the playlist for this course is given <a href="https://www.youtube.com/playlist?list=PLPH7f_7ZlzxTi6kS4vCmv4ZKm9u8g5yic" target="_blank" class="text-sky-600 hover:text-sky-800 hover:underline decoration-sky-300 underline-offset-2 transition duration-150 ease-in-out">here</a>.
                 </p>
             </div>
         </section>
-        </main>
+    </main>
+
+    <div data-include="footer.html"></div>
 
     <script>
     // Simple script to include HTML content.  For production, you'd use a server-side include or a more robust client-side solution.
@@ -90,11 +93,11 @@
 
                         const lastSection = sections[sections.length - 1];
                         if (scrollPosition + window.innerHeight >= document.documentElement.scrollHeight - 50) {
-                                currentSectionId = lastSection.getAttribute('id');
+                            currentSectionId = lastSection.getAttribute('id');
                         }
 
                         if (scrollPosition < sections[0].offsetTop - navHeight * 2) {
-                                currentSectionId = sections[0].getAttribute('id');
+                            currentSectionId = sections[0].getAttribute('id');
                         }
 
 
@@ -112,9 +115,8 @@
                     // --- Set Current Year ---
                     const yearSpan = document.getElementById('current-year');
                     if(yearSpan){
-                         yearSpan.textContent = new Date().getFullYear();
+                        yearSpan.textContent = new Date().getFullYear();
                     }
-
 
                 })
                 .catch(error => {
