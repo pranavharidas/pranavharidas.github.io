@@ -1,393 +1,495 @@
-/* Revamped Custom CSS for Pranav Haridas's Personal Webpage */
+/* Futuristic Dark Theme CSS for Pranav Haridas's Personal Webpage */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=IBM+Plex+Mono:wght@500;700&display=swap');
 
-/* Base body styling */
+/* --- Base & Variables --- */
+:root {
+  --bg-primary: #0f172a; /* Very dark blue (slate-900) */
+  --bg-secondary: #1e293b; /* Darker blue-gray (slate-800) */
+  --bg-tertiary: #334155; /* Medium blue-gray (slate-700) */
+  --text-primary: #f1f5f9; /* Very light gray (slate-100) */
+  --text-secondary: #94a3b8; /* Medium gray (slate-400) */
+  --accent-primary: #2dd4bf; /* Bright Teal (teal-400) */
+  --accent-secondary: #5eead4; /* Lighter Teal (teal-300) */
+  --border-color: #475569; /* Grayish border (slate-600) */
+  --font-body: 'Inter', sans-serif;
+  --font-heading: 'IBM Plex Mono', monospace;
+  --transition-speed: 0.25s;
+}
+
 body {
-    font-family: 'Nunito', sans-serif; /* A friendly, slightly rounded font */
-    background-color: #f0f4f8; /* Lighter, softer background ( близкий to blue-50) */
-    color: #2d3748; /* Darker, more saturated text (gray-800) */
-    margin-top: 6rem; /* Increased top margin for fixed nav */
-    transition: background-color 0.4s ease, color 0.4s ease; /* Slightly slower transition */
-    line-height: 1.7; /* Improved default line height for readability */
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  margin: 0; /* Remove default margin */
+  padding-top: 5rem; /* Space for fixed nav */
+  line-height: 1.6;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
 }
 
-/* Utility classes */
-.flex {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.grid {
-    display: grid;
-}
+/* --- Utility Classes (Keep simple or remove if using framework) --- */
 .container {
-    max-width: 64rem; /* Slightly wider container */
-    margin: 0 auto;
-    padding: 0 1.25rem; /* Adjusted horizontal padding */
+  max-width: 72rem; /* Wider container */
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
-/* Main content container styling with subtle animation */
+/* --- Main Content Container --- */
 .main-container {
-    max-width: 64rem;
-    margin: 2.5rem auto; /* Adjusted vertical margin */
-    background-color: #ffffff; /* Still white, but can be changed for a theme */
-    border-radius: 0.85rem; /* Slightly more rounded corners */
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08); /* More subtle, softer shadow */
-    overflow: hidden;
-    border: 1px solid #e2e8f0; /* Lighter border color */
-    opacity: 0;
-    transform: translateY(15px); /* Slightly less initial transform */
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out; /* Adjusted timing */
-}
-body.loaded .main-container {
-    opacity: 1;
-    transform: translateY(0);
+  max-width: 72rem;
+  margin: 2rem auto;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px; /* Sharper corners */
+  box-shadow: 0 0 25px rgba(45, 212, 191, 0.1); /* Subtle teal glow */
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out forwards;
+  animation-delay: 0.2s; /* Slight delay for effect */
 }
 
-/* Header styling */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* --- Header --- */
 .page-header {
-    background: linear-gradient(135deg, #4f46e5, #6366f1); /* More vibrant purple gradient (indigo) */
-    color: white;
-    padding: 2.5rem 2rem; /* Slightly increased vertical padding */
-    text-align: center;
+  background: linear-gradient(145deg, var(--bg-secondary), var(--bg-primary));
+  color: var(--text-primary);
+  padding: 3rem 2rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
 }
 .page-header h1 {
-    font-size: 2.75rem; /* Larger heading */
-    font-weight: 800; /* Extra bold */
-    margin-bottom: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 2.5rem; /* Slightly smaller but mono */
+  font-weight: 700;
+  color: var(--accent-primary);
+  margin-bottom: 0.75rem;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(45, 212, 191, 0.3);
 }
 .page-header p {
-    font-size: 1.3rem; /* Slightly larger paragraph */
-    color: #f5f5f5; /* Off-white, very light text */
-    font-weight: 400; /* Regular font weight */
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  max-width: 60ch; /* Limit line length */
+  margin: 0 auto;
 }
 
-/* Navigation Menu Styling */
+/* --- Navigation Menu --- */
 .top-nav {
-    background-color: rgba(255, 255, 255, 0.98); /* Slightly less transparent */
-    backdrop-filter: blur(12px); /* Slightly stronger blur */
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid #e2e8f0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 50;
-    padding: 0.85rem 1.5rem; /* Adjusted padding */
-    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.06); /* Slightly stronger shadow */
+  background-color: rgba(15, 23, 42, 0.85); /* --bg-primary with transparency */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 0.75rem 1.5rem;
 }
 .top-nav ul {
-    max-width: 64rem;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.75rem 2rem; /* Adjusted horizontal gap */
-    list-style: none;
-    padding: 0;
+  max-width: 72rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem 1.5rem;
+  list-style: none;
+  padding: 0;
 }
 .top-nav a {
-    color: #4a5568; /* Darker gray (gray-700) */
-    font-weight: 600; /* Semi-bold */
-    text-decoration: none;
-    padding: 0.6rem 1rem; /* Slightly increased vertical padding */
-    border-radius: 0.5rem; /* Slightly more rounded */
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; /* Added transform */
-    border-bottom: none;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 2px; /* Sharp */
+  transition: color var(--transition-speed) ease, background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  position: relative;
+  overflow: hidden; /* For underline effect */
 }
+
+.top-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-speed) ease-out;
+}
+
 .top-nav a:hover,
 .top-nav a.active {
-    background-color: #f7fafc; /* Very light gray hover (gray-50) */
-    color: #4f46e5; /* Purple hover (indigo-600) */
-    transform: translateY(-2px); /* Slight lift on hover */
-    border-bottom: none;
-}
-.top-nav a:focus,
-a:focus,
-button:focus,
-input:focus,
-textarea:focus {
-    outline: 2px solid #4f46e5;
-    outline-offset: 2px;
+  color: var(--accent-secondary);
+  background-color: rgba(45, 212, 191, 0.1); /* Subtle teal background */
 }
 
-/* Section styling */
+.top-nav a:hover::after,
+.top-nav a.active::after {
+   transform: scaleX(1);
+}
+
+/* --- Focus Styles --- */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+/* Remove default outline for non-keyboard focus if needed, but generally keep for accessibility */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+
+/* --- Section Styling --- */
 section {
-    padding: 2.5rem 2rem; /* Slightly increased vertical padding */
-    margin-bottom: 0;
-    border-bottom: 1px solid #e2e8f0;
-    scroll-margin-top: 7rem; /* Adjusted scroll margin */
+  padding: 3rem 2rem;
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--border-color);
+  scroll-margin-top: 6rem; /* Adjust based on nav height */
 }
 section:last-child {
-    border-bottom: none;
+  border-bottom: none;
+  padding-bottom: 4rem; /* More space at the end */
 }
 
-/* Section headings */
+/* Section Headings */
 section h2 {
-    font-size: 1.85rem; /* Slightly larger heading */
-    font-weight: 700; /* Bold */
-    color: #4f46e5; /* Purple (indigo-600) */
-    margin-bottom: 1.25rem; /* Increased margin */
-    padding-bottom: 0.75rem; /* Increased padding */
-    border-bottom: 3px solid #ede9fe; /* Very light purple border (indigo-100) */
-    display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--accent-secondary);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  display: block; /* Make it full width */
+  letter-spacing: 0.5px;
 }
 section h3 {
-    font-size: 1.35rem; /* Slightly larger subheading */
-    font-weight: 600;
-    color: #6d28d9; /* Darker purple (violet-700)*/
-    margin-top: 1.75rem; /* Increased margin */
-    margin-bottom: 0.85rem; /* Increased margin */
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
-/* List styling */
+/* --- List Styling --- */
 .styled-list {
-    list-style: none;
-    padding-left: 0.75rem; /* Increased padding */
+  list-style: none;
+  padding-left: 0;
 }
 .styled-list li {
-    margin-bottom: 0.95rem; /* Increased margin */
-    padding-left: 1.5rem;
-    position: relative;
+  margin-bottom: 0.8rem;
+  padding-left: 1.75rem;
+  position: relative;
 }
 .styled-list li::before {
-    content: '•';
-    color: #6d28d9; /* Darker purple bullet */
-    font-weight: bold;
-    display: inline-block;
-    width: 1em;
-    margin-left: -1.5em;
-    position: absolute;
-    left: 1rem;
-    top: 0.25em; /* Adjusted vertical alignment */
+  content: '»'; /* Use a different character */
+  color: var(--accent-primary);
+  font-weight: bold;
+  font-size: 1.2em;
+  position: absolute;
+  left: 0.25rem;
+  top: -0.1em; /* Adjust vertical alignment */
+  transition: transform var(--transition-speed) ease;
+}
+.styled-list li:hover::before {
+    transform: translateX(3px); /* Slight move on hover */
 }
 
-/* Specific styling for ordered list (publications) */
+/* Publication/Ordered List */
 .publication-list {
-    list-style: none;
-    counter-reset: publication-counter;
-    padding-left: 0.75rem;
+  list-style: none;
+  counter-reset: publication-counter;
+  padding-left: 0;
 }
 .publication-list li {
-    counter-increment: publication-counter;
-    margin-bottom: 1.1rem; /* Increased margin */
-    padding-left: 2.25rem; /* Increased padding */
-    position: relative;
+  counter-increment: publication-counter;
+  margin-bottom: 1rem;
+  padding-left: 2.5rem; /* More space for number */
+  position: relative;
 }
 .publication-list li::before {
-    content: counter(publication-counter) ".";
-    position: absolute;
-    left: 0.75rem;
-    top: 0.2rem;
-    font-weight: 600;
-    color: #718096; /* Medium gray (gray-600) */
-    width: 1.75rem; /* Increased width */
+  content: counter(publication-counter, decimal-leading-zero); /* Add leading zero */
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 0.9em;
+  color: var(--accent-primary);
+  background-color: var(--bg-tertiary);
+  width: 1.75rem;
+  height: 1.75rem;
+  line-height: 1.75rem;
+  text-align: center;
+  border-radius: 2px; /* Sharp */
 }
 
-/* General Link styling */
+/* --- General Link Styling --- */
 a {
-    color: #6d28d9; /* Darker purple */
-    text-decoration: none;
-    transition: color 0.3s ease, border-bottom 0.3s ease;
-    border-bottom: 1px solid transparent;
+  color: var(--accent-secondary);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease, background-color var(--transition-speed) ease;
+  border-radius: 2px;
 }
 a:hover {
-    color: #4f46e5; /* Purple */
-    border-bottom: 2px solid #8b5cf6; /* Lighter purple border */
+  color: var(--text-primary);
+  background-color: rgba(45, 212, 191, 0.15);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-primary);
+  text-underline-offset: 3px;
 }
 
 /* Specific Link styling within lists */
 .publication-list a, .course-list a {
-    word-break: break-word;
-    margin-left: 0.6rem; /* Adjusted margin */
+  word-break: break-word;
+  margin-left: 0.5rem;
 }
 .publication-list a:hover, .course-list a:hover {
-    background-color: #f7fafc;
-    border-radius: 0.35rem; /* Slightly more rounded */
-    padding: 0.25rem 0.35rem; /* Adjusted padding */
-    margin: -0.25rem -0.35rem;
-    border-bottom: none;
+  /* Keep general link hover */
 }
 
-/* Address styling */
+/* --- Address Styling --- */
 address {
-    font-style: normal;
-    line-height: 1.8; /* Increased line height */
-    color: #4a5568; /* Dark gray */
+  font-style: normal;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  border-left: 3px solid var(--accent-primary);
+  padding-left: 1rem;
+  margin-top: 1.5rem;
 }
 address strong {
-    color: #2d3748; /* Very dark gray */
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
-/* Paragraph text styling */
-p.leading-relaxed {
-    line-height: 1.9; /* Further increased line height */
-    color: #4a5568;
+/* --- Paragraph Text Styling --- */
+p {
+    margin-bottom: 1rem;
+}
+p.leading-relaxed { /* If this class is used */
+  line-height: 1.8;
+  color: var(--text-secondary);
 }
 
-/* MathJax Styling */
+/* --- MathJax Styling (Keep basic, adjust if needed) --- */
 .math {
-    text-align: center;
-    margin: 1.4em 0; /* Increased margin */
-    overflow-x: auto;
+  text-align: center;
+  margin: 1.5em 0;
+  overflow-x: auto;
+  background: var(--bg-primary);
+  padding: 1em;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
 }
 
-/* Button styling */
+/* --- Button Styling --- */
 .btn {
-    display: inline-block;
-    padding: 0.75rem 1.75rem; /* Increased horizontal padding */
-    background-color: #8b5cf6; /* Lighter purple */
-    color: white;
-    border: none;
-    border-radius: 0.5rem;
-    font-weight: 600; /* Semi-bold */
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform */
-    text-decoration: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  background-color: transparent;
+  color: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
+  border-radius: 2px; /* Sharp */
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 .btn:hover {
-    background-color: #7c3aed; /* Darker purple hover */
-    transform: translateY(-2px);
+  background-color: var(--accent-primary);
+  color: var(--bg-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(45, 212, 191, 0.2);
+  text-decoration: none; /* Remove underline from link hover */
 }
-.btn:focus {
-    outline: 2px solid #8b5cf6;
-    outline-offset: 2px;
+.btn:focus-visible { /* Ensure focus style matches */
+   outline: 2px solid var(--accent-primary);
+   outline-offset: 3px;
 }
 
-/* Form styling */
+
+/* --- Form Styling --- */
 input[type="text"],
 input[type="email"],
 textarea,
 select {
-    width: 100%;
-    padding: 0.85rem; /* Increased padding */
-    border: 1px solid #e2e8f0;
-    border-radius: 0.5rem;
-    margin-bottom: 1.25rem; /* Increased margin */
-    transition: border-color 0.3s ease;
-    background-color: #f7fafc; /* Very light gray input */
-    color: #2d3748;
-    font-family: 'Nunito', sans-serif;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 2px; /* Sharp */
+  margin-bottom: 1rem;
+  transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1rem;
 }
 input[type="text"]:focus,
 input[type="email"]:focus,
 textarea:focus,
 select:focus {
-    border-color: #8b5cf6;
-    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px rgba(45, 212, 191, 0.3); /* Teal focus ring */
+  outline: none; /* Use box-shadow for focus */
+}
+textarea {
+    min-height: 120px;
+    resize: vertical;
 }
 button,
 input[type="submit"] {
-    cursor: pointer;
-    padding: 0.75rem 1.75rem;
-    background-color: #8b5cf6;
-    color: white;
-    border: none;
-    border-radius: 0.5rem;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    font-weight: 600;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-}
-button:hover,
-input[type="submit"]:hover {
-    background-color: #7c3aed;
-    transform: translateY(-2px);
+  /* Use .btn styles by adding the class to the element */
+  /* Example: <button class="btn">Submit</button> */
+  /* If standalone styles needed, copy .btn styles here */
+   cursor: pointer;
 }
 
-/* Footer styling */
+
+/* --- Footer Styling --- */
 footer {
-    background-color: #f0f4f8;
-    color: #718096;
-    text-align: center;
-    padding: 2.25rem; /* Increased padding */
-    border-top: 1px solid #e2e8f0;
-    margin-top: 4rem;
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border-top: 1px solid var(--border-color);
+  margin-top: 3rem;
+  font-size: 0.9rem;
+}
+footer a {
+    /* Use general link styles */
 }
 
-/* Back-to-top button styling */
+/* --- Back-to-top button styling --- */
 .back-to-top {
-    position: fixed;
-    bottom: 2.25rem; /* Increased distance */
-    right: 2.25rem;
-    background-color: #8b5cf6;
-    color: white;
-    padding: 0.6rem; /* Adjusted padding */
-    border-radius: 50%;
-    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
-    text-decoration: none;
-    font-size: 1.4rem; /* Increased size */
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    z-index: 100;
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background-color: var(--accent-primary);
+  color: var(--bg-primary);
+  width: 40px;
+  height: 40px;
+  line-height: 40px; /* Center icon vertically */
+  text-align: center;
+  border-radius: 2px; /* Sharp */
+  box-shadow: 0 3px 10px rgba(45, 212, 191, 0.2);
+  text-decoration: none;
+  font-size: 1.5rem; /* Icon size */
+  transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  z-index: 500;
+  opacity: 0; /* Hidden by default */
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease, background-color var(--transition-speed) ease;
+}
+.back-to-top.visible { /* Add this class with JS when scrolling down */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 .back-to-top:hover {
-    background-color: #7c3aed;
-    transform: translateY(-2px);
+  background-color: var(--accent-secondary);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(45, 212, 191, 0.3);
+  color: var(--bg-primary); /* Ensure color remains */
+}
+.back-to-top svg { /* If using SVG icon */
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
 }
 
-/* Responsive adjustments */
-@media (max-width: 640px) {
-    .top-nav ul {
-        justify-content: flex-start;
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-    }
-    body {
-        margin-top: 7.5rem; /* Adjusted margin */
-    }
-    section {
-        scroll-margin-top: 8.5rem; /* Adjusted scroll margin */
-    }
-    .main-container {
-        margin: 1.25rem;
-        width: 92%; /* Slightly wider */
-    }
-    .page-header h1 {
-        font-size: 2.25rem;
-    }
-    .page-header p {
-        font-size: 1.15rem; /* Slightly larger */
-    }
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  body {
+      padding-top: 4.5rem; /* Adjust if nav wraps */
+  }
+  .page-header h1 {
+    font-size: 2rem;
+  }
+  .page-header p {
+    font-size: 1rem;
+  }
+  section {
+      padding: 2rem 1rem;
+      scroll-margin-top: 5rem;
+  }
+  section h2 {
+      font-size: 1.5rem;
+  }
+  section h3 {
+      font-size: 1.15rem;
+  }
+  .top-nav ul {
+      justify-content: flex-start; /* Align left on smaller screens */
+      flex-wrap: wrap;
+  }
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #1a202c; /* Very dark gray (gray-900) */
-        color: #f7fafc; /* Very light gray (gray-50) */
-    }
-    .main-container {
-        background-color: #2d3748; /* Dark gray (gray-800) */
-        border: 1px solid #4a5568; /* Darker gray border */
-        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4); /* Stronger dark shadow */
+@media (max-width: 480px) {
+    .container, .top-nav ul {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
     .page-header {
-        background: linear-gradient(135deg, #7e57c2, #5e35b1); /* Darker purple gradient */
+        padding: 2rem 1rem;
     }
-    .top-nav {
-        background-color: rgba(26, 32, 44, 0.98); /* Very dark, slightly transparent */
-        border-bottom: 1px solid #6b7280; /* Darker gray border */
+    .page-header h1 {
+        font-size: 1.8rem;
     }
-    .top-nav a {
-        color: #e2e8f0; /* Light gray text */
+    .btn,
+    button,
+    input[type="submit"] {
+        width: 100%; /* Make buttons full width */
+        padding: 0.8rem 1rem;
     }
-    a {
-        color: #a78bfa; /* Lighter purple */
-    }
-    a:hover {
-        color: #d8b4fe; /* Very light purple hover */
-    }
-    input[type="text"],
-    input[type="email"],
-    textarea,
-    select {
-        background-color: #4a5568; /* Dark gray input */
-        color: #f7fafc;
-        border: 1px solid #718096; /* Medium gray border */
-    }
-    footer {
-        background-color: #1a202c;
-        color: #d1d5db; /* Light gray footer text */
-        border-top: 1px solid #4a5568;
+    .back-to-top {
+        bottom: 1rem;
+        right: 1rem;
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+        font-size: 1.3rem;
     }
 }
+
+/* --- Optional: Light Mode (if needed later) --- */
+/*
+@media (prefers-color-scheme: light) {
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #e2e8f0;
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --accent-primary: #0d9488; // Darker teal for light mode
+      --accent-secondary: #14b8a6;
+      --border-color: #cbd5e1;
+    }
+
+    // Add overrides for specific elements if needed
+    .main-container {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+    .top-nav {
+        background-color: rgba(248, 250, 252, 0.85); // --bg-primary light
+    }
+    // etc.
+}
+*/
+
