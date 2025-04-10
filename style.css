@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Rewritten CSS for Pranav Haridas's Personal Webpage (v2.1 - Mobile Friendly)
+   Rewritten CSS for Pranav Haridas's Personal Webpage (v2.2 - Header Refined)
    Focus: Mobile Fixes, Alignment, Consistency, Accessibility, Performance
    ========================================================================== */
 
@@ -45,7 +45,9 @@
   --line-height-relaxed: 1.7;
 
   /* Spacing & Sizing */
-  --header-height: 4rem; /* 64px */
+  --header-height-desktop: 4rem; /* 64px */
+  --header-height-mobile: 3.5rem; /* 56px - Slightly shorter for mobile */
+  --header-height: var(--header-height-desktop); /* Default to desktop height */
   --container-max-width: 60rem; /* 960px - Slightly wider */
   --content-max-width: 56rem; /* 896px */
   --spacing-unit: 0.25rem; /* 4px */
@@ -127,8 +129,9 @@ body {
   font-family: var(--font-sans);
   background-color: var(--bg-color);
   color: var(--text-color);
-  margin-top: var(--header-height); /* Offset for fixed header */
-  transition: background-color var(--transition-duration-long) ease, color var(--transition-duration-long) ease;
+  /* Use CSS variable for header height offset */
+  margin-top: var(--header-height);
+  transition: background-color var(--transition-duration-long) ease, color var(--transition-duration-long) ease, margin-top var(--transition-duration) ease; /* Add margin-top transition */
   overflow-x: hidden; /* Prevent accidental horizontal scroll */
 }
 
@@ -240,7 +243,7 @@ body.loaded .main-content-wrapper {
 }
 
 /* ==========================================================================
-   5. Header & Navigation (#main-nav)
+   5. Header & Navigation (#main-nav) - REFINED
    ========================================================================== */
 #main-nav {
   position: fixed;
@@ -248,14 +251,16 @@ body.loaded .main-content-wrapper {
   left: 0;
   right: 0;
   width: 100%;
-  height: var(--header-height);
-  background-color: hsla(0, 0%, 100%, 0.85); /* Use hsla for better control */
+  height: var(--header-height); /* Use variable height */
+  background-color: hsla(0, 0%, 100%, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 50;
   border-bottom: 1px solid var(--border-light);
   box-shadow: var(--shadow-sm);
-  transition: background-color var(--transition-duration) ease, border-color var(--transition-duration) ease;
+  transition: background-color var(--transition-duration) ease,
+              border-color var(--transition-duration) ease,
+              height var(--transition-duration) ease; /* Add height transition */
 }
 @media (prefers-color-scheme: dark) {
   #main-nav {
@@ -269,21 +274,27 @@ body.loaded .main-content-wrapper {
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  /* Use container padding defined globally */
 }
 
 /* Site Title */
 .site-title {
-  font-size: 1.25rem; /* Slightly smaller title on all screens */
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--text-color);
   letter-spacing: -0.025em;
   transition: color var(--transition-duration) var(--transition-timing);
   text-decoration: none;
   border-bottom: none;
-  white-space: nowrap; /* Prevent wrapping */
-  overflow: hidden; /* Hide overflow */
-  text-overflow: ellipsis; /* Add ellipsis if it still overflows */
-  padding-right: var(--padding-sm); /* Add padding to prevent touching button */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: var(--padding-sm);
+  /* Add vertical padding for better tap target */
+  padding-top: var(--padding-xs);
+  padding-bottom: var(--padding-xs);
+  margin-top: calc(-1 * var(--padding-xs));
+  margin-bottom: calc(-1 * var(--padding-xs));
 }
 .site-title:hover {
   color: var(--primary-color);
@@ -292,12 +303,12 @@ body.loaded .main-content-wrapper {
 
 /* Desktop Navigation Menu */
 .nav-menu {
-  display: none; /* Hidden by default */
+  display: none;
   align-items: center;
   list-style: none;
   padding-left: 0;
   margin-bottom: 0;
-  gap: var(--padding-xs); /* Use gap for spacing */
+  gap: var(--padding-xs);
 }
 @media (min-width: 768px) { /* md breakpoint */
   .nav-menu {
@@ -311,7 +322,7 @@ body.loaded .main-content-wrapper {
   color: var(--text-muted);
   padding: var(--padding-sm) var(--padding-md);
   border-radius: var(--border-radius-md);
-  font-size: 0.875rem; /* Fixed size for nav links */
+  font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
   transition: color var(--transition-duration) var(--transition-timing), background-color var(--transition-duration) var(--transition-timing);
@@ -320,7 +331,7 @@ body.loaded .main-content-wrapper {
   white-space: nowrap;
 }
 .nav-link:hover {
-  color: var(--primary-dark); /* Darker primary on hover */
+  color: var(--primary-dark);
   background-color: var(--primary-light-bg);
   border-bottom: none;
 }
@@ -329,18 +340,21 @@ body.loaded .main-content-wrapper {
   color: var(--primary-color);
   font-weight: 600;
 }
-/* Active indicator */
-.nav-link.active::before {
-    content: '';
-    position: absolute;
-    bottom: 4px;
-    left: var(--padding-md);
-    right: var(--padding-md);
-    height: 2px;
-    background-color: var(--primary-color);
-    border-radius: 1px;
-    transition: background-color var(--transition-duration) ease;
+/* Active indicator (Desktop only) */
+@media (min-width: 768px) {
+  .nav-link.active::before {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: var(--padding-md);
+      right: var(--padding-md);
+      height: 2px;
+      background-color: var(--primary-color);
+      border-radius: 1px;
+      transition: background-color var(--transition-duration) ease;
+  }
 }
+
 
 /* Mobile Menu Button */
 #mobile-menu-button {
@@ -351,7 +365,13 @@ body.loaded .main-content-wrapper {
   background-color: transparent;
   cursor: pointer;
   transition: background-color var(--transition-duration) var(--transition-timing), color var(--transition-duration) var(--transition-timing);
-  flex-shrink: 0; /* Prevent button from shrinking */
+  flex-shrink: 0;
+  /* Ensure minimum tap size */
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 #mobile-menu-button:hover {
   background-color: var(--bg-muted);
@@ -370,22 +390,26 @@ body.loaded .main-content-wrapper {
   display: block;
 }
 
-/* Mobile Menu Container - FIX APPLIED */
+/* Mobile Menu Container */
 .mobile-menu {
-  position: fixed; /* Changed from absolute */
-  top: var(--header-height); /* Position below fixed header */
+  position: fixed;
+  /* Use variable height */
+  top: var(--header-height);
   left: 0;
   right: 0;
   background-color: var(--bg-content);
   box-shadow: var(--shadow-lg);
   border-top: 1px solid var(--border-color);
-  z-index: 40; /* Below header but above content */
-  /* Animation */
+  z-index: 40;
   max-height: 0;
   overflow: hidden;
-  visibility: hidden; /* Use visibility for better accessibility */
-  transition: max-height 0.3s ease-out, visibility 0s linear 0.3s, padding 0.3s ease-out, border-color var(--transition-duration) ease;
-  padding: 0 var(--padding-lg); /* Remove vertical padding when hidden */
+  visibility: hidden;
+  transition: max-height 0.3s ease-out,
+              visibility 0s linear 0.3s,
+              padding 0.3s ease-out,
+              border-color var(--transition-duration) ease,
+              top var(--transition-duration) ease; /* Add top transition */
+  padding: 0 var(--padding-lg);
 }
 @media (min-width: 768px) { /* md breakpoint */
   .mobile-menu {
@@ -396,11 +420,11 @@ body.loaded .main-content-wrapper {
 }
 /* Class to show mobile menu */
 .mobile-menu.visible {
-  max-height: calc(100vh - var(--header-height)); /* Allow scrolling if content exceeds viewport */
+  max-height: calc(100vh - var(--header-height));
   visibility: visible;
-  transition: max-height 0.3s ease-out, visibility 0s linear 0s, padding 0.3s ease-out;
-  padding: var(--padding-md) var(--padding-lg); /* Add padding back */
-  overflow-y: auto; /* Enable scrolling for long menus */
+  transition: max-height 0.3s ease-out, visibility 0s linear 0s, padding 0.3s ease-out, top var(--transition-duration) ease;
+  padding: var(--padding-md) var(--padding-lg);
+  overflow-y: auto;
 }
 /* Inner container for mobile menu links */
 .mobile-menu > div {
@@ -411,11 +435,15 @@ body.loaded .main-content-wrapper {
 /* Mobile links */
 .mobile-menu .nav-link {
     text-align: left;
-    padding: var(--padding-md); /* Larger tap target */
+    padding: var(--padding-md);
+    white-space: normal; /* Allow mobile links to wrap */
 }
-.mobile-menu .nav-link.active::before {
-    display: none; /* Hide bottom indicator on mobile */
+/* Mobile active link - simpler style */
+.mobile-menu .nav-link.active {
+    background-color: var(--primary-light-bg);
+    color: var(--primary-dark); /* Darker color for active */
 }
+
 
 /* ==========================================================================
    6. Page Header
@@ -423,21 +451,24 @@ body.loaded .main-content-wrapper {
 .page-header {
   background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: var(--text-on-primary);
-  padding: var(--padding-xl) var(--padding-lg); /* Reduced vertical padding */
+  padding: var(--padding-xl) var(--padding-lg);
   text-align: center;
   border-bottom: 4px solid var(--primary-dark);
+  /* Adjust margin to account for potentially shorter header */
+  margin-top: calc(-1 * var(--header-height));
+  padding-top: calc(var(--padding-xl) + var(--header-height));
 }
 .page-header h1 {
   margin-bottom: var(--padding-sm);
   color: var(--text-on-primary);
 }
 .page-header p {
-  font-size: 1.125rem; /* Slightly smaller */
+  font-size: 1.125rem;
   color: var(--text-on-primary);
   font-weight: 300;
   margin-bottom: 0;
   opacity: 0.85;
-  max-width: 60ch; /* Limit width */
+  max-width: 60ch;
   margin-left: auto;
   margin-right: auto;
 }
@@ -446,27 +477,28 @@ body.loaded .main-content-wrapper {
    7. Content Sections
    ========================================================================== */
 section {
-  padding: var(--padding-xl) var(--padding-lg); /* Reduced vertical padding */
+  padding: var(--padding-xl) var(--padding-lg);
   border-bottom: 1px solid var(--border-color);
+  /* Use variable height for scroll margin */
   scroll-margin-top: calc(var(--header-height) + 1rem);
   transition: border-color var(--transition-duration-long) ease;
 }
 section:last-child {
   border-bottom: none;
-  padding-bottom: var(--padding-xl); /* Match top padding */
+  padding-bottom: var(--padding-xl);
 }
 
 /* Section Headings */
 section h2 {
   color: var(--primary-dark);
-  margin-bottom: var(--padding-lg); /* Reduced margin */
+  margin-bottom: var(--padding-lg);
   padding-bottom: var(--padding-sm);
   border-bottom: 2px solid var(--primary-light-border);
   display: inline-block;
 }
 section h3 {
   color: var(--primary-color);
-  margin-top: var(--padding-lg); /* Reduced margin */
+  margin-top: var(--padding-lg);
   margin-bottom: var(--padding-md);
 }
 
@@ -726,10 +758,6 @@ footer a:hover {
 
 /* Medium screens and up (Tablets) */
 @media (min-width: 768px) {
-  /* Desktop nav becomes visible (already handled in .nav-menu) */
-  /* Mobile menu button hidden (already handled in #mobile-menu-button) */
-  /* Mobile menu hidden (already handled in .mobile-menu) */
-
   /* Restore button width if needed */
   .btn {
       width: auto; /* Allow button to size to content */
@@ -738,6 +766,11 @@ footer a:hover {
 
 /* Smaller screens adjustments (Refining defaults and overrides from v2) */
 @media (max-width: 767px) { /* Below md breakpoint */
+  /* Use mobile header height */
+  :root {
+    --header-height: var(--header-height-mobile);
+  }
+
   .container {
       padding-left: var(--padding-md); /* 1rem */
       padding-right: var(--padding-md);
@@ -750,6 +783,9 @@ footer a:hover {
   .page-header {
       padding-top: var(--padding-xl);
       padding-bottom: var(--padding-xl);
+      /* Adjust padding top based on new header height */
+      margin-top: calc(-1 * var(--header-height));
+      padding-top: calc(var(--padding-xl) + var(--header-height));
   }
   section {
      padding-top: var(--padding-xl);
@@ -779,6 +815,9 @@ footer a:hover {
    .page-header {
        padding-top: var(--padding-lg);
        padding-bottom: var(--padding-lg);
+       /* Adjust padding top based on new header height */
+       margin-top: calc(-1 * var(--header-height));
+       padding-top: calc(var(--padding-lg) + var(--header-height));
    }
    section {
        padding-top: var(--padding-lg);
