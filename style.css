@@ -218,19 +218,36 @@ address strong {
   width: 100%;
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0; /* Remove container padding */
+  padding: 0 var(--padding-md); /* Mobile-first padding */
 }
 
 .main-content-wrapper {
   width: 100%;
-  max-width: var(--content-max-width); /* 56rem (896px) */
-  margin: var(--padding-xl) auto; /* Vertical spacing + horizontal centering */
+  max-width: var(--content-max-width);
+  margin: var(--padding-xl) auto;
   background-color: var(--bg-content);
   border-radius: var(--border-radius-xl);
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border-color);
-  padding: var(--padding-xl); /* Internal spacing */
-  box-sizing: border-box; /* Include padding in width calculation */
+  padding: var(--padding-xl);
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity var(--transition-duration-long) ease, 
+             transform var(--transition-duration-long) ease, 
+             background-color var(--transition-duration-long) ease, 
+             border-color var(--transition-duration-long) ease;
+}
+
+/* Desktop overrides */
+@media (min-width: 768px) {
+  .container {
+    padding: 0; /* Remove mobile padding on desktop */
+  }
+  
+  .main-content-wrapper {
+    margin: var(--padding-xl) auto; /* Maintain vertical spacing */
+  }
 }
 
 /* Trigger fade-in */
@@ -748,111 +765,33 @@ footer a:hover {
 }
 
 /* ==========================================================================
-   14. Responsive Adjustments (Mobile First Approach Refinements)
+   14. Responsive Adjustments (Mobile First Refinements)
    ========================================================================== */
-
-/* Base styles are mobile-first friendly, these queries enhance larger screens */
-
-/* Medium screens and up (Tablets) */
-@media (min-width: 768px) {
-  /* Restore button width if needed */
-  .btn {
-      width: auto; /* Allow button to size to content */
-  }
-}
-
-/* Smaller screens adjustments (Refining defaults and overrides from v2) */
-@media (max-width: 767px) { /* Below md breakpoint */
-  /* Use mobile header height */
+@media (max-width: 767px) {
   :root {
     --header-height: var(--header-height-mobile);
   }
 
-  .container {
-      padding-left: var(--padding-md); /* 1rem */
-      padding-right: var(--padding-md);
-  }
   .main-content-wrapper {
-     margin-top: var(--padding-xl);
-     margin-bottom: var(--padding-xl);
-     margin-left: var(--padding-md); /* Add side margin for mobile */
-     margin-right: var(--padding-md);
-     width: auto; /* Allow shrinking */
-     max-width: none; /* Override max-width */
-     border-radius: var(--border-radius-lg); /* Slightly smaller radius */
+    margin: var(--padding-xl) var(--padding-md);
+    border-radius: var(--border-radius-lg);
   }
+
   .page-header {
-      padding-top: var(--padding-xl);
-      padding-bottom: var(--padding-xl);
-      /* Adjust padding top based on new header height */
-      margin-top: calc(-1 * var(--header-height));
-      padding-top: calc(var(--padding-xl) + var(--header-height));
-  }
-  section {
-     padding-top: var(--padding-xl);
-     padding-bottom: var(--padding-xl);
-  }
-  footer {
-      padding-top: var(--padding-lg);
-      padding-bottom: var(--padding-lg);
+    padding: var(--padding-xl);
+    margin-top: calc(-1 * var(--header-height));
+    padding-top: calc(var(--padding-xl) + var(--header-height));
   }
 }
 
-/* Very small screens adjustments */
-@media (max-width: 479px) { /* Below ~sm breakpoint */
-   html {
-       /* Slightly reduce base font size on very small screens if needed */
-       /* font-size: calc(var(--font-size-base) * 0.95); */
-   }
-   .container {
-     /* Keep 1rem padding for breathing room */
-     padding-left: var(--padding-md);
-     padding-right: var(--padding-md);
-   }
-   .main-content-wrapper {
-       margin-top: var(--padding-lg);
-       margin-bottom: var(--padding-lg);
-       margin-left: var(--padding-sm); /* Further reduce side margin */
-       margin-right: var(--padding-sm);
-   }
-   .page-header {
-       padding-top: var(--padding-lg);
-       padding-bottom: var(--padding-lg);
-       /* Adjust padding top based on new header height */
-       margin-top: calc(-1 * var(--header-height));
-       padding-top: calc(var(--padding-lg) + var(--header-height));
-   }
-   section {
-       padding-top: var(--padding-lg);
-       padding-bottom: var(--padding-lg);
-   }
-   /* Headings might need slight size reduction */
-   h1 { font-size: clamp(1.6rem, 1.4rem + 1vw, 1.8rem); } /* Further adjust clamp max */
-   h2 { font-size: clamp(1.25rem, 1.15rem + 0.5vw, 1.4rem); }
-
-   .btn {
-        padding: var(--padding-sm) var(--padding-md); /* Adjust button padding */
-        width: 100%; /* Make buttons full width */
-        text-align: center;
-   }
-   .back-to-top {
-       bottom: var(--padding-md);
-       right: var(--padding-md);
-       width: 40px;
-       height: 40px;
-   }
-   .publication-list li {
-       padding-left: calc(2em + var(--padding-sm)); /* Adjust for smaller screens */
-   }
-   .publication-list li::before {
-       width: 2em;
-       padding-right: var(--padding-sm);
-   }
-   /* Reduce spacing in mobile menu */
-   .mobile-menu {
-       padding: var(--padding-sm) var(--padding-md);
-   }
-   .mobile-menu .nav-link {
-       padding: var(--padding-sm);
-   }
+@media (max-width: 479px) {
+  .main-content-wrapper {
+    margin: var(--padding-lg) var(--padding-sm);
+    border-radius: var(--border-radius-md);
+  }
+  
+  .page-header {
+    padding: var(--padding-lg);
+    padding-top: calc(var(--padding-lg) + var(--header-height));
+  }
 }
