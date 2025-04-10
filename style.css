@@ -1,82 +1,84 @@
 /* ==========================================================================
-   Rewritten CSS for Pranav Haridas's Personal Webpage (v2.5 - Layout Fixes)
-   Focus: Mobile Fixes, Alignment, Consistency, Accessibility, Performance
-   Incorporates fixes for container width, mobile overrides, padding,
-   centering, box sizing, transitions, z-index, image handling,
-   mobile menu visibility, desktop centering, publication alignment,
-   and includes reset/acceleration recommendations.
+   CSS for Pranav Haridas's Personal Webpage (v3.0 - Rewritten with Fixes)
+   Focus: Mobile First, Alignment, Consistency, Accessibility, Performance
+   Clean rewrite incorporating all fixes from previous versions.
    ========================================================================== */
 
 /* ==========================================================================
    1. CSS Variables (Theme Configuration)
    ========================================================================== */
 :root {
-  /* Color Palette */
-  --primary-color: #0ea5e9; /* sky-500 */
-  --primary-dark: #0369a1; /* sky-700 */
-  --primary-light-bg: #e0f2fe; /* sky-100 - Background usage */
+  /* --- Color Palette --- */
+  /* Light Mode */
+  --primary-color: #0ea5e9;        /* sky-500 */
+  --primary-dark: #0369a1;         /* sky-700 */
+  --primary-light-bg: #e0f2fe;     /* sky-100 - Background usage */
   --primary-light-border: #bae6fd; /* sky-200 - Border/Subtle usage */
-  --secondary-color: #475569; /* slate-600 */
-  --text-color: #1e293b; /* slate-800 */
-  --text-muted: #4b5567; /* slate-600 (was gray-600) */
+  --secondary-color: #475569;      /* slate-600 */
+  --text-color: #1e293b;           /* slate-800 */
+  --text-muted: #4b5567;           /* slate-600 */
   --text-on-primary: #ffffff;
-  --bg-color: #f1f5f9; /* slate-100 */
+  --bg-color: #f1f5f9;             /* slate-100 */
   --bg-content: #ffffff;
-  --bg-muted: #f3f4f6; /* gray-100 */
-  --border-color: #e2e8f0; /* slate-200 */
-  --border-light: #f3f4f6; /* gray-100 */
-  --focus-ring-color: #3b82f6; /* blue-500 */
+  --bg-muted: #f3f4f6;             /* gray-100 */
+  --border-color: #e2e8f0;         /* slate-200 */
+  --border-light: #f3f4f6;         /* gray-100 */
+  --focus-ring-color: #3b82f6;     /* blue-500 */
 
-  /* Dark Mode Colors */
-  --dark-primary-color: #38bdf8; /* sky-400 - Brighter for dark */
-  --dark-primary-dark: #0ea5e9; /* sky-500 */
-  --dark-primary-light-bg: #334155; /* slate-700 - Background usage */
+  /* Dark Mode */
+  --dark-primary-color: #38bdf8;        /* sky-400 - Brighter for dark */
+  --dark-primary-dark: #0ea5e9;         /* sky-500 */
+  --dark-primary-light-bg: #334155;     /* slate-700 - Background usage */
   --dark-primary-light-border: #475569; /* slate-600 - Border/Subtle usage */
-  --dark-secondary-color: #94a3b8; /* slate-400 */
-  --dark-text-color: #f1f5f9; /* slate-100 */
-  --dark-text-muted: #cbd5e1; /* slate-300 */
-  --dark-bg-color: #1e293b; /* slate-800 */
-  --dark-bg-content: #334155; /* slate-700 */
-  --dark-bg-muted: #475569; /* slate-600 */
-  --dark-border-color: #475569; /* slate-600 */
-  --dark-border-light: #334155; /* slate-700 */
-  --dark-focus-ring-color: #60a5fa; /* blue-400 */
+  --dark-secondary-color: #94a3b8;      /* slate-400 */
+  --dark-text-color: #f1f5f9;           /* slate-100 */
+  --dark-text-muted: #cbd5e1;           /* slate-300 */
+  --dark-bg-color: #1e293b;             /* slate-800 */
+  --dark-bg-content: #334155;           /* slate-700 */
+  --dark-bg-muted: #475569;             /* slate-600 */
+  --dark-border-color: #475569;         /* slate-600 */
+  --dark-border-light: #334155;         /* slate-700 */
+  --dark-focus-ring-color: #60a5fa;     /* blue-400 */
 
-  /* Typography */
+  /* --- Typography --- */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); /* Fluid base size (~16px -> 18px) */
   --line-height-base: 1.6;
   --line-height-relaxed: 1.7;
 
-  /* Spacing & Sizing */
-  --header-height-desktop: 4rem; /* 64px */
-  --header-height-mobile: 3.5rem; /* 56px - Slightly shorter for mobile */
-  --header-height: var(--header-height-desktop); /* Default to desktop height */
-  /* FIX 1: Container Width Conflict */
-  --container-max-width: 56rem; /* Match content width */
-  --content-max-width: 56rem;
-  --spacing-unit: 0.25rem; /* 4px */
-  --padding-xs: calc(var(--spacing-unit) * 1); /* 0.25rem */
-  --padding-sm: calc(var(--spacing-unit) * 2); /* 0.5rem */
-  --padding-md: calc(var(--spacing-unit) * 4); /* 1rem */
-  --padding-lg: calc(var(--spacing-unit) * 6); /* 1.5rem */
-  --padding-xl: calc(var(--spacing-unit) * 8); /* 2rem */
+  /* --- Spacing & Sizing --- */
+  --header-height-desktop: 4rem;    /* 64px */
+  --header-height-mobile: 3.5rem;   /* 56px */
+  --header-height: var(--header-height-desktop); /* Default */
+  --container-max-width: 56rem;     /* FIX: Match content width */
+  --content-max-width: 56rem;       /* FIX: Match container width */
+  --spacing-unit: 0.25rem;          /* 4px */
+  --padding-xs: calc(var(--spacing-unit) * 1);  /* 0.25rem */
+  --padding-sm: calc(var(--spacing-unit) * 2);  /* 0.5rem */
+  --padding-md: calc(var(--spacing-unit) * 4);  /* 1rem */
+  --padding-lg: calc(var(--spacing-unit) * 6);  /* 1.5rem */
+  --padding-xl: calc(var(--spacing-unit) * 8);  /* 2rem */
   --padding-xxl: calc(var(--spacing-unit) * 12); /* 3rem */
-  /* FIX 3: Padding/Margin Stacking - Define content padding variable */
-  --content-padding: var(--padding-xl);
+  --content-padding: var(--padding-xl); /* FIX: Padding variable */
 
-  /* Borders & Shadows */
+  /* --- Borders & Shadows --- */
   --border-radius-sm: 0.25rem;
   --border-radius-md: 0.375rem;
   --border-radius-lg: 0.5rem;
   --border-radius-xl: 0.75rem;
   --border-radius-full: 9999px;
+  /* Light Mode Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04); /* Softer */
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04); /* Softer */
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  /* Dark Mode Shadows */
+  --dark-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+  --dark-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -2px rgba(0, 0, 0, 0.15);
+  --dark-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.15);
+  --dark-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.15);
 
-  /* Transitions */
+  /* --- Transitions --- */
   --transition-duration: 150ms;
   --transition-duration-long: 300ms;
   --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
@@ -87,8 +89,9 @@
    ========================================================================== */
 @media (prefers-color-scheme: dark) {
   :root {
-    color-scheme: dark; /* Inform browser about dark mode */
+    color-scheme: dark; /* Inform browser */
 
+    /* Override colors */
     --primary-color: var(--dark-primary-color);
     --primary-dark: var(--dark-primary-dark);
     --primary-light-bg: var(--dark-primary-light-bg);
@@ -103,61 +106,65 @@
     --border-light: var(--dark-border-light);
     --focus-ring-color: var(--dark-focus-ring-color);
 
-    /* Darker Shadows */
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -2px rgba(0, 0, 0, 0.15);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.15);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.15);
+    /* Override shadows */
+    --shadow-sm: var(--dark-shadow-sm);
+    --shadow-md: var(--dark-shadow-md);
+    --shadow-lg: var(--dark-shadow-lg);
+    --shadow-xl: var(--dark-shadow-xl);
   }
-}
-
-/* Additional Recommendation 1: CSS Reset */
-html, body {
-  width: 100%;
-  overflow-x: hidden;
 }
 
 /* ==========================================================================
    3. Base Styles & Resets
    ========================================================================== */
+
+/* Basic Reset & Box Sizing */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* FIX 6: Box Sizing Conflict - Separate border properties */
+  /* FIX: Correct border reset */
   border: 0;
   border-style: solid;
   border-color: var(--border-color);
 }
 
+/* HTML & Body Defaults */
 html {
   scroll-behavior: smooth;
-  font-size: var(--font-size-base); /* Apply fluid base font size */
+  font-size: var(--font-size-base);
   line-height: var(--line-height-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape */
+  -webkit-text-size-adjust: 100%; /* Prevent font scaling */
+}
+
+html, body {
+  /* FIX: Prevent horizontal overflow */
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   font-family: var(--font-sans);
   background-color: var(--bg-color);
   color: var(--text-color);
-  /* Use CSS variable for header height offset */
-  margin-top: var(--header-height);
-  transition: background-color var(--transition-duration-long) ease, color var(--transition-duration-long) ease, margin-top var(--transition-duration) ease; /* Add margin-top transition */
-  /* overflow-x: hidden; /* Moved to html, body reset above */
+  margin-top: var(--header-height); /* Offset for fixed header */
+  transition: background-color var(--transition-duration-long) ease,
+              color var(--transition-duration-long) ease,
+              margin-top var(--transition-duration) ease;
 }
 
-/* General Link Styling */
+/* Link Styling */
 a {
   color: var(--primary-color);
   text-decoration: none;
   border-bottom: 1px solid transparent;
-  transition: color var(--transition-duration) ease, border-color var(--transition-duration) ease;
-  /* Improve tap target slightly for inline links */
+  transition: color var(--transition-duration) ease,
+              border-color var(--transition-duration) ease;
+  /* Improve tap target */
   padding-top: var(--padding-xs);
   padding-bottom: var(--padding-xs);
   margin-top: calc(-1 * var(--padding-xs));
@@ -168,8 +175,8 @@ a:hover {
   border-bottom-color: var(--primary-light-border);
 }
 
-/* Accessibility focus state (using :focus-visible) */
-*:focus { outline: none; } /* Remove default outline */
+/* Accessibility Focus Outline */
+*:focus { outline: none; } /* Remove default */
 
 a:focus-visible,
 button:focus-visible,
@@ -180,40 +187,40 @@ select:focus-visible,
   outline: 2px solid var(--focus-ring-color);
   outline-offset: 2px;
   box-shadow: none;
-  border-radius: var(--border-radius-sm); /* Optional: add radius to outline */
+  border-radius: var(--border-radius-sm);
 }
 
-/* Headings with Fluid Typography */
+/* Headings */
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: var(--padding-md);
   font-weight: 600;
   line-height: 1.3;
-  color: var(--text-color); /* Explicitly set color */
+  color: var(--text-color);
 }
-h1 { font-size: clamp(1.75rem, 1.5rem + 1.25vw, 2.5rem); font-weight: 700; } /* Adjusted clamp */
-h2 { font-size: clamp(1.375rem, 1.25rem + 0.625vw, 1.75rem); } /* Adjusted clamp */
-h3 { font-size: clamp(1.125rem, 1.05rem + 0.375vw, 1.375rem); } /* Adjusted clamp */
-h4 { font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); } /* Kept same */
+h1 { font-size: clamp(1.75rem, 1.5rem + 1.25vw, 2.5rem); font-weight: 700; }
+h2 { font-size: clamp(1.375rem, 1.25rem + 0.625vw, 1.75rem); }
+h3 { font-size: clamp(1.125rem, 1.05rem + 0.375vw, 1.375rem); }
+h4 { font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); }
 
 /* Paragraphs */
 p {
   margin-bottom: var(--padding-md);
   line-height: var(--line-height-base);
-  max-width: 65ch; /* Improve readability */
+  max-width: 65ch; /* Readability */
 }
 p.leading-relaxed {
   line-height: var(--line-height-relaxed);
   color: var(--text-muted);
 }
 
-/* Lists (Basic Reset) */
+/* Lists */
 ul, ol {
   margin-bottom: var(--padding-md);
   padding-left: var(--padding-lg);
 }
 li {
   margin-bottom: var(--padding-sm);
-  padding-left: var(--padding-xs); /* Small indent for list item itself */
+  padding-left: var(--padding-xs);
 }
 
 /* Address */
@@ -232,55 +239,51 @@ address strong {
    ========================================================================== */
 .container {
   width: 100%;
-  max-width: var(--container-max-width); /* Uses updated variable */
-  margin: 0 auto;
-  padding: 0 var(--padding-md); /* Mobile-first padding */
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--padding-md); /* Mobile padding */
+  padding-right: var(--padding-md);
 }
 
 .main-content-wrapper {
-  /* FIX 4: Missing Centering Safeguards */
+  /* FIX: Centering & Width */
   width: min(100%, var(--content-max-width));
-  margin-inline: auto !important; /* Ensure centering */
-  /* Original margin-top/bottom */
+  margin-inline: auto !important; /* Robust centering */
   margin-top: var(--padding-xl);
   margin-bottom: var(--padding-xl);
   background-color: var(--bg-content);
   border-radius: var(--border-radius-xl);
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border-color);
-  /* FIX 3: Padding/Margin Stacking - Use content padding variable */
-  padding: var(--content-padding);
-  box-sizing: border-box;
+  padding: var(--content-padding); /* FIX: Use padding variable */
+  position: relative; /* For z-index context */
+  z-index: 10; /* FIX: Base z-index */
+  /* Fade-in animation setup */
   opacity: 0;
-  transform: translateY(10px);
-  /* Additional Recommendation 2: Force Hardware Acceleration */
-  transform: translateZ(0); /* Add this */
+  transform: translateY(10px) translateZ(0); /* FIX: Hardware acceleration hint */
   transition: opacity var(--transition-duration-long) ease,
               transform var(--transition-duration-long) ease,
               background-color var(--transition-duration-long) ease,
               border-color var(--transition-duration-long) ease;
-  /* FIX 8: Z-index Conflicts */
-  z-index: 10;
-  position: relative; /* Needed for z-index to work reliably */
-}
-
-/* Desktop overrides for container padding */
-@media (min-width: 768px) {
-  .container {
-    padding: 0; /* Remove mobile padding on desktop */
-  }
-  /* Note: margin adjustments for main-content-wrapper on desktop were removed
-     as they are handled by the base rule now */
 }
 
 /* Trigger fade-in */
 body.loaded .main-content-wrapper {
   opacity: 1;
-  transform: translateY(0) translateZ(0); /* Ensure translateZ is included */
+  transform: translateY(0) translateZ(0);
+}
+
+/* Desktop container adjustments */
+@media (min-width: 768px) {
+  .container {
+    padding-left: 0; /* Remove mobile padding */
+    padding-right: 0;
+  }
 }
 
 /* ==========================================================================
-   5. Header & Navigation (#main-nav) - REFINED
+   5. Header & Navigation (#main-nav)
    ========================================================================== */
 #main-nav {
   position: fixed;
@@ -288,32 +291,30 @@ body.loaded .main-content-wrapper {
   left: 0;
   right: 0;
   width: 100%;
-  height: var(--header-height); /* Use variable height */
+  height: var(--header-height);
   background-color: hsla(0, 0%, 100%, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  /* FIX 8: Z-index Conflicts & Mobile Menu Visibility Fix */
-  z-index: 1000; /* Increased */
+  z-index: 1000; /* FIX: Highest z-index */
   border-bottom: 1px solid var(--border-light);
   box-shadow: var(--shadow-sm);
   transition: background-color var(--transition-duration) ease,
               border-color var(--transition-duration) ease,
-              /* FIX 7: Header Height Transition */
-              height 0.3s ease-out;
+              height 0.3s ease-out; /* FIX: Height transition */
 }
 @media (prefers-color-scheme: dark) {
   #main-nav {
-    background-color: hsla(215, 28%, 17%, 0.85); /* dark-bg-color equivalent */
+    background-color: hsla(215, 28%, 17%, 0.85); /* Dark bg equivalent */
   }
 }
 
-/* Inner container */
+/* Navigation container inside header */
 #main-nav .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100%;
-  /* Use container padding defined globally */
+  /* Inherits padding from .container */
 }
 
 /* Site Title */
@@ -329,7 +330,7 @@ body.loaded .main-content-wrapper {
   overflow: hidden;
   text-overflow: ellipsis;
   padding-right: var(--padding-sm);
-  /* Add vertical padding for better tap target */
+  /* Tap target */
   padding-top: var(--padding-xs);
   padding-bottom: var(--padding-xs);
   margin-top: calc(-1 * var(--padding-xs));
@@ -342,20 +343,20 @@ body.loaded .main-content-wrapper {
 
 /* Desktop Navigation Menu */
 .nav-menu {
-  display: none; /* Hidden by default, shown via media query */
+  display: none; /* Mobile first: hidden */
   align-items: center;
   list-style: none;
   padding-left: 0;
   margin-bottom: 0;
   gap: var(--padding-xs);
 }
-@media (min-width: 768px) { /* md breakpoint */
+@media (min-width: 768px) {
   .nav-menu {
-    display: flex;
+    display: flex; /* Show on desktop */
   }
 }
 
-/* Navigation Links (Desktop & Mobile) */
+/* Navigation Links (Shared styles) */
 .nav-link {
   display: block;
   color: var(--text-muted);
@@ -364,7 +365,8 @@ body.loaded .main-content-wrapper {
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
-  transition: color var(--transition-duration) var(--transition-timing), background-color var(--transition-duration) var(--transition-timing);
+  transition: color var(--transition-duration) var(--transition-timing),
+              background-color var(--transition-duration) var(--transition-timing);
   position: relative;
   border-bottom: none;
   white-space: nowrap;
@@ -374,39 +376,38 @@ body.loaded .main-content-wrapper {
   background-color: var(--primary-light-bg);
   border-bottom: none;
 }
-/* Active Navigation Link */
-.nav-link.active {
+.nav-link.active { /* Active state */
   color: var(--primary-color);
   font-weight: 600;
 }
-/* Active indicator (Desktop only) */
+
+/* Desktop Active Link Indicator */
 @media (min-width: 768px) {
   .nav-link.active::before {
-      content: '';
-      position: absolute;
-      bottom: 4px;
-      left: var(--padding-md);
-      right: var(--padding-md);
-      height: 2px;
-      background-color: var(--primary-color);
-      border-radius: 1px;
-      transition: background-color var(--transition-duration) ease;
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: var(--padding-md);
+    right: var(--padding-md);
+    height: 2px;
+    background-color: var(--primary-color);
+    border-radius: 1px;
+    transition: background-color var(--transition-duration) ease;
   }
 }
 
-
-/* Mobile Menu Button */
+/* Mobile Menu Button (Hamburger) */
 #mobile-menu-button {
-  display: block; /* Display by default, hidden via media query */
+  display: block; /* Mobile first: visible */
   padding: var(--padding-sm);
   border-radius: var(--border-radius-lg);
   color: var(--text-muted);
   background-color: transparent;
   cursor: pointer;
-  transition: background-color var(--transition-duration) var(--transition-timing), color var(--transition-duration) var(--transition-timing);
+  transition: background-color var(--transition-duration) var(--transition-timing),
+              color var(--transition-duration) var(--transition-timing);
   flex-shrink: 0;
-  /* Ensure minimum tap size */
-  min-width: 44px;
+  min-width: 44px; /* Tap target size */
   min-height: 44px;
   display: inline-flex;
   align-items: center;
@@ -416,77 +417,66 @@ body.loaded .main-content-wrapper {
   background-color: var(--bg-muted);
   color: var(--text-color);
 }
-/* Focus state handled by global :focus-visible */
-@media (min-width: 768px) { /* md breakpoint */
+@media (min-width: 768px) {
   #mobile-menu-button {
-    display: none;
+    display: none; /* Hide on desktop */
   }
 }
-/* Icon within the button */
-#mobile-menu-button .icon {
+#mobile-menu-button .icon { /* Icon inside button */
   font-size: 1.5rem;
   line-height: 1;
   display: block;
 }
 
-/* Mobile Menu Container */
+/* Mobile Menu Container (Dropdown) */
 .mobile-menu {
   position: fixed;
-  /* Use variable height */
-  top: var(--header-height);
+  top: var(--header-height); /* Position below header */
   left: 0;
   right: 0;
   background-color: var(--bg-content);
   box-shadow: var(--shadow-lg);
   border-top: 1px solid var(--border-color);
-  /* FIX 8: Z-index Conflicts & Mobile Menu Visibility Fix */
-  z-index: 999; /* Increased */
-  max-height: 0;
+  z-index: 999; /* FIX: Below header, above content */
+  max-height: 0; /* Hidden by default */
   overflow: hidden;
   visibility: hidden;
   transition: max-height 0.3s ease-out,
               visibility 0s linear 0.3s,
               padding 0.3s ease-out,
               border-color var(--transition-duration) ease,
-              top var(--transition-duration) ease; /* Add top transition */
-  padding: 0 var(--padding-lg);
+              top var(--transition-duration) ease;
+  padding: 0 var(--padding-lg); /* Collapsed padding */
 }
-@media (min-width: 768px) { /* md breakpoint */
+@media (min-width: 768px) {
   .mobile-menu {
-    display: none !important;
-    max-height: none !important;
-    visibility: hidden !important;
+    display: none !important; /* Ensure hidden on desktop */
   }
 }
-/* Class to show mobile menu */
-.mobile-menu.visible {
-  max-height: calc(100vh - var(--header-height));
+.mobile-menu.visible { /* Class to show menu */
+  max-height: calc(100vh - var(--header-height)); /* Expand */
   visibility: visible;
-  transition: max-height 0.3s ease-out, visibility 0s linear 0s, padding 0.3s ease-out, top var(--transition-duration) ease;
-  padding: var(--padding-md) var(--padding-lg);
+  transition-delay: 0s, 0s, 0s, 0s, 0s; /* Reset delays */
+  padding: var(--padding-md) var(--padding-lg); /* Expanded padding */
   overflow-y: auto;
 }
-/* Inner container for mobile menu links */
-.mobile-menu > div {
+.mobile-menu > div { /* Inner container for links */
   display: flex;
   flex-direction: column;
   gap: var(--padding-xs);
 }
-/* Mobile links */
-.mobile-menu .nav-link {
-    text-align: left;
-    padding: var(--padding-md);
-    white-space: normal; /* Allow mobile links to wrap */
+.mobile-menu .nav-link { /* Mobile link specific styles */
+  text-align: left;
+  padding: var(--padding-md);
+  white-space: normal; /* Allow wrapping */
 }
-/* Mobile active link - simpler style */
-.mobile-menu .nav-link.active {
-    background-color: var(--primary-light-bg);
-    color: var(--primary-dark); /* Darker color for active */
+.mobile-menu .nav-link.active { /* Mobile active state */
+  background-color: var(--primary-light-bg);
+  color: var(--primary-dark);
 }
-
 
 /* ==========================================================================
-   6. Page Header
+   6. Page Header (Optional Hero Section)
    ========================================================================== */
 .page-header {
   background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
@@ -494,9 +484,8 @@ body.loaded .main-content-wrapper {
   padding: var(--padding-xl) var(--padding-lg);
   text-align: center;
   border-bottom: 4px solid var(--primary-dark);
-  /* Adjust margin to account for potentially shorter header */
-  margin-top: calc(-1 * var(--header-height));
-  padding-top: calc(var(--padding-xl) + var(--header-height));
+  margin-top: calc(-1 * var(--header-height)); /* Pull up under fixed header */
+  padding-top: calc(var(--padding-xl) + var(--header-height)); /* Adjust top padding */
 }
 .page-header h1 {
   margin-bottom: var(--padding-sm);
@@ -517,16 +506,14 @@ body.loaded .main-content-wrapper {
    7. Content Sections
    ========================================================================== */
 section {
-  /* FIX 3: Padding/Margin Stacking - Adjust section padding */
-  padding: calc(var(--content-padding) * 0.75) 0;
+  padding: calc(var(--content-padding) * 0.75) 0; /* FIX: Adjusted padding */
   border-bottom: 1px solid var(--border-color);
-  /* Use variable height for scroll margin */
-  scroll-margin-top: calc(var(--header-height) + 1rem);
+  scroll-margin-top: calc(var(--header-height) + 1rem); /* Offset for scroll links */
   transition: border-color var(--transition-duration-long) ease;
 }
 section:last-child {
   border-bottom: none;
-  padding-bottom: var(--padding-xl); /* Keep original bottom padding for last section */
+  padding-bottom: var(--padding-xl); /* Restore bottom padding for last section */
 }
 
 /* Section Headings */
@@ -546,7 +533,7 @@ section h3 {
 /* ==========================================================================
    8. Styled Lists
    ========================================================================== */
-/* Unordered List */
+/* Unordered List with Custom Bullet */
 .styled-list {
   list-style: none;
   padding-left: var(--padding-sm);
@@ -560,12 +547,12 @@ section h3 {
   color: var(--primary-color);
   font-size: 0.8em;
   position: absolute;
-  left: var(--padding-sm); /* Position relative to padding-left */
+  left: var(--padding-sm);
   top: 0.3em;
   line-height: 1;
 }
 
-/* Ordered List (e.g., Publications) */
+/* Ordered List (e.g., Publications) with Custom Counter */
 .publication-list {
   list-style: none;
   counter-reset: publication-counter;
@@ -574,31 +561,29 @@ section h3 {
 .publication-list li {
   counter-increment: publication-counter;
   margin-bottom: var(--padding-md);
-  /* Adjust padding-left dynamically based on expected number width */
-  padding-left: calc(2.5em + var(--padding-md)); /* Base padding for number area */
+  padding-left: calc(2.5em + var(--padding-md)); /* Space for number */
   position: relative;
 }
 .publication-list li::before {
   content: counter(publication-counter) ".";
   position: absolute;
   /* FIX: Publication Number Alignment */
-  left: var(--padding-sm); /* Align with list padding */
-  text-align: left; /* Align number text left */
-  width: auto; /* Allow natural width */
-  /* Original styles */
+  left: var(--padding-sm);
+  text-align: left;
+  width: auto;
+  /* --- */
   top: 0.1em;
   font-weight: 600;
   color: var(--secondary-color);
-  padding-right: var(--padding-md); /* Space between number and text */
+  padding-right: var(--padding-md); /* Space after number */
   transition: color var(--transition-duration) ease;
 }
 
-/* Links within lists */
+/* Links within Lists */
 .publication-list a,
 .styled-list a,
-.course-list a { /* Assuming .course-list exists */
-  word-break: break-word; /* Keep this */
-  /* Remove margin/padding adjustments for inline links here, handled globally */
+.course-list a { /* Assuming .course-list */
+  word-break: break-word;
   border-bottom: 1px solid var(--primary-light-border);
 }
 .publication-list a:hover,
@@ -637,17 +622,20 @@ select {
   border-radius: var(--border-radius-md);
   background-color: var(--bg-content);
   color: var(--text-color);
-  font-size: 1rem; /* Use 1rem for form inputs */
+  font-size: 1rem;
   line-height: var(--line-height-base);
-  transition: border-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease, background-color var(--transition-duration) ease, color var(--transition-duration) ease;
+  transition: border-color var(--transition-duration) ease,
+              box-shadow var(--transition-duration) ease,
+              background-color var(--transition-duration) ease,
+              color var(--transition-duration) ease;
 }
-/* Focus state handled by global :focus-visible */
 input[type="text"]:focus,
 input[type="email"]:focus,
 textarea:focus,
 select:focus {
    border-color: var(--primary-color);
-   /* box-shadow: 0 0 0 2px var(--primary-light-bg); /* Optional inner shadow */
+   /* Optional focus shadow: */
+   /* box-shadow: 0 0 0 2px var(--primary-light-bg); */
 }
 textarea {
   min-height: 120px;
@@ -656,7 +644,9 @@ textarea {
 
 /* Button Base Style */
 .btn {
-  display: inline-block;
+  display: inline-flex; /* Use flex for alignment */
+  align-items: center;
+  justify-content: center;
   padding: var(--padding-sm) var(--padding-lg);
   background-color: var(--primary-color);
   color: var(--text-on-primary);
@@ -665,31 +655,30 @@ textarea {
   font-weight: 500;
   text-align: center;
   cursor: pointer;
-  transition: background-color var(--transition-duration) ease, border-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease, color var(--transition-duration) ease;
+  transition: background-color var(--transition-duration) ease,
+              border-color var(--transition-duration) ease,
+              box-shadow var(--transition-duration) ease,
+              color var(--transition-duration) ease;
   text-decoration: none;
   line-height: var(--line-height-base);
   font-size: 0.9375rem; /* 15px */
-  min-height: 44px; /* Ensure minimum tap height */
-  display: inline-flex; /* Align text vertically */
-  align-items: center;
-  justify-content: center;
+  min-height: 44px; /* Tap target */
 }
-/* Grouped Button States */
 .btn:hover {
   background-color: var(--primary-dark);
   color: var(--text-on-primary);
-  box-shadow: var(--shadow-sm); /* Subtle shadow instead of translate */
+  box-shadow: var(--shadow-sm);
 }
 .btn:active {
-    background-color: var(--primary-dark); /* Keep dark on active */
-    box-shadow: none; /* Remove shadow on active */
+  background-color: var(--primary-dark);
+  box-shadow: none;
 }
-/* Focus state handled by global :focus-visible */
+/* Focus state handled globally */
 
-/* Submit Button (Alias for .btn) */
+/* Submit Button */
 button[type="submit"],
 input[type="submit"] {
-  /* Inherit .btn styles */
+  /* Inherits .btn styles */
 }
 
 /* ==========================================================================
@@ -702,21 +691,23 @@ footer {
   padding: var(--padding-xl) var(--padding-lg);
   border-top: 1px solid var(--border-color);
   font-size: 0.875rem;
-  transition: background-color var(--transition-duration-long) ease, color var(--transition-duration-long) ease, border-color var(--transition-duration-long) ease;
+  transition: background-color var(--transition-duration-long) ease,
+              color var(--transition-duration-long) ease,
+              border-color var(--transition-duration-long) ease;
 }
 footer a {
-    color: var(--primary-color);
-    font-weight: 500;
-    border-bottom: 1px solid transparent;
-    /* Tap target improvement */
-    padding-top: var(--padding-xs);
-    padding-bottom: var(--padding-xs);
-    margin-top: calc(-1 * var(--padding-xs));
-    margin-bottom: calc(-1 * var(--padding-xs));
+  color: var(--primary-color);
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  /* Tap target */
+  padding-top: var(--padding-xs);
+  padding-bottom: var(--padding-xs);
+  margin-top: calc(-1 * var(--padding-xs));
+  margin-bottom: calc(-1 * var(--padding-xs));
 }
 footer a:hover {
-    color: var(--primary-dark);
-    border-bottom-color: var(--primary-light-border);
+  color: var(--primary-dark);
+  border-bottom-color: var(--primary-light-border);
 }
 
 /* ==========================================================================
@@ -728,7 +719,7 @@ footer a:hover {
   right: var(--padding-lg);
   background-color: var(--primary-color);
   color: var(--text-on-primary);
-  width: 44px; /* Ensure minimum tap size */
+  width: 44px; /* Tap target */
   height: 44px;
   border-radius: var(--border-radius-full);
   box-shadow: var(--shadow-md);
@@ -737,25 +728,29 @@ footer a:hover {
   align-items: center;
   justify-content: center;
   font-size: 1.25rem;
-  opacity: 0;
+  opacity: 0; /* Hidden by default */
   visibility: hidden;
-  transform: scale(0.8); /* Scale transition */
-  transition: background-color var(--transition-duration) ease, opacity 0.3s ease, visibility 0s linear 0.3s, transform 0.3s ease, box-shadow var(--transition-duration) ease;
-  z-index: 100; /* Keep below header/mobile menu */
+  transform: scale(0.8);
+  transition: background-color var(--transition-duration) ease,
+              opacity 0.3s ease,
+              visibility 0s linear 0.3s,
+              transform 0.3s ease,
+              box-shadow var(--transition-duration) ease;
+  z-index: 100; /* Below header/menu */
 }
-.back-to-top.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1);
-    transition-delay: 0s, 0s, 0s, 0s; /* Reset visibility delay */
+.back-to-top.visible { /* Class to show */
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition-delay: 0s, 0s, 0s, 0s, 0s;
 }
 .back-to-top:hover {
   background-color: var(--primary-dark);
   color: var(--text-on-primary);
-  transform: scale(1.05); /* Slightly larger on hover */
+  transform: scale(1.05);
   box-shadow: var(--shadow-lg);
 }
-/* Focus state handled by global :focus-visible */
+/* Focus state handled globally */
 
 /* ==========================================================================
    12. Utilities
@@ -778,82 +773,76 @@ footer a:hover {
   border-width: 0;
 }
 
-
 /* ==========================================================================
    13. MathJax Styling
    ========================================================================== */
 .math {
   text-align: center;
   margin: var(--padding-xl) 0;
-  overflow-x: auto;
+  overflow-x: auto; /* Allow horizontal scroll for wide equations */
   padding: var(--padding-md);
-  background-color: var(--bg-muted); /* Add subtle background */
+  background-color: var(--bg-muted);
   border-radius: var(--border-radius-md);
-  -webkit-overflow-scrolling: touch; /* Smoother scrolling on iOS */
+  -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
 }
 
 /* ==========================================================================
-   14. Responsive Adjustments (Mobile First Refinements)
+   14. Responsive Adjustments
    ========================================================================== */
 
-/* Note: Media Query Order (Point 5) was interpreted as ensuring correct application
-   of overrides within the existing mobile-first structure, rather than moving entire blocks.
-   The specific mobile override fix (Point 2) is applied below. */
-
-@media (max-width: 767px) {
+@media (max-width: 767px) { /* Apply below 768px */
   :root {
+    /* Use mobile header height */
     --header-height: var(--header-height-mobile);
   }
 
   .main-content-wrapper {
-    /* Original mobile margin adjustment */
+    /* Adjust vertical margins */
     margin-top: var(--padding-xl);
     margin-bottom: var(--padding-xl);
-    /* FIX: Desktop Centering Problem - Remove conflicting mobile margins */
-    /* margin-left: var(--padding-md); */ /* REMOVED */
-    /* margin-right: var(--padding-md); */ /* REMOVED */
+    /* FIX: Ensure width calculation uses correct padding var & no side margins */
+    width: calc(100% - (2 * var(--padding-md)));
     border-radius: var(--border-radius-lg);
-    /* FIX 2: Mobile Override Conflict */
-    max-width: 100%; /* Ensure it doesn't exceed viewport */
-    width: calc(100% - (2 * var(--padding-md))); /* Account for side padding/margins */
-    /* Ensure centering is maintained */
-    margin-inline: auto !important;
+    /* Centering is handled by margin-inline: auto !important; */
   }
 
   .page-header {
-    padding: var(--padding-xl);
+    padding-left: var(--padding-xl);
+    padding-right: var(--padding-xl);
+    /* Adjust padding based on mobile header height */
     margin-top: calc(-1 * var(--header-height));
     padding-top: calc(var(--padding-xl) + var(--header-height));
   }
 }
 
-@media (max-width: 479px) {
+@media (max-width: 479px) { /* Apply below 480px */
   .main-content-wrapper {
-    /* Adjust margins for smaller screens */
+    /* Further adjust vertical margins */
     margin-top: var(--padding-lg);
     margin-bottom: var(--padding-lg);
-    /* FIX: Desktop Centering Problem - Remove conflicting mobile margins */
-    /* margin-left: var(--padding-sm); */ /* REMOVED */
-    /* margin-right: var(--padding-sm); */ /* REMOVED */
-    border-radius: var(--border-radius-md);
-    /* Apply width calculation here too */
+    /* FIX: Ensure width calculation uses correct padding var & no side margins */
     width: calc(100% - (2 * var(--padding-sm)));
-    margin-inline: auto !important;
+    border-radius: var(--border-radius-md);
+    /* Centering is handled by margin-inline: auto !important; */
   }
 
   .page-header {
-    padding: var(--padding-lg);
+    padding-left: var(--padding-lg);
+    padding-right: var(--padding-lg);
+    /* Adjust padding based on mobile header height */
+    margin-top: calc(-1 * var(--header-height));
     padding-top: calc(var(--padding-lg) + var(--header-height));
   }
 }
 
 /* ==========================================================================
-   15. Images (NEW SECTION)
+   15. Images
    ========================================================================== */
-/* FIX 9: Image Containment */
+/* FIX: Image containment */
 img {
-  max-width: 100%; /* Prevent images from overflowing container */
-  height: auto; /* Maintain aspect ratio */
-  display: block; /* Remove extra space below inline images */
-  margin: 0 auto; /* Center block images if container is wider */
+  max-width: 100%;
+  height: auto;
+  display: block; /* Prevents bottom space */
+  margin-left: auto; /* Center if needed */
+  margin-right: auto;
 }
