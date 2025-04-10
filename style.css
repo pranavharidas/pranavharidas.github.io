@@ -217,29 +217,29 @@ address strong {
 .container {
   width: 100%;
   max-width: var(--container-max-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--padding-lg); /* 1.5rem */
-  padding-right: var(--padding-lg);
+  margin: 0 auto;
+  padding: 0 var(--padding-lg);
 }
 
-/* Main content wrapper with fade-in */
+/* Main content wrapper with proper width inheritance */
 .main-content-wrapper {
-  display: block; /* Ensure it's treated as a block element */
+  width: 100%;
   max-width: var(--content-max-width);
-  /* Explicitly set margins for centering */
-  margin-top: var(--padding-xl);
-  margin-bottom: var(--padding-xl);
-  margin-left: auto;
-  margin-right: auto;
+  margin: var(--padding-xl) auto;
   background-color: var(--bg-content);
   border-radius: var(--border-radius-xl);
   box-shadow: var(--shadow-lg);
-  overflow: hidden; /* Keep hidden to respect radius */
   border: 1px solid var(--border-color);
+  /* Add these properties for better content containment: */
+  box-sizing: border-box;
+  padding: var(--padding-xl);
+  /* Animation properties remain the same */
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity var(--transition-duration-long) ease, transform var(--transition-duration-long) ease, background-color var(--transition-duration-long) ease, border-color var(--transition-duration-long) ease;
+  transition: opacity var(--transition-duration-long) ease, 
+             transform var(--transition-duration-long) ease, 
+             background-color var(--transition-duration-long) ease, 
+             border-color var(--transition-duration-long) ease;
 }
 /* Trigger fade-in */
 body.loaded .main-content-wrapper {
