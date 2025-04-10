@@ -218,29 +218,21 @@ address strong {
   width: 100%;
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 var(--padding-lg);
+  padding: 0; /* Remove container padding */
 }
 
-/* Main content wrapper with proper width inheritance */
 .main-content-wrapper {
   width: 100%;
-  max-width: var(--content-max-width);
-  margin: var(--padding-xl) auto;
+  max-width: var(--content-max-width); /* 56rem (896px) */
+  margin: var(--padding-xl) auto; /* Vertical spacing + horizontal centering */
   background-color: var(--bg-content);
   border-radius: var(--border-radius-xl);
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border-color);
-  /* Add these properties for better content containment: */
-  box-sizing: border-box;
-  padding: var(--padding-xl);
-  /* Animation properties remain the same */
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity var(--transition-duration-long) ease, 
-             transform var(--transition-duration-long) ease, 
-             background-color var(--transition-duration-long) ease, 
-             border-color var(--transition-duration-long) ease;
+  padding: var(--padding-xl); /* Internal spacing */
+  box-sizing: border-box; /* Include padding in width calculation */
 }
+
 /* Trigger fade-in */
 body.loaded .main-content-wrapper {
   opacity: 1;
