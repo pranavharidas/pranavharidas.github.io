@@ -1,6 +1,8 @@
 /* ==========================================================================
-   Rewritten CSS for Pranav Haridas's Personal Webpage (v2.3 - Center Fix)
+   Rewritten CSS for Pranav Haridas's Personal Webpage (v2.4 - Applied Fixes)
    Focus: Mobile Fixes, Alignment, Consistency, Accessibility, Performance
+   Incorporates fixes for container width, mobile overrides, padding,
+   centering, box sizing, transitions, z-index, and image handling.
    ========================================================================== */
 
 /* ==========================================================================
@@ -48,8 +50,9 @@
   --header-height-desktop: 4rem; /* 64px */
   --header-height-mobile: 3.5rem; /* 56px - Slightly shorter for mobile */
   --header-height: var(--header-height-desktop); /* Default to desktop height */
-  --container-max-width: 60rem; /* 960px - Slightly wider */
-  --content-max-width: 56rem; /* 896px */
+  /* FIX 1: Container Width Conflict */
+  --container-max-width: 56rem; /* Match content width */
+  --content-max-width: 56rem;
   --spacing-unit: 0.25rem; /* 4px */
   --padding-xs: calc(var(--spacing-unit) * 1); /* 0.25rem */
   --padding-sm: calc(var(--spacing-unit) * 2); /* 0.5rem */
@@ -57,6 +60,8 @@
   --padding-lg: calc(var(--spacing-unit) * 6); /* 1.5rem */
   --padding-xl: calc(var(--spacing-unit) * 8); /* 2rem */
   --padding-xxl: calc(var(--spacing-unit) * 12); /* 3rem */
+  /* FIX 3: Padding/Margin Stacking - Define content padding variable */
+  --content-padding: var(--padding-xl);
 
   /* Borders & Shadows */
   --border-radius-sm: 0.25rem;
@@ -113,7 +118,10 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  border: 0 solid var(--border-color); /* Reset borders */
+  /* FIX 6: Box Sizing Conflict - Separate border properties */
+  border: 0;
+  border-style: solid;
+  border-color: var(--border-color);
 }
 
 html {
@@ -216,38 +224,43 @@ address strong {
    ========================================================================== */
 .container {
   width: 100%;
-  max-width: var(--container-max-width);
+  max-width: var(--container-max-width); /* Uses updated variable */
   margin: 0 auto;
   padding: 0 var(--padding-md); /* Mobile-first padding */
 }
 
 .main-content-wrapper {
-  width: 100%;
-  max-width: var(--content-max-width);
-  margin: var(--padding-xl) auto;
+  /* FIX 4: Missing Centering Safeguards */
+  width: min(100%, var(--content-max-width));
+  margin-inline: auto !important; /* Ensure centering */
+  /* Original margin-top/bottom */
+  margin-top: var(--padding-xl);
+  margin-bottom: var(--padding-xl);
   background-color: var(--bg-content);
   border-radius: var(--border-radius-xl);
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border-color);
-  padding: var(--padding-xl);
+  /* FIX 3: Padding/Margin Stacking - Use content padding variable */
+  padding: var(--content-padding);
   box-sizing: border-box;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity var(--transition-duration-long) ease, 
-             transform var(--transition-duration-long) ease, 
-             background-color var(--transition-duration-long) ease, 
-             border-color var(--transition-duration-long) ease;
+  transition: opacity var(--transition-duration-long) ease,
+              transform var(--transition-duration-long) ease,
+              background-color var(--transition-duration-long) ease,
+              border-color var(--transition-duration-long) ease;
+  /* FIX 8: Z-index Conflicts */
+  z-index: 10;
+  position: relative; /* Needed for z-index to work reliably */
 }
 
-/* Desktop overrides */
+/* Desktop overrides for container padding */
 @media (min-width: 768px) {
   .container {
     padding: 0; /* Remove mobile padding on desktop */
   }
-  
-  .main-content-wrapper {
-    margin: var(--padding-xl) auto; /* Maintain vertical spacing */
-  }
+  /* Note: margin adjustments for main-content-wrapper on desktop were removed
+     as they are handled by the base rule now */
 }
 
 /* Trigger fade-in */
@@ -269,12 +282,14 @@ body.loaded .main-content-wrapper {
   background-color: hsla(0, 0%, 100%, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  z-index: 50;
+  /* FIX 8: Z-index Conflicts */
+  z-index: 100;
   border-bottom: 1px solid var(--border-light);
   box-shadow: var(--shadow-sm);
   transition: background-color var(--transition-duration) ease,
               border-color var(--transition-duration) ease,
-              height var(--transition-duration) ease; /* Add height transition */
+              /* FIX 7: Header Height Transition */
+              height 0.3s ease-out;
 }
 @media (prefers-color-scheme: dark) {
   #main-nav {
@@ -317,7 +332,7 @@ body.loaded .main-content-wrapper {
 
 /* Desktop Navigation Menu */
 .nav-menu {
-  display: none;
+  display: none; /* Hidden by default, shown via media query */
   align-items: center;
   list-style: none;
   padding-left: 0;
@@ -372,7 +387,7 @@ body.loaded .main-content-wrapper {
 
 /* Mobile Menu Button */
 #mobile-menu-button {
-  display: block;
+  display: block; /* Display by default, hidden via media query */
   padding: var(--padding-sm);
   border-radius: var(--border-radius-lg);
   color: var(--text-muted);
@@ -414,7 +429,8 @@ body.loaded .main-content-wrapper {
   background-color: var(--bg-content);
   box-shadow: var(--shadow-lg);
   border-top: 1px solid var(--border-color);
-  z-index: 40;
+  /* FIX 8: Z-index Conflicts */
+  z-index: 90;
   max-height: 0;
   overflow: hidden;
   visibility: hidden;
@@ -491,7 +507,8 @@ body.loaded .main-content-wrapper {
    7. Content Sections
    ========================================================================== */
 section {
-  padding: var(--padding-xl) var(--padding-lg);
+  /* FIX 3: Padding/Margin Stacking - Adjust section padding */
+  padding: calc(var(--content-padding) * 0.75) 0;
   border-bottom: 1px solid var(--border-color);
   /* Use variable height for scroll margin */
   scroll-margin-top: calc(var(--header-height) + 1rem);
@@ -499,7 +516,7 @@ section {
 }
 section:last-child {
   border-bottom: none;
-  padding-bottom: var(--padding-xl);
+  padding-bottom: var(--padding-xl); /* Keep original bottom padding for last section */
 }
 
 /* Section Headings */
@@ -767,14 +784,28 @@ footer a:hover {
 /* ==========================================================================
    14. Responsive Adjustments (Mobile First Refinements)
    ========================================================================== */
+
+/* Note: Media Query Order (Point 5) was interpreted as ensuring correct application
+   of overrides within the existing mobile-first structure, rather than moving entire blocks.
+   The specific mobile override fix (Point 2) is applied below. */
+
 @media (max-width: 767px) {
   :root {
     --header-height: var(--header-height-mobile);
   }
 
   .main-content-wrapper {
-    margin: var(--padding-xl) var(--padding-md);
+    /* Original mobile margin adjustment */
+    margin-top: var(--padding-xl);
+    margin-bottom: var(--padding-xl);
+    margin-left: var(--padding-md);
+    margin-right: var(--padding-md);
     border-radius: var(--border-radius-lg);
+    /* FIX 2: Mobile Override Conflict */
+    max-width: 100%; /* Ensure it doesn't exceed viewport */
+    width: calc(100% - (2 * var(--padding-md))); /* Account for side margins */
+    /* Ensure centering is maintained if needed, though margin handles it */
+    margin-inline: auto !important;
   }
 
   .page-header {
@@ -786,12 +817,31 @@ footer a:hover {
 
 @media (max-width: 479px) {
   .main-content-wrapper {
-    margin: var(--padding-lg) var(--padding-sm);
+    /* Adjust margins for smaller screens */
+    margin-top: var(--padding-lg);
+    margin-bottom: var(--padding-lg);
+    margin-left: var(--padding-sm);
+    margin-right: var(--padding-sm);
     border-radius: var(--border-radius-md);
+    /* Apply width calculation here too */
+    width: calc(100% - (2 * var(--padding-sm)));
+    margin-inline: auto !important;
   }
-  
+
   .page-header {
     padding: var(--padding-lg);
     padding-top: calc(var(--padding-lg) + var(--header-height));
   }
 }
+
+/* ==========================================================================
+   15. Images (NEW SECTION)
+   ========================================================================== */
+/* FIX 9: Image Containment */
+img {
+  max-width: 100%; /* Prevent images from overflowing container */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Remove extra space below inline images */
+  margin: 0 auto; /* Center block images if container is wider */
+}
+
