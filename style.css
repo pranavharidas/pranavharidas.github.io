@@ -1,8 +1,10 @@
 /* ==========================================================================
-   Rewritten CSS for Pranav Haridas's Personal Webpage (v2.4 - Applied Fixes)
+   Rewritten CSS for Pranav Haridas's Personal Webpage (v2.5 - Layout Fixes)
    Focus: Mobile Fixes, Alignment, Consistency, Accessibility, Performance
    Incorporates fixes for container width, mobile overrides, padding,
-   centering, box sizing, transitions, z-index, and image handling.
+   centering, box sizing, transitions, z-index, image handling,
+   mobile menu visibility, desktop centering, publication alignment,
+   and includes reset/acceleration recommendations.
    ========================================================================== */
 
 /* ==========================================================================
@@ -109,6 +111,12 @@
   }
 }
 
+/* Additional Recommendation 1: CSS Reset */
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 /* ==========================================================================
    3. Base Styles & Resets
    ========================================================================== */
@@ -140,7 +148,7 @@ body {
   /* Use CSS variable for header height offset */
   margin-top: var(--header-height);
   transition: background-color var(--transition-duration-long) ease, color var(--transition-duration-long) ease, margin-top var(--transition-duration) ease; /* Add margin-top transition */
-  overflow-x: hidden; /* Prevent accidental horizontal scroll */
+  /* overflow-x: hidden; /* Moved to html, body reset above */
 }
 
 /* General Link Styling */
@@ -245,6 +253,8 @@ address strong {
   box-sizing: border-box;
   opacity: 0;
   transform: translateY(10px);
+  /* Additional Recommendation 2: Force Hardware Acceleration */
+  transform: translateZ(0); /* Add this */
   transition: opacity var(--transition-duration-long) ease,
               transform var(--transition-duration-long) ease,
               background-color var(--transition-duration-long) ease,
@@ -266,7 +276,7 @@ address strong {
 /* Trigger fade-in */
 body.loaded .main-content-wrapper {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) translateZ(0); /* Ensure translateZ is included */
 }
 
 /* ==========================================================================
@@ -282,8 +292,8 @@ body.loaded .main-content-wrapper {
   background-color: hsla(0, 0%, 100%, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  /* FIX 8: Z-index Conflicts */
-  z-index: 100;
+  /* FIX 8: Z-index Conflicts & Mobile Menu Visibility Fix */
+  z-index: 1000; /* Increased */
   border-bottom: 1px solid var(--border-light);
   box-shadow: var(--shadow-sm);
   transition: background-color var(--transition-duration) ease,
@@ -429,8 +439,8 @@ body.loaded .main-content-wrapper {
   background-color: var(--bg-content);
   box-shadow: var(--shadow-lg);
   border-top: 1px solid var(--border-color);
-  /* FIX 8: Z-index Conflicts */
-  z-index: 90;
+  /* FIX 8: Z-index Conflicts & Mobile Menu Visibility Fix */
+  z-index: 999; /* Increased */
   max-height: 0;
   overflow: hidden;
   visibility: hidden;
@@ -555,7 +565,7 @@ section h3 {
   line-height: 1;
 }
 
-/* Ordered List (e.g., Publications) - FIX APPLIED */
+/* Ordered List (e.g., Publications) */
 .publication-list {
   list-style: none;
   counter-reset: publication-counter;
@@ -571,13 +581,14 @@ section h3 {
 .publication-list li::before {
   content: counter(publication-counter) ".";
   position: absolute;
-  left: 0; /* Align to the very left of the li's padding box */
+  /* FIX: Publication Number Alignment */
+  left: var(--padding-sm); /* Align with list padding */
+  text-align: left; /* Align number text left */
+  width: auto; /* Allow natural width */
+  /* Original styles */
   top: 0.1em;
   font-weight: 600;
   color: var(--secondary-color);
-  text-align: right;
-  /* Dynamic width based on content, plus padding */
-  width: 2.5em; /* Ensure enough space for 2-3 digits + dot */
   padding-right: var(--padding-md); /* Space between number and text */
   transition: color var(--transition-duration) ease;
 }
@@ -730,7 +741,7 @@ footer a:hover {
   visibility: hidden;
   transform: scale(0.8); /* Scale transition */
   transition: background-color var(--transition-duration) ease, opacity 0.3s ease, visibility 0s linear 0.3s, transform 0.3s ease, box-shadow var(--transition-duration) ease;
-  z-index: 100;
+  z-index: 100; /* Keep below header/mobile menu */
 }
 .back-to-top.visible {
     opacity: 1;
@@ -798,13 +809,14 @@ footer a:hover {
     /* Original mobile margin adjustment */
     margin-top: var(--padding-xl);
     margin-bottom: var(--padding-xl);
-    margin-left: var(--padding-md);
-    margin-right: var(--padding-md);
+    /* FIX: Desktop Centering Problem - Remove conflicting mobile margins */
+    /* margin-left: var(--padding-md); */ /* REMOVED */
+    /* margin-right: var(--padding-md); */ /* REMOVED */
     border-radius: var(--border-radius-lg);
     /* FIX 2: Mobile Override Conflict */
     max-width: 100%; /* Ensure it doesn't exceed viewport */
-    width: calc(100% - (2 * var(--padding-md))); /* Account for side margins */
-    /* Ensure centering is maintained if needed, though margin handles it */
+    width: calc(100% - (2 * var(--padding-md))); /* Account for side padding/margins */
+    /* Ensure centering is maintained */
     margin-inline: auto !important;
   }
 
@@ -820,8 +832,9 @@ footer a:hover {
     /* Adjust margins for smaller screens */
     margin-top: var(--padding-lg);
     margin-bottom: var(--padding-lg);
-    margin-left: var(--padding-sm);
-    margin-right: var(--padding-sm);
+    /* FIX: Desktop Centering Problem - Remove conflicting mobile margins */
+    /* margin-left: var(--padding-sm); */ /* REMOVED */
+    /* margin-right: var(--padding-sm); */ /* REMOVED */
     border-radius: var(--border-radius-md);
     /* Apply width calculation here too */
     width: calc(100% - (2 * var(--padding-sm)));
@@ -844,4 +857,3 @@ img {
   display: block; /* Remove extra space below inline images */
   margin: 0 auto; /* Center block images if container is wider */
 }
-
