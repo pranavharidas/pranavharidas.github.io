@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Rewritten CSS for Pranav Haridas's Personal Webpage (v2)
+   Rewritten CSS for Pranav Haridas's Personal Webpage (v2.1 - Mobile Friendly)
    Focus: Mobile Fixes, Alignment, Consistency, Accessibility, Performance
    ========================================================================== */
 
@@ -40,7 +40,7 @@
 
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); /* Fluid base size (16px -> 18px) */
+  --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); /* Fluid base size (~16px -> 18px) */
   --line-height-base: 1.6;
   --line-height-relaxed: 1.7;
 
@@ -129,6 +129,7 @@ body {
   color: var(--text-color);
   margin-top: var(--header-height); /* Offset for fixed header */
   transition: background-color var(--transition-duration-long) ease, color var(--transition-duration-long) ease;
+  overflow-x: hidden; /* Prevent accidental horizontal scroll */
 }
 
 /* General Link Styling */
@@ -137,6 +138,11 @@ a {
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: color var(--transition-duration) ease, border-color var(--transition-duration) ease;
+  /* Improve tap target slightly for inline links */
+  padding-top: var(--padding-xs);
+  padding-bottom: var(--padding-xs);
+  margin-top: calc(-1 * var(--padding-xs));
+  margin-bottom: calc(-1 * var(--padding-xs));
 }
 a:hover {
   color: var(--primary-dark);
@@ -165,10 +171,10 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.3;
   color: var(--text-color); /* Explicitly set color */
 }
-h1 { font-size: clamp(1.8rem, 1.6rem + 1vw, 2.5rem); font-weight: 700; } /* ~29px to 40px */
-h2 { font-size: clamp(1.4rem, 1.3rem + 0.5vw, 1.75rem); } /* ~22px to 28px */
-h3 { font-size: clamp(1.15rem, 1.1rem + 0.25vw, 1.375rem); } /* ~18px to 22px */
-h4 { font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); } /* ~16px to 18px */
+h1 { font-size: clamp(1.75rem, 1.5rem + 1.25vw, 2.5rem); font-weight: 700; } /* Adjusted clamp */
+h2 { font-size: clamp(1.375rem, 1.25rem + 0.625vw, 1.75rem); } /* Adjusted clamp */
+h3 { font-size: clamp(1.125rem, 1.05rem + 0.375vw, 1.375rem); } /* Adjusted clamp */
+h4 { font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); } /* Kept same */
 
 /* Paragraphs */
 p {
@@ -217,11 +223,11 @@ address strong {
 /* Main content wrapper with fade-in */
 .main-content-wrapper {
   max-width: var(--content-max-width);
-  margin: var(--padding-xxl) auto; /* 3rem */
+  margin: var(--padding-xl) auto; /* Use XL for top/bottom */
   background-color: var(--bg-content);
   border-radius: var(--border-radius-xl);
   box-shadow: var(--shadow-lg);
-  overflow: hidden;
+  overflow: hidden; /* Keep hidden to respect radius */
   border: 1px solid var(--border-color);
   opacity: 0;
   transform: translateY(10px);
@@ -267,13 +273,17 @@ body.loaded .main-content-wrapper {
 
 /* Site Title */
 .site-title {
-  font-size: 1.5rem; /* Keep fixed size for branding */
+  font-size: 1.25rem; /* Slightly smaller title on all screens */
   font-weight: 700;
   color: var(--text-color);
   letter-spacing: -0.025em;
   transition: color var(--transition-duration) var(--transition-timing);
   text-decoration: none;
   border-bottom: none;
+  white-space: nowrap; /* Prevent wrapping */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Add ellipsis if it still overflows */
+  padding-right: var(--padding-sm); /* Add padding to prevent touching button */
 }
 .site-title:hover {
   color: var(--primary-color);
@@ -341,6 +351,7 @@ body.loaded .main-content-wrapper {
   background-color: transparent;
   cursor: pointer;
   transition: background-color var(--transition-duration) var(--transition-timing), color var(--transition-duration) var(--transition-timing);
+  flex-shrink: 0; /* Prevent button from shrinking */
 }
 #mobile-menu-button:hover {
   background-color: var(--bg-muted);
@@ -412,7 +423,7 @@ body.loaded .main-content-wrapper {
 .page-header {
   background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: var(--text-on-primary);
-  padding: var(--padding-xxl) var(--padding-lg);
+  padding: var(--padding-xl) var(--padding-lg); /* Reduced vertical padding */
   text-align: center;
   border-bottom: 4px solid var(--primary-dark);
 }
@@ -435,27 +446,27 @@ body.loaded .main-content-wrapper {
    7. Content Sections
    ========================================================================== */
 section {
-  padding: var(--padding-xxl) var(--padding-lg);
+  padding: var(--padding-xl) var(--padding-lg); /* Reduced vertical padding */
   border-bottom: 1px solid var(--border-color);
   scroll-margin-top: calc(var(--header-height) + 1rem);
   transition: border-color var(--transition-duration-long) ease;
 }
 section:last-child {
   border-bottom: none;
-  padding-bottom: var(--padding-xxl);
+  padding-bottom: var(--padding-xl); /* Match top padding */
 }
 
 /* Section Headings */
 section h2 {
   color: var(--primary-dark);
-  margin-bottom: var(--padding-xl); /* More space after heading */
+  margin-bottom: var(--padding-lg); /* Reduced margin */
   padding-bottom: var(--padding-sm);
   border-bottom: 2px solid var(--primary-light-border);
   display: inline-block;
 }
 section h3 {
   color: var(--primary-color);
-  margin-top: var(--padding-xl);
+  margin-top: var(--padding-lg); /* Reduced margin */
   margin-bottom: var(--padding-md);
 }
 
@@ -512,8 +523,8 @@ section h3 {
 .publication-list a,
 .styled-list a,
 .course-list a { /* Assuming .course-list exists */
-  word-break: break-word;
-  margin-left: var(--padding-xs);
+  word-break: break-word; /* Keep this */
+  /* Remove margin/padding adjustments for inline links here, handled globally */
   border-bottom: 1px solid var(--primary-light-border);
 }
 .publication-list a:hover,
@@ -523,7 +534,7 @@ section h3 {
   color: var(--primary-dark);
   border-radius: var(--border-radius-sm);
   padding: 0 var(--padding-xs);
-  margin: 0 calc(-1 * var(--padding-xs)); /* Keep layout stable */
+  margin: 0 calc(-1 * var(--padding-xs));
   border-bottom-color: transparent;
 }
 
@@ -584,6 +595,10 @@ textarea {
   text-decoration: none;
   line-height: var(--line-height-base);
   font-size: 0.9375rem; /* 15px */
+  min-height: 44px; /* Ensure minimum tap height */
+  display: inline-flex; /* Align text vertically */
+  align-items: center;
+  justify-content: center;
 }
 /* Grouped Button States */
 .btn:hover {
@@ -619,6 +634,11 @@ footer a {
     color: var(--primary-color);
     font-weight: 500;
     border-bottom: 1px solid transparent;
+    /* Tap target improvement */
+    padding-top: var(--padding-xs);
+    padding-bottom: var(--padding-xs);
+    margin-top: calc(-1 * var(--padding-xs));
+    margin-bottom: calc(-1 * var(--padding-xs));
 }
 footer a:hover {
     color: var(--primary-dark);
@@ -634,7 +654,7 @@ footer a:hover {
   right: var(--padding-lg);
   background-color: var(--primary-color);
   color: var(--text-on-primary);
-  width: 44px; /* Slightly larger */
+  width: 44px; /* Ensure minimum tap size */
   height: 44px;
   border-radius: var(--border-radius-full);
   box-shadow: var(--shadow-md);
@@ -695,45 +715,79 @@ footer a:hover {
   padding: var(--padding-md);
   background-color: var(--bg-muted); /* Add subtle background */
   border-radius: var(--border-radius-md);
+  -webkit-overflow-scrolling: touch; /* Smoother scrolling on iOS */
 }
 
 /* ==========================================================================
-   14. Responsive Adjustments
+   14. Responsive Adjustments (Mobile First Approach Refinements)
    ========================================================================== */
+
+/* Base styles are mobile-first friendly, these queries enhance larger screens */
+
+/* Medium screens and up (Tablets) */
+@media (min-width: 768px) {
+  /* Desktop nav becomes visible (already handled in .nav-menu) */
+  /* Mobile menu button hidden (already handled in #mobile-menu-button) */
+  /* Mobile menu hidden (already handled in .mobile-menu) */
+
+  /* Restore button width if needed */
+  .btn {
+      width: auto; /* Allow button to size to content */
+  }
+}
+
+/* Smaller screens adjustments (Refining defaults and overrides from v2) */
 @media (max-width: 767px) { /* Below md breakpoint */
   .container {
       padding-left: var(--padding-md); /* 1rem */
       padding-right: var(--padding-md);
   }
   .main-content-wrapper {
-     margin: var(--padding-xl) var(--padding-md);
-     border-radius: var(--border-radius-lg);
+     margin-top: var(--padding-xl);
+     margin-bottom: var(--padding-xl);
+     border-radius: var(--border-radius-lg); /* Slightly smaller radius */
   }
   .page-header {
-      padding: var(--padding-xl) var(--padding-md);
+      padding-top: var(--padding-xl);
+      padding-bottom: var(--padding-xl);
   }
   section {
-     padding: var(--padding-xl) var(--padding-md);
+     padding-top: var(--padding-xl);
+     padding-bottom: var(--padding-xl);
   }
   footer {
-      padding: var(--padding-lg) var(--padding-md);
+      padding-top: var(--padding-lg);
+      padding-bottom: var(--padding-lg);
   }
 }
 
+/* Very small screens adjustments */
 @media (max-width: 479px) { /* Below ~sm breakpoint */
+   html {
+       /* Slightly reduce base font size on very small screens if needed */
+       /* font-size: calc(var(--font-size-base) * 0.95); */
+   }
    .container {
-     padding-left: var(--padding-sm); /* 0.5rem */
-     padding-right: var(--padding-sm);
+     /* Keep 1rem padding for breathing room */
+     padding-left: var(--padding-md);
+     padding-right: var(--padding-md);
    }
    .main-content-wrapper {
-       margin: var(--padding-lg) var(--padding-sm);
+       margin-top: var(--padding-lg);
+       margin-bottom: var(--padding-lg);
    }
    .page-header {
-       padding: var(--padding-lg) var(--padding-sm);
+       padding-top: var(--padding-lg);
+       padding-bottom: var(--padding-lg);
    }
    section {
-       padding: var(--padding-lg) var(--padding-sm);
+       padding-top: var(--padding-lg);
+       padding-bottom: var(--padding-lg);
    }
+   /* Headings might need slight size reduction */
+   h1 { font-size: clamp(1.6rem, 1.4rem + 1vw, 1.8rem); } /* Further adjust clamp max */
+   h2 { font-size: clamp(1.25rem, 1.15rem + 0.5vw, 1.4rem); }
+
    .btn {
         padding: var(--padding-sm) var(--padding-md); /* Adjust button padding */
         width: 100%; /* Make buttons full width */
@@ -751,5 +805,12 @@ footer a:hover {
    .publication-list li::before {
        width: 2em;
        padding-right: var(--padding-sm);
+   }
+   /* Reduce spacing in mobile menu */
+   .mobile-menu {
+       padding: var(--padding-sm) var(--padding-md);
+   }
+   .mobile-menu .nav-link {
+       padding: var(--padding-sm);
    }
 }
