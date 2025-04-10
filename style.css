@@ -1,6 +1,6 @@
 /* ==========================================================================
-   Revised CSS for Pranav Haridas's Personal Webpage
-   Focus: Consistency, Classy Design, Maintainability
+   Rewritten CSS for Pranav Haridas's Personal Webpage (v2)
+   Focus: Mobile Fixes, Alignment, Consistency, Accessibility, Performance
    ========================================================================== */
 
 /* ==========================================================================
@@ -10,11 +10,11 @@
   /* Color Palette */
   --primary-color: #0ea5e9; /* sky-500 */
   --primary-dark: #0369a1; /* sky-700 */
-  --primary-light: #e0f2fe; /* sky-100 */
+  --primary-light-bg: #e0f2fe; /* sky-100 - Background usage */
+  --primary-light-border: #bae6fd; /* sky-200 - Border/Subtle usage */
   --secondary-color: #475569; /* slate-600 */
   --text-color: #1e293b; /* slate-800 */
-  --text-muted: #4b5567; /* gray-600 -> slate-600 for consistency */
-  --text-light: #f1f5f9; /* slate-100 */
+  --text-muted: #4b5567; /* slate-600 (was gray-600) */
   --text-on-primary: #ffffff;
   --bg-color: #f1f5f9; /* slate-100 */
   --bg-content: #ffffff;
@@ -24,39 +24,48 @@
   --focus-ring-color: #3b82f6; /* blue-500 */
 
   /* Dark Mode Colors */
+  --dark-primary-color: #38bdf8; /* sky-400 - Brighter for dark */
+  --dark-primary-dark: #0ea5e9; /* sky-500 */
+  --dark-primary-light-bg: #334155; /* slate-700 - Background usage */
+  --dark-primary-light-border: #475569; /* slate-600 - Border/Subtle usage */
+  --dark-secondary-color: #94a3b8; /* slate-400 */
   --dark-text-color: #f1f5f9; /* slate-100 */
   --dark-text-muted: #cbd5e1; /* slate-300 */
   --dark-bg-color: #1e293b; /* slate-800 */
   --dark-bg-content: #334155; /* slate-700 */
   --dark-bg-muted: #475569; /* slate-600 */
   --dark-border-color: #475569; /* slate-600 */
+  --dark-border-light: #334155; /* slate-700 */
+  --dark-focus-ring-color: #60a5fa; /* blue-400 */
 
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-size-base: 1rem; /* 16px */
+  --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); /* Fluid base size (16px -> 18px) */
   --line-height-base: 1.6;
   --line-height-relaxed: 1.7;
 
   /* Spacing & Sizing */
   --header-height: 4rem; /* 64px */
-  --container-max-width: 56rem; /* 896px */
-  --content-max-width: 56rem; /* 896px, was 4xl (64rem), changed to match nav */
+  --container-max-width: 60rem; /* 960px - Slightly wider */
+  --content-max-width: 56rem; /* 896px */
   --spacing-unit: 0.25rem; /* 4px */
-  --padding-sm: calc(var(--spacing-unit) * 2); /* 8px */
-  --padding-md: calc(var(--spacing-unit) * 4); /* 16px */
-  --padding-lg: calc(var(--spacing-unit) * 6); /* 24px */
-  --padding-xl: calc(var(--spacing-unit) * 8); /* 32px */
+  --padding-xs: calc(var(--spacing-unit) * 1); /* 0.25rem */
+  --padding-sm: calc(var(--spacing-unit) * 2); /* 0.5rem */
+  --padding-md: calc(var(--spacing-unit) * 4); /* 1rem */
+  --padding-lg: calc(var(--spacing-unit) * 6); /* 1.5rem */
+  --padding-xl: calc(var(--spacing-unit) * 8); /* 2rem */
+  --padding-xxl: calc(var(--spacing-unit) * 12); /* 3rem */
 
   /* Borders & Shadows */
-  --border-radius-sm: 0.25rem; /* 4px */
-  --border-radius-md: 0.375rem; /* 6px */
-  --border-radius-lg: 0.5rem; /* 8px */
-  --border-radius-xl: 0.75rem; /* 12px */
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.375rem;
+  --border-radius-lg: 0.5rem;
+  --border-radius-xl: 0.75rem;
   --border-radius-full: 9999px;
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04); /* Softer */
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04); /* Softer */
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
 
   /* Transitions */
   --transition-duration: 150ms;
@@ -65,7 +74,36 @@
 }
 
 /* ==========================================================================
-   2. Base Styles & Resets
+   2. Dark Mode Variable Overrides
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark; /* Inform browser about dark mode */
+
+    --primary-color: var(--dark-primary-color);
+    --primary-dark: var(--dark-primary-dark);
+    --primary-light-bg: var(--dark-primary-light-bg);
+    --primary-light-border: var(--dark-primary-light-border);
+    --secondary-color: var(--dark-secondary-color);
+    --text-color: var(--dark-text-color);
+    --text-muted: var(--dark-text-muted);
+    --bg-color: var(--dark-bg-color);
+    --bg-content: var(--dark-bg-content);
+    --bg-muted: var(--dark-bg-muted);
+    --border-color: var(--dark-border-color);
+    --border-light: var(--dark-border-light);
+    --focus-ring-color: var(--dark-focus-ring-color);
+
+    /* Darker Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -2px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.15);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* ==========================================================================
+   3. Base Styles & Resets
    ========================================================================== */
 *,
 *::before,
@@ -73,14 +111,16 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  border: 0 solid var(--border-color); /* Reset borders */
 }
 
 html {
   scroll-behavior: smooth;
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-base); /* Apply fluid base font size */
   line-height: var(--line-height-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape */
 }
 
 body {
@@ -95,64 +135,67 @@ body {
 a {
   color: var(--primary-color);
   text-decoration: none;
-  transition: color var(--transition-duration) ease, border-color var(--transition-duration) ease;
   border-bottom: 1px solid transparent;
+  transition: color var(--transition-duration) ease, border-color var(--transition-duration) ease;
 }
 a:hover {
   color: var(--primary-dark);
-  border-bottom-color: var(--primary-color);
+  border-bottom-color: var(--primary-light-border);
 }
 
-/* Accessibility focus state */
+/* Accessibility focus state (using :focus-visible) */
+*:focus { outline: none; } /* Remove default outline */
+
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
-select:focus-visible {
-  outline: 2px solid var(--primary-color);
+select:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
+  outline: 2px solid var(--focus-ring-color);
   outline-offset: 2px;
-  box-shadow: none; /* Prevent double outlines if box-shadow is used */
-}
-/* Remove default outline when focus-visible is supported */
-*:focus {
-    outline: none;
+  box-shadow: none;
+  border-radius: var(--border-radius-sm); /* Optional: add radius to outline */
 }
 
-/* Headings */
+/* Headings with Fluid Typography */
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: var(--padding-md);
-  font-weight: 600; /* Default semibold */
+  font-weight: 600;
   line-height: 1.3;
+  color: var(--text-color); /* Explicitly set color */
 }
-h1 { font-size: 2.25rem; font-weight: 700; } /* text-4xl bold */
-h2 { font-size: 1.5rem; } /* text-2xl */
-h3 { font-size: 1.25rem; } /* text-xl */
-h4 { font-size: 1.125rem; } /* text-lg */
+h1 { font-size: clamp(1.8rem, 1.6rem + 1vw, 2.5rem); font-weight: 700; } /* ~29px to 40px */
+h2 { font-size: clamp(1.4rem, 1.3rem + 0.5vw, 1.75rem); } /* ~22px to 28px */
+h3 { font-size: clamp(1.15rem, 1.1rem + 0.25vw, 1.375rem); } /* ~18px to 22px */
+h4 { font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); } /* ~16px to 18px */
 
 /* Paragraphs */
 p {
   margin-bottom: var(--padding-md);
   line-height: var(--line-height-base);
+  max-width: 65ch; /* Improve readability */
 }
 p.leading-relaxed {
   line-height: var(--line-height-relaxed);
-  color: var(--secondary-color); /* Match address style */
+  color: var(--text-muted);
 }
 
 /* Lists (Basic Reset) */
 ul, ol {
   margin-bottom: var(--padding-md);
-  padding-left: var(--padding-lg); /* Standard indent */
+  padding-left: var(--padding-lg);
 }
 li {
   margin-bottom: var(--padding-sm);
+  padding-left: var(--padding-xs); /* Small indent for list item itself */
 }
 
 /* Address */
 address {
   font-style: normal;
   line-height: var(--line-height-base);
-  color: var(--secondary-color);
+  color: var(--text-muted);
   margin-bottom: var(--padding-md);
 }
 address strong {
@@ -160,34 +203,21 @@ address strong {
 }
 
 /* ==========================================================================
-   3. Layout Containers
+   4. Layout Containers
    ========================================================================== */
 .container {
+  width: 100%;
   max-width: var(--container-max-width);
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--padding-md);
-  padding-right: var(--padding-md);
-}
-
-/* Responsive Padding */
-@media (min-width: 640px) { /* sm */
-  .container {
-    padding-left: var(--padding-lg);
-    padding-right: var(--padding-lg);
-  }
-}
-@media (min-width: 1024px) { /* lg */
-  .container {
-    padding-left: var(--padding-xl);
-    padding-right: var(--padding-xl);
-  }
+  padding-left: var(--padding-lg); /* 1.5rem */
+  padding-right: var(--padding-lg);
 }
 
 /* Main content wrapper with fade-in */
 .main-content-wrapper {
   max-width: var(--content-max-width);
-  margin: var(--padding-xl) auto;
+  margin: var(--padding-xxl) auto; /* 3rem */
   background-color: var(--bg-content);
   border-radius: var(--border-radius-xl);
   box-shadow: var(--shadow-lg);
@@ -197,14 +227,14 @@ address strong {
   transform: translateY(10px);
   transition: opacity var(--transition-duration-long) ease, transform var(--transition-duration-long) ease, background-color var(--transition-duration-long) ease, border-color var(--transition-duration-long) ease;
 }
-/* Trigger fade-in (assumes JS adds 'loaded' class to body) */
+/* Trigger fade-in */
 body.loaded .main-content-wrapper {
   opacity: 1;
   transform: translateY(0);
 }
 
 /* ==========================================================================
-   4. Header & Navigation (#main-nav)
+   5. Header & Navigation (#main-nav)
    ========================================================================== */
 #main-nav {
   position: fixed;
@@ -212,32 +242,38 @@ body.loaded .main-content-wrapper {
   left: 0;
   right: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.9); /* Slightly less opaque */
-  backdrop-filter: blur(6px); /* Slightly more blur */
-  -webkit-backdrop-filter: blur(6px);
+  height: var(--header-height);
+  background-color: hsla(0, 0%, 100%, 0.85); /* Use hsla for better control */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 50;
   border-bottom: 1px solid var(--border-light);
   box-shadow: var(--shadow-sm);
   transition: background-color var(--transition-duration) ease, border-color var(--transition-duration) ease;
 }
+@media (prefers-color-scheme: dark) {
+  #main-nav {
+    background-color: hsla(215, 28%, 17%, 0.85); /* dark-bg-color equivalent */
+  }
+}
 
-/* Inner container uses the standard .container class */
+/* Inner container */
 #main-nav .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: var(--header-height);
+  height: 100%;
 }
 
 /* Site Title */
 .site-title {
-  font-size: 1.5rem; /* text-2xl */
-  font-weight: 700; /* font-bold */
+  font-size: 1.5rem; /* Keep fixed size for branding */
+  font-weight: 700;
   color: var(--text-color);
-  letter-spacing: -0.025em; /* tracking-tight */
+  letter-spacing: -0.025em;
   transition: color var(--transition-duration) var(--transition-timing);
   text-decoration: none;
-  border-bottom: none; /* Override general link style */
+  border-bottom: none;
 }
 .site-title:hover {
   color: var(--primary-color);
@@ -248,13 +284,10 @@ body.loaded .main-content-wrapper {
 .nav-menu {
   display: none; /* Hidden by default */
   align-items: center;
-  list-style: none; /* Remove list bullets */
-  padding-left: 0; /* Remove default padding */
-  margin-bottom: 0; /* Remove default margin */
-}
-/* Spacing between desktop nav items */
-.nav-menu > li + li {
-  margin-left: var(--spacing-unit); /* Small gap, padding handles visual space */
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+  gap: var(--padding-xs); /* Use gap for spacing */
 }
 @media (min-width: 768px) { /* md breakpoint */
   .nav-menu {
@@ -266,46 +299,46 @@ body.loaded .main-content-wrapper {
 .nav-link {
   display: block;
   color: var(--text-muted);
-  padding: var(--padding-sm) var(--padding-md); /* py-2 px-3 */
+  padding: var(--padding-sm) var(--padding-md);
   border-radius: var(--border-radius-md);
-  font-size: 0.875rem; /* text-sm */
-  font-weight: 500; /* font-medium */
+  font-size: 0.875rem; /* Fixed size for nav links */
+  font-weight: 500;
   text-decoration: none;
   transition: color var(--transition-duration) var(--transition-timing), background-color var(--transition-duration) var(--transition-timing);
   position: relative;
-  border-bottom: none; /* Override general link style */
-  white-space: nowrap; /* Prevent wrapping */
+  border-bottom: none;
+  white-space: nowrap;
 }
 .nav-link:hover {
-  color: var(--primary-color);
-  background-color: var(--primary-light);
+  color: var(--primary-dark); /* Darker primary on hover */
+  background-color: var(--primary-light-bg);
   border-bottom: none;
 }
 /* Active Navigation Link */
 .nav-link.active {
   color: var(--primary-color);
-  font-weight: 600; /* Slightly bolder for active */
+  font-weight: 600;
 }
-/* Optional: Add a subtle indicator for active link instead of underline */
+/* Active indicator */
 .nav-link.active::before {
     content: '';
     position: absolute;
-    bottom: 4px; /* Adjust position */
+    bottom: 4px;
     left: var(--padding-md);
     right: var(--padding-md);
     height: 2px;
     background-color: var(--primary-color);
     border-radius: 1px;
+    transition: background-color var(--transition-duration) ease;
 }
 
 /* Mobile Menu Button */
 #mobile-menu-button {
-  display: block; /* Visible by default */
-  padding: var(--padding-sm); /* p-2 */
+  display: block;
+  padding: var(--padding-sm);
   border-radius: var(--border-radius-lg);
   color: var(--text-muted);
   background-color: transparent;
-  border: none;
   cursor: pointer;
   transition: background-color var(--transition-duration) var(--transition-timing), color var(--transition-duration) var(--transition-timing);
 }
@@ -313,147 +346,142 @@ body.loaded .main-content-wrapper {
   background-color: var(--bg-muted);
   color: var(--text-color);
 }
-#mobile-menu-button:focus-visible {
-   /* Use the general focus style defined earlier */
-   outline: 2px solid var(--primary-color);
-   outline-offset: 2px;
-}
+/* Focus state handled by global :focus-visible */
 @media (min-width: 768px) { /* md breakpoint */
   #mobile-menu-button {
     display: none;
   }
 }
 /* Icon within the button */
-#mobile-menu-button .icon { /* Assuming icon uses a class like 'icon' */
-  font-size: 1.5rem; /* text-xl equivalent */
+#mobile-menu-button .icon {
+  font-size: 1.5rem;
   line-height: 1;
-  display: block; /* Prevents extra space */
+  display: block;
 }
 
-/* Mobile Menu Container */
+/* Mobile Menu Container - FIX APPLIED */
 .mobile-menu {
-  position: absolute;
-  top: 100%; /* Position below the header */
+  position: fixed; /* Changed from absolute */
+  top: var(--header-height); /* Position below fixed header */
   left: 0;
   right: 0;
   background-color: var(--bg-content);
   box-shadow: var(--shadow-lg);
-  padding: var(--padding-sm) var(--padding-md); /* py-2 px-4 */
-  display: none; /* Hidden by default */
   border-top: 1px solid var(--border-color);
+  z-index: 40; /* Below header but above content */
   /* Animation */
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease-out, padding 0.3s ease-out, border-color var(--transition-duration) ease;
+  visibility: hidden; /* Use visibility for better accessibility */
+  transition: max-height 0.3s ease-out, visibility 0s linear 0.3s, padding 0.3s ease-out, border-color var(--transition-duration) ease;
+  padding: 0 var(--padding-lg); /* Remove vertical padding when hidden */
 }
 @media (min-width: 768px) { /* md breakpoint */
   .mobile-menu {
-    display: none !important; /* Ensure hidden on desktop */
-    max-height: none !important; /* Override for safety */
+    display: none !important;
+    max-height: none !important;
+    visibility: hidden !important;
   }
 }
-/* Class to show mobile menu (toggled by JS) */
+/* Class to show mobile menu */
 .mobile-menu.visible {
-  display: block; /* Needed for visibility, but max-height controls appearance */
-  max-height: 50vh; /* Adjust as needed, large enough for content */
-  padding: var(--padding-md) var(--padding-md); /* Add padding back */
+  max-height: calc(100vh - var(--header-height)); /* Allow scrolling if content exceeds viewport */
+  visibility: visible;
+  transition: max-height 0.3s ease-out, visibility 0s linear 0s, padding 0.3s ease-out;
+  padding: var(--padding-md) var(--padding-lg); /* Add padding back */
+  overflow-y: auto; /* Enable scrolling for long menus */
 }
 /* Inner container for mobile menu links */
 .mobile-menu > div {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-unit); /* space-y-1 equivalent */
+  gap: var(--padding-xs);
 }
-/* Mobile links take full width */
+/* Mobile links */
 .mobile-menu .nav-link {
     text-align: left;
+    padding: var(--padding-md); /* Larger tap target */
 }
 .mobile-menu .nav-link.active::before {
-    /* Hide the bottom indicator on mobile if desired, or adjust */
-    display: none;
+    display: none; /* Hide bottom indicator on mobile */
 }
 
-
 /* ==========================================================================
-   5. Page Header
+   6. Page Header
    ========================================================================== */
 .page-header {
   background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: var(--text-on-primary);
-  padding: var(--padding-xl) var(--padding-lg);
+  padding: var(--padding-xxl) var(--padding-lg);
   text-align: center;
-  border-bottom: 5px solid var(--primary-dark); /* Add a stronger bottom edge */
+  border-bottom: 4px solid var(--primary-dark);
 }
 .page-header h1 {
-  font-size: 2.25rem; /* text-4xl */
-  font-weight: 700;
-  margin-bottom: var(--spacing-unit); /* Smaller margin */
-  color: var(--text-on-primary); /* Ensure color overrides base */
+  margin-bottom: var(--padding-sm);
+  color: var(--text-on-primary);
 }
 .page-header p {
-  font-size: 1.25rem; /* text-xl */
-  color: var(--primary-light); /* Lighter text color */
-  font-weight: 300; /* Lighter font weight */
-  margin-bottom: 0; /* Remove margin */
-  opacity: 0.9;
+  font-size: 1.125rem; /* Slightly smaller */
+  color: var(--text-on-primary);
+  font-weight: 300;
+  margin-bottom: 0;
+  opacity: 0.85;
+  max-width: 60ch; /* Limit width */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ==========================================================================
-   6. Content Sections
+   7. Content Sections
    ========================================================================== */
 section {
-  padding: var(--padding-xl) var(--padding-lg);
+  padding: var(--padding-xxl) var(--padding-lg);
   border-bottom: 1px solid var(--border-color);
-  scroll-margin-top: calc(var(--header-height) + 1rem); /* Offset for fixed header */
+  scroll-margin-top: calc(var(--header-height) + 1rem);
   transition: border-color var(--transition-duration-long) ease;
 }
 section:last-child {
   border-bottom: none;
-  padding-bottom: var(--padding-xl); /* Ensure consistent padding */
+  padding-bottom: var(--padding-xxl);
 }
 
 /* Section Headings */
 section h2 {
-  font-size: 1.5rem; /* text-2xl */
-  font-weight: 600;
   color: var(--primary-dark);
-  margin-bottom: var(--padding-lg); /* More space after heading */
+  margin-bottom: var(--padding-xl); /* More space after heading */
   padding-bottom: var(--padding-sm);
-  border-bottom: 2px solid var(--primary-light);
-  display: inline-block; /* Keep border only under text */
+  border-bottom: 2px solid var(--primary-light-border);
+  display: inline-block;
 }
 section h3 {
-  font-size: 1.25rem; /* text-xl */
-  font-weight: 600;
-  color: var(--primary-color); /* Use primary color */
-  margin-top: var(--padding-lg); /* Consistent top margin */
+  color: var(--primary-color);
+  margin-top: var(--padding-xl);
   margin-bottom: var(--padding-md);
 }
 
 /* ==========================================================================
-   7. Styled Lists
+   8. Styled Lists
    ========================================================================== */
-/* Unordered List with Custom Bullet */
+/* Unordered List */
 .styled-list {
   list-style: none;
-  padding-left: var(--padding-sm); /* Reduced overall indent */
+  padding-left: var(--padding-sm);
 }
 .styled-list li {
-  padding-left: var(--padding-lg); /* Indent for bullet */
+  padding-left: var(--padding-lg);
   position: relative;
-  margin-bottom: var(--padding-sm); /* Consistent spacing */
 }
 .styled-list li::before {
-  content: '◆'; /* Diamond bullet */
+  content: '◆';
   color: var(--primary-color);
-  font-size: 0.8em; /* Smaller bullet */
+  font-size: 0.8em;
   position: absolute;
-  left: var(--padding-md); /* Position bullet */
-  top: 0.25em; /* Adjust vertical alignment */
+  left: var(--padding-sm); /* Position relative to padding-left */
+  top: 0.3em;
   line-height: 1;
 }
 
-/* Ordered List (e.g., Publications) */
+/* Ordered List (e.g., Publications) - FIX APPLIED */
 .publication-list {
   list-style: none;
   counter-reset: publication-counter;
@@ -461,52 +489,56 @@ section h3 {
 }
 .publication-list li {
   counter-increment: publication-counter;
-  margin-bottom: var(--padding-md); /* Slightly more space */
-  padding-left: calc(var(--padding-lg) + var(--padding-sm)); /* Indent for number */
+  margin-bottom: var(--padding-md);
+  /* Adjust padding-left dynamically based on expected number width */
+  padding-left: calc(2.5em + var(--padding-md)); /* Base padding for number area */
   position: relative;
 }
 .publication-list li::before {
   content: counter(publication-counter) ".";
   position: absolute;
-  left: var(--padding-md);
-  top: 0.1em; /* Adjust vertical alignment */
+  left: 0; /* Align to the very left of the li's padding box */
+  top: 0.1em;
   font-weight: 600;
   color: var(--secondary-color);
-  width: var(--padding-lg); /* Ensure space for number */
-  text-align: right; /* Align number to the right */
-  padding-right: var(--padding-sm); /* Space after number */
+  text-align: right;
+  /* Dynamic width based on content, plus padding */
+  width: 2.5em; /* Ensure enough space for 2-3 digits + dot */
+  padding-right: var(--padding-md); /* Space between number and text */
+  transition: color var(--transition-duration) ease;
 }
 
 /* Links within lists */
 .publication-list a,
 .styled-list a,
 .course-list a { /* Assuming .course-list exists */
-  word-break: break-word; /* Allow long links to wrap */
-  margin-left: var(--spacing-unit);
-  border-bottom: 1px solid var(--primary-light); /* Subtle underline */
+  word-break: break-word;
+  margin-left: var(--padding-xs);
+  border-bottom: 1px solid var(--primary-light-border);
 }
 .publication-list a:hover,
 .styled-list a:hover,
 .course-list a:hover {
-  background-color: var(--primary-light);
+  background-color: var(--primary-light-bg);
   color: var(--primary-dark);
   border-radius: var(--border-radius-sm);
-  padding: 0 var(--spacing-unit); /* Minimal padding */
-  margin: 0; /* Adjust margin to keep layout stable */
-  border-bottom-color: transparent; /* Remove underline on hover */
+  padding: 0 var(--padding-xs);
+  margin: 0 calc(-1 * var(--padding-xs)); /* Keep layout stable */
+  border-bottom-color: transparent;
 }
 
 /* ==========================================================================
-   8. Forms & Buttons
+   9. Forms & Buttons
    ========================================================================== */
 .form-group {
-  margin-bottom: var(--padding-md);
+  margin-bottom: var(--padding-lg);
 }
 .form-label {
   display: block;
   margin-bottom: var(--padding-sm);
   font-weight: 500;
   color: var(--text-muted);
+  font-size: 0.875rem;
 }
 
 input[type="text"],
@@ -515,22 +547,22 @@ textarea,
 select {
   display: block;
   width: 100%;
-  padding: var(--padding-sm) var(--padding-md); /* Consistent padding */
+  padding: var(--padding-sm) var(--padding-md);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-md);
-  background-color: var(--bg-content); /* Use content bg */
+  background-color: var(--bg-content);
   color: var(--text-color);
-  font-size: var(--font-size-base);
+  font-size: 1rem; /* Use 1rem for form inputs */
   line-height: var(--line-height-base);
-  transition: border-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+  transition: border-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease, background-color var(--transition-duration) ease, color var(--transition-duration) ease;
 }
+/* Focus state handled by global :focus-visible */
 input[type="text"]:focus,
 input[type="email"]:focus,
 textarea:focus,
 select:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px var(--primary-light); /* Subtle focus ring */
-  outline: none; /* Replaced by box-shadow */
+   border-color: var(--primary-color);
+   /* box-shadow: 0 0 0 2px var(--primary-light-bg); /* Optional inner shadow */
 }
 textarea {
   min-height: 120px;
@@ -540,7 +572,7 @@ textarea {
 /* Button Base Style */
 .btn {
   display: inline-block;
-  padding: var(--padding-sm) var(--padding-lg); /* More horizontal padding */
+  padding: var(--padding-sm) var(--padding-lg);
   background-color: var(--primary-color);
   color: var(--text-on-primary);
   border: 1px solid transparent;
@@ -548,57 +580,53 @@ textarea {
   font-weight: 500;
   text-align: center;
   cursor: pointer;
-  transition: background-color var(--transition-duration) ease, border-color var(--transition-duration) ease, transform var(--transition-duration) ease;
-  text-decoration: none; /* Ensure no underline */
+  transition: background-color var(--transition-duration) ease, border-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease, color var(--transition-duration) ease;
+  text-decoration: none;
   line-height: var(--line-height-base);
-  font-size: var(--font-size-base);
+  font-size: 0.9375rem; /* 15px */
 }
+/* Grouped Button States */
 .btn:hover {
   background-color: var(--primary-dark);
-  color: var(--text-on-primary); /* Ensure text stays white */
-  border-color: transparent; /* Keep border transparent */
-  transform: translateY(-1px); /* Subtle lift */
-  box-shadow: var(--shadow-md);
+  color: var(--text-on-primary);
+  box-shadow: var(--shadow-sm); /* Subtle shadow instead of translate */
 }
 .btn:active {
-    transform: translateY(0);
-    box-shadow: none;
+    background-color: var(--primary-dark); /* Keep dark on active */
+    box-shadow: none; /* Remove shadow on active */
 }
-.btn:focus-visible {
-    outline: 2px solid var(--primary-dark);
-    outline-offset: 2px;
-}
+/* Focus state handled by global :focus-visible */
 
 /* Submit Button (Alias for .btn) */
 button[type="submit"],
 input[type="submit"] {
   /* Inherit .btn styles */
-  /* Add specific overrides if needed */
 }
 
 /* ==========================================================================
-   9. Footer
+   10. Footer
    ========================================================================== */
 footer {
   background-color: var(--bg-muted);
   color: var(--text-muted);
   text-align: center;
-  padding: var(--padding-lg) var(--padding-md);
+  padding: var(--padding-xl) var(--padding-lg);
   border-top: 1px solid var(--border-color);
-  font-size: 0.875rem; /* text-sm */
+  font-size: 0.875rem;
   transition: background-color var(--transition-duration-long) ease, color var(--transition-duration-long) ease, border-color var(--transition-duration-long) ease;
 }
 footer a {
     color: var(--primary-color);
     font-weight: 500;
+    border-bottom: 1px solid transparent;
 }
 footer a:hover {
     color: var(--primary-dark);
-    border-bottom-color: var(--primary-color);
+    border-bottom-color: var(--primary-light-border);
 }
 
 /* ==========================================================================
-   10. Back-to-Top Button
+   11. Back-to-Top Button
    ========================================================================== */
 .back-to-top {
   position: fixed;
@@ -606,237 +634,122 @@ footer a:hover {
   right: var(--padding-lg);
   background-color: var(--primary-color);
   color: var(--text-on-primary);
-  width: 40px; /* Fixed size */
-  height: 40px;
-  border-radius: var(--border-radius-full); /* Circle */
+  width: 44px; /* Slightly larger */
+  height: 44px;
+  border-radius: var(--border-radius-full);
   box-shadow: var(--shadow-md);
   text-decoration: none;
-  display: flex; /* Center icon */
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem; /* Icon size */
-  opacity: 0; /* Hidden by default */
+  font-size: 1.25rem;
+  opacity: 0;
   visibility: hidden;
-  transform: translateY(10px);
-  transition: background-color var(--transition-duration) ease, opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+  transform: scale(0.8); /* Scale transition */
+  transition: background-color var(--transition-duration) ease, opacity 0.3s ease, visibility 0s linear 0.3s, transform 0.3s ease, box-shadow var(--transition-duration) ease;
   z-index: 100;
-  border: none; /* Remove potential borders */
 }
-.back-to-top.visible { /* Class added by JS when scrolled */
+.back-to-top.visible {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: scale(1);
+    transition-delay: 0s, 0s, 0s, 0s; /* Reset visibility delay */
 }
 .back-to-top:hover {
   background-color: var(--primary-dark);
   color: var(--text-on-primary);
-  transform: translateY(-2px); /* Lift on hover */
+  transform: scale(1.05); /* Slightly larger on hover */
   box-shadow: var(--shadow-lg);
-  border: none;
 }
-.back-to-top:focus-visible {
-    outline-color: var(--primary-dark);
-}
+/* Focus state handled by global :focus-visible */
 
 /* ==========================================================================
-   11. Utilities
+   12. Utilities
    ========================================================================== */
 .flex { display: flex; }
 .grid { display: grid; }
 .items-center { align-items: center; }
 .justify-center { justify-content: center; }
 .justify-between { justify-content: space-between; }
+.text-center { text-align: center; }
+.sr-only { /* Screen reader only */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
 
-/* MathJax Styling */
+
+/* ==========================================================================
+   13. MathJax Styling
+   ========================================================================== */
 .math {
   text-align: center;
-  margin: var(--padding-lg) 0;
-  overflow-x: auto; /* Keep horizontal scroll */
-  padding: var(--padding-sm); /* Add some padding */
+  margin: var(--padding-xl) 0;
+  overflow-x: auto;
+  padding: var(--padding-md);
+  background-color: var(--bg-muted); /* Add subtle background */
+  border-radius: var(--border-radius-md);
 }
 
 /* ==========================================================================
-   12. Responsive Adjustments
+   14. Responsive Adjustments
    ========================================================================== */
 @media (max-width: 767px) { /* Below md breakpoint */
-  body {
-     /* Adjust margin if mobile nav wraps and increases header height significantly */
-     /* margin-top: calc(var(--header-height) + 2rem); */ /* Example adjustment */
-  }
-  section {
-     /* Adjust scroll margin if needed */
-     /* scroll-margin-top: calc(var(--header-height) + 3rem); */
+  .container {
+      padding-left: var(--padding-md); /* 1rem */
+      padding-right: var(--padding-md);
   }
   .main-content-wrapper {
-     margin: var(--padding-lg) var(--padding-md); /* Smaller margins */
-     width: auto; /* Allow it to shrink */
-     border-radius: var(--border-radius-lg); /* Slightly smaller radius */
+     margin: var(--padding-xl) var(--padding-md);
+     border-radius: var(--border-radius-lg);
   }
-  .page-header h1 {
-     font-size: 1.75rem; /* text-3xl */
+  .page-header {
+      padding: var(--padding-xl) var(--padding-md);
   }
-  .page-header p {
-     font-size: 1rem; /* text-base */
+  section {
+     padding: var(--padding-xl) var(--padding-md);
   }
-  h2 { font-size: 1.25rem; } /* text-xl */
-  h3 { font-size: 1.125rem; } /* text-lg */
+  footer {
+      padding: var(--padding-lg) var(--padding-md);
+  }
 }
 
-@media (max-width: 639px) { /* sm breakpoint */
-   /* Further adjustments if needed for very small screens */
+@media (max-width: 479px) { /* Below ~sm breakpoint */
    .container {
-     padding-left: var(--padding-md);
-     padding-right: var(--padding-md);
+     padding-left: var(--padding-sm); /* 0.5rem */
+     padding-right: var(--padding-sm);
+   }
+   .main-content-wrapper {
+       margin: var(--padding-lg) var(--padding-sm);
    }
    .page-header {
-     padding: var(--padding-lg) var(--padding-md);
+       padding: var(--padding-lg) var(--padding-sm);
    }
    section {
-     padding: var(--padding-lg) var(--padding-md);
+       padding: var(--padding-lg) var(--padding-sm);
    }
    .btn {
         padding: var(--padding-sm) var(--padding-md); /* Adjust button padding */
+        width: 100%; /* Make buttons full width */
+        text-align: center;
    }
-}
-
-
-/* ==========================================================================
-   13. Dark Mode Styles
-   ========================================================================== */
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Override variables for dark mode */
-    --text-color: var(--dark-text-color);
-    --text-muted: var(--dark-text-muted);
-    --bg-color: var(--dark-bg-color);
-    --bg-content: var(--dark-bg-content);
-    --bg-muted: var(--dark-bg-muted);
-    --border-color: var(--dark-border-color);
-    --border-light: #334155; /* Slightly darker than border-color */
-    --primary-light: #1e293b; /* Use a dark background for hover */
-
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -2px rgba(0, 0, 0, 0.15);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.15);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.15);
-  }
-
-  /* Specific element adjustments for dark mode */
-  #main-nav {
-    background-color: rgba(30, 41, 59, 0.9); /* dark-bg-color with alpha */
-    border-bottom-color: var(--border-light);
-  }
-  .site-title {
-      color: var(--dark-text-color);
-  }
-  .site-title:hover {
-      color: var(--primary-color); /* Keep primary hover color */
-  }
-  .nav-link {
-    color: var(--dark-text-muted);
-  }
-  .nav-link:hover {
-    color: var(--primary-color); /* Keep primary hover */
-    background-color: var(--dark-bg-muted); /* Use dark muted for hover bg */
-  }
-  .nav-link.active {
-    color: var(--primary-color); /* Keep primary active color */
-  }
-  .nav-link.active::before {
-     background-color: var(--primary-color); /* Keep primary indicator */
-  }
-
-  #mobile-menu-button {
-    color: var(--dark-text-muted);
-  }
-  #mobile-menu-button:hover {
-    background-color: var(--dark-bg-muted);
-    color: var(--dark-text-color);
-  }
-  .mobile-menu {
-    background-color: var(--dark-bg-content);
-    border-top-color: var(--dark-border-color);
-  }
-
-  .page-header {
-    /* Keep the gradient, maybe adjust slightly if needed */
-    background: linear-gradient(135deg, #0ea5e9, #0369a1); /* Same gradient often works well */
-    border-bottom-color: #0284c7; /* Slightly lighter dark primary */
-  }
-  .page-header p {
-      color: #bae6fd; /* sky-200 - Lighter blue for contrast */
-  }
-
-  section h2 {
-    color: var(--primary-color); /* Brighter heading in dark mode */
-    border-bottom-color: var(--dark-border-color);
-  }
-  section h3 {
-    color: #38bdf8; /* sky-400 - Slightly lighter primary */
-  }
-
-  a {
-    color: var(--primary-color); /* Keep primary link color */
-  }
-  a:hover {
-    color: #38bdf8; /* Lighter primary on hover */
-    border-bottom-color: #38bdf8;
-  }
-
-  .publication-list a:hover,
-  .styled-list a:hover,
-  .course-list a:hover {
-    background-color: var(--dark-bg-muted); /* Use dark muted bg */
-    color: #38bdf8; /* Lighter primary */
-    border-bottom-color: transparent;
-  }
-  .styled-list li::before {
-    color: var(--primary-color); /* Keep bullet color */
-  }
-  .publication-list li::before {
-      color: var(--dark-text-muted);
-  }
-
-  input[type="text"],
-  input[type="email"],
-  textarea,
-  select {
-    background-color: var(--dark-bg-muted);
-    color: var(--dark-text-color);
-    border: 1px solid var(--dark-border-color);
-  }
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  textarea:focus,
-  select:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.3); /* Primary color with alpha */
-  }
-
-  address {
-      color: var(--dark-text-muted);
-  }
-  address strong {
-      color: var(--dark-text-color);
-  }
-  p.leading-relaxed {
-      color: var(--dark-text-muted);
-  }
-
-  footer {
-    background-color: var(--dark-bg-color); /* Match body background */
-    color: var(--dark-text-muted);
-    border-top: 1px solid var(--dark-border-color);
-  }
-  footer a {
-      color: var(--primary-color);
-  }
-  footer a:hover {
-      color: #38bdf8;
-      border-bottom-color: #38bdf8;
-  }
-
-  .back-to-top {
-      /* Style usually remains the same, colors are handled by variables */
-  }
+   .back-to-top {
+       bottom: var(--padding-md);
+       right: var(--padding-md);
+       width: 40px;
+       height: 40px;
+   }
+   .publication-list li {
+       padding-left: calc(2em + var(--padding-sm)); /* Adjust for smaller screens */
+   }
+   .publication-list li::before {
+       width: 2em;
+       padding-right: var(--padding-sm);
+   }
 }
