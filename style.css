@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Rewritten CSS for Pranav Haridas's Personal Webpage (v2.2 - Header Refined)
+   Rewritten CSS for Pranav Haridas's Personal Webpage (v2.3 - Center Fix)
    Focus: Mobile Fixes, Alignment, Consistency, Accessibility, Performance
    ========================================================================== */
 
@@ -225,8 +225,13 @@ address strong {
 
 /* Main content wrapper with fade-in */
 .main-content-wrapper {
+  display: block; /* Ensure it's treated as a block element */
   max-width: var(--content-max-width);
-  margin: var(--padding-xl) auto; /* Use XL for top/bottom */
+  /* Explicitly set margins for centering */
+  margin-top: var(--padding-xl);
+  margin-bottom: var(--padding-xl);
+  margin-left: auto;
+  margin-right: auto;
   background-color: var(--bg-content);
   border-radius: var(--border-radius-xl);
   box-shadow: var(--shadow-lg);
@@ -778,6 +783,10 @@ footer a:hover {
   .main-content-wrapper {
      margin-top: var(--padding-xl);
      margin-bottom: var(--padding-xl);
+     margin-left: var(--padding-md); /* Add side margin for mobile */
+     margin-right: var(--padding-md);
+     width: auto; /* Allow shrinking */
+     max-width: none; /* Override max-width */
      border-radius: var(--border-radius-lg); /* Slightly smaller radius */
   }
   .page-header {
@@ -811,6 +820,8 @@ footer a:hover {
    .main-content-wrapper {
        margin-top: var(--padding-lg);
        margin-bottom: var(--padding-lg);
+       margin-left: var(--padding-sm); /* Further reduce side margin */
+       margin-right: var(--padding-sm);
    }
    .page-header {
        padding-top: var(--padding-lg);
