@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pranav Haridas - Assistant Professor at Kerala School of Mathematics</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Pranav Haridas is an Assistant Professor at Kerala School of Mathematics specializing in Complex Analysis, surface braid groups, and Teichmüller spaces.">
+    <meta name="keywords" content="Pranav Haridas, Complex Analysis, Kerala School of Mathematics, Mathematics, Research, Teaching">
+    <meta name="author" content="Pranav Haridas">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/solid.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
+
+    <!-- MathJax Configuration -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                packages: ['base', 'ams']
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process',
+                renderActions: {
+                    addMenu: [0, '', ''],
+                    checkLoading: [0, '', '']
+                }
+            },
+            startup: {
+                pageReady() {
+                    return MathJax.startup.defaultPageReady().then(function () {
+                        document.body.classList.add('mathjax-loaded');
+                    });
+                }
+            },
+            loader: {
+                load: ['[tex]/ams']
+            }
+        };
+    </script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Pranav Haridas",
+        "jobTitle": "Assistant Professor",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Kerala School of Mathematics",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Kunnamangalam, Kozhikode",
+                "addressRegion": "Kerala",
+                "postalCode": "673571",
+                "addressCountry": "India"
+            }
+        },
+        "url": "https://pranavharidas.github.io/",
+        "knowsAbout": ["Complex Analysis", "Surface Braid Groups", "Teichmüller Spaces", "Proper Holomorphic Mappings"]
+    }
+    </script>
+
+    <!-- Inline Report Table Styles -->
+    <style>
+        .responsive-table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .report-table th, .report-table td {
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        .report-table th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: #1a202c;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 font-inter text-gray-800">
+    <header id="main-nav" role="banner" class="bg-white shadow-sm py-4">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <a href="https://pranavharidas.github.io/" class="text-2xl font-bold text-blue-700 hover:text-blue-800 transition-colors duration-300 rounded-md p-2" aria-label="Pranav Haridas Home Page">
+                Pranav Haridas
+            </a>
+            <nav class="hidden md:flex space-x-6" role="navigation" aria-label="Main Navigation">
+                <a href="https://pranavharidas.github.io/research" class="nav-link text-gray-600 hover:text-blue-700 font-medium transition-colors duration-300">Research</a>
+                <a href="https://pranavharidas.github.io/teaching" class="nav-link text-gray-600 hover:text-blue-700 font-medium transition-colors duration-300">Teaching</a>
+                <a href="https://pranavharidas.github.io/resources" class="nav-link text-gray-600 hover:text-blue-700 font-medium transition-colors duration-300">Resources</a>
+            </nav>
+            <button id="mobile-menu-button"
+                aria-label="Toggle Navigation Menu"
+                aria-expanded="false"
+                aria-controls="mobile-menu"
+                class="md:hidden flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300">
+                <span class="sr-only">Menu</span>
+                <i class="fas fa-bars text-xl" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="mobile-menu hidden md:hidden bg-white shadow-lg py-2">
+            <div class="flex flex-col space-y-1 px-4">
+                <a href="https://pranavharidas.github.io/research" class="block py-2 px-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors duration-300">Research</a>
+                <a href="https://pranavharidas.github.io/teaching" class="block py-2 px-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors duration-300">Teaching</a>
+                <a href="https://pranavharidas.github.io/resources" class="block py-2 px-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors duration-300">Resources</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content-wrapper">
+        <main class="container mx-auto py-8 px-4">
+          <section id="teaching" class="bg-white rounded-xl shadow p-6 mb-6">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Teaching</h2>
+          
+            <h3 class="text-xl font-semibold text-sky-600 mb-3">Courses</h3>
+            <ul class="list-disc list-outside pl-6 space-y-3 text-slate-700 leading-relaxed">
+              <li>Differential Equations (Spring 2023 at Kerala School of Mathematics)</li>
+              <li>Algebraic Topology (Fall 2022 at Kerala School of Mathematics)</li>
+              <li>Differential Geometry (Fall 2021 and Spring 2022 at Kerala School of Mathematics)</li>
+              <li>Complex Analysis (Spring 2021 at Kerala School of Mathematics)</li>
+              <li>Topology (Fall 2020 at Kerala School of Mathematics)</li>
+              <li>
+                Complex Analysis (Spring 2020 in the online portal Swayam Central —
+                <a href="https://nptel.ac.in/courses/111106141" target="_blank"
+                   class="text-sky-600 hover:text-sky-800 hover:underline decoration-sky-300 underline-offset-2 transition">
+                  view lectures here</a>)
+              </li>
+              <li>
+                Linear Algebra (Fall 2020 in the online portal Swayam Central —
+                <a href="https://nptel.ac.in/courses/111106135" target="_blank"
+                   class="text-sky-600 hover:text-sky-800 hover:underline decoration-sky-300 underline-offset-2 transition">
+                  view lectures here</a>)
+              </li>
+              <li>Linear Algebra and Numerical Analysis (Spring 2016 and 2017 at Indian Institute of Technology Madras)</li>
+              <li>Riemann Surfaces (Fall 2018 at Chennai Mathematical Institute)</li>
+            </ul>
+          
+            <p class="text-lg text-slate-600 leading-relaxed mt-6">
+              In this semester, I am offering a course on Algebraic Topology at Kerala School of Mathematics.
+            </p>
+          </section>
+        </main>
+    </div>
+
+    <footer class="text-center py-6 mt-12 border-t border-slate-200 bg-white">
+        <p class="text-sm text-slate-500">© <span id="current-year"></span> Pranav Haridas. All rights reserved.</p>
+    </footer>
+
+    <!-- UI Behavior Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                    mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                    mobileMenu.classList.toggle('hidden', isExpanded);
+
+                    const icon = mobileMenuButton.querySelector('i');
+                    if (icon) {
+                        icon.classList.toggle('fa-bars', isExpanded);
+                        icon.classList.toggle('fa-times', !isExpanded);
+                    }
+                });
+            }
+
+            const sections = document.querySelectorAll('main section[id]');
+            const navLinks = document.querySelectorAll('#main-nav a.nav-link');
+
+            const activateNavLink = (id) => {
+                navLinks.forEach(link => {
+                    link.classList.remove('text-blue-700', 'font-bold');
+                    link.classList.add('text-gray-600', 'font-medium');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('text-blue-700', 'font-bold');
+                        link.classList.remove('text-gray-600', 'font-medium');
+                    }
+                });
+            };
+
+            const onScroll = () => {
+                let currentSectionId = '';
+                const scrollPosition = window.pageYOffset + (document.getElementById('main-nav')?.offsetHeight || 0) + 10;
+
+                sections.forEach(section => {
+                    const top = section.offsetTop;
+                    const bottom = top + section.offsetHeight;
+                    if (scrollPosition >= top && scrollPosition < bottom) {
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+
+                if (currentSectionId) {
+                    activateNavLink(currentSectionId);
+                } else if (sections.length && navLinks.length) {
+                    activateNavLink(sections[0].getAttribute('id'));
+                }
+            };
+
+            if (sections.length) {
+                window.addEventListener('scroll', onScroll, { passive: true });
+                window.addEventListener('load', onScroll);
+            }
+        });
+
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>
