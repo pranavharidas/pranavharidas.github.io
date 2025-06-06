@@ -1,0 +1,55 @@
+<header id="main-nav" role="banner" class="bg-white shadow-sm py-4">
+  <div class="container mx-auto flex justify-between items-center px-4">
+    <a href="https://pranavharidas.github.io/" class="text-2xl font-bold text-blue-700 hover:text-blue-800 transition-colors duration-300 rounded-md p-2" aria-label="Pranav Haridas Home Page">
+      Pranav Haridas
+    </a>
+    
+    <!-- Desktop Nav -->
+    <nav id="main-menu" class="hidden md:flex space-x-6" role="navigation" aria-label="Main Navigation">
+      <!-- Menu items go here once -->
+      <a href="https://pranavharidas.github.io/research" class="nav-link text-gray-600 hover:text-blue-700 font-medium transition-colors duration-300">Research</a>
+      <a href="https://pranavharidas.github.io/teaching" class="nav-link text-gray-600 hover:text-blue-700 font-medium transition-colors duration-300">Teaching</a>
+      <a href="https://pranavharidas.github.io/resources" class="nav-link text-gray-600 hover:text-blue-700 font-medium transition-colors duration-300">Resources</a>
+    </nav>
+
+    <!-- Mobile Menu Toggle -->
+    <button id="mobile-menu-button"
+      aria-label="Toggle Navigation Menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      class="md:hidden flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300">
+      <span class="sr-only">Menu</span>
+      <i class="fas fa-bars text-xl" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <!-- Mobile Nav will be populated dynamically -->
+  <div id="mobile-menu" class="mobile-menu hidden md:hidden bg-white shadow-lg py-2">
+    <div id="mobile-menu-items" class="flex flex-col space-y-1 px-4">
+      <!-- Items copied from #main-menu -->
+    </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuBtn = document.getElementById("mobile-menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const desktopMenu = document.getElementById("main-menu");
+    const mobileMenuItems = document.getElementById("mobile-menu-items");
+
+    // Toggle mobile menu visibility
+    menuBtn.addEventListener("click", function () {
+      const expanded = menuBtn.getAttribute("aria-expanded") === "true";
+      menuBtn.setAttribute("aria-expanded", !expanded);
+      mobileMenu.classList.toggle("hidden");
+    });
+
+    // Clone desktop nav items into mobile nav
+    desktopMenu.querySelectorAll('a').forEach(link => {
+      const mobileLink = link.cloneNode(true);
+      mobileLink.classList.add("block", "py-2", "px-3", "text-gray-700", "hover:bg-blue-50", "hover:text-blue-700", "rounded-md", "transition-colors", "duration-300");
+      mobileMenuItems.appendChild(mobileLink);
+    });
+  });
+</script>
