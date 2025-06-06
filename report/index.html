@@ -10,24 +10,24 @@
     <meta name="keywords" content="Pranav Haridas, Complex Analysis, Kerala School of Mathematics, Mathematics, Research, Teaching">
     <meta name="author" content="Pranav Haridas">
     
-    <!-- Preload Critical Resources -->
+    <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     
-    <!-- Fonts -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="../style.css">
-    
-    <!-- Minimal Font Awesome (only what's needed) -->
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/solid.min.css">
-    
+
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
+    <script src="https://cdn.tailwindcss.com" defer></script>
+
     <!-- MathJax Configuration -->
     <script>
         MathJax = {
@@ -48,7 +48,6 @@
             startup: {
                 pageReady() {
                     return MathJax.startup.defaultPageReady().then(function () {
-                        // Signal that MathJax is done rendering
                         document.body.classList.add('mathjax-loaded');
                     });
                 }
@@ -59,8 +58,8 @@
         };
     </script>
     <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
-    <!-- Structured Data for Academic Profile -->
+
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -82,49 +81,47 @@
         "knowsAbout": ["Complex Analysis", "Surface Braid Groups", "Teichmüller Spaces", "Proper Holomorphic Mappings"]
     }
     </script>
+
+    <!-- Inline Report Table Styles -->
     <style>
-        /* Custom styles for tables within the report to allow scrolling on small screens */
         .responsive-table-container {
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch; /* for smooth scrolling on iOS */
+            -webkit-overflow-scrolling: touch;
         }
         .report-table {
             width: 100%;
             border-collapse: collapse;
         }
         .report-table th, .report-table td {
-            border: 1px solid #e2e8f0; /* Tailwind's border-gray-200 */
-            padding: 0.75rem; /* Tailwind's p-3 */
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem;
             text-align: left;
             vertical-align: top;
         }
         .report-table th {
-            background-color: #f8fafc; /* Tailwind's bg-gray-50 */
-            font-weight: 600; /* Tailwind's font-semibold */
-            color: #1a202c; /* Tailwind's text-gray-900 */
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: #1a202c;
         }
     </style>
 </head>
 
 <body class="bg-gray-100 font-inter text-gray-800">
-    <!-- Main Navigation -->
     <header id="main-nav" role="banner" class="bg-white shadow-sm py-4">
         <div class="container mx-auto flex justify-between items-center px-4">
             <a href="https://pranavharidas.github.io/" class="text-2xl font-bold text-blue-700 hover:text-blue-800 transition-colors duration-300 rounded-md p-2" aria-label="Pranav Haridas Home Page">
                 Pranav Haridas
             </a>
-
             <nav class="hidden md:flex space-x-6" role="navigation" aria-label="Main Navigation">
                 <a href="https://pranavharidas.github.io/research" class="nav-link text-gray-600 hover:text-blue-700 font-medium transition-colors duration-300">Research</a>
                 <a href="https://pranavharidas.github.io/teaching" class="nav-link text-gray-600 hover:text-blue-700 font-medium transition-colors duration-300">Teaching</a>
                 <a href="https://pranavharidas.github.io/resources" class="nav-link text-gray-600 hover:text-blue-700 font-medium transition-colors duration-300">Resources</a>
             </nav>
-
-            <button id="mobile-menu-button" 
-                    aria-label="Toggle Navigation Menu" 
-                    aria-expanded="false" 
-                    aria-controls="mobile-menu"
-                    class="md:hidden flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300">
+            <button id="mobile-menu-button"
+                aria-label="Toggle Navigation Menu"
+                aria-expanded="false"
+                aria-controls="mobile-menu"
+                class="md:hidden flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300">
                 <span class="sr-only">Menu</span>
                 <i class="fas fa-bars text-xl" aria-hidden="true"></i>
             </button>
@@ -693,21 +690,17 @@
                 </ul>
             </section> -->
         </main>
-
     </div>
 
-    <!-- Footer -->
     <footer class="text-center py-6 mt-12 border-t border-slate-200 bg-white">
         <p class="text-sm text-slate-500">© <span id="current-year"></span> Pranav Haridas. All rights reserved.</p>
     </footer>
 
+    <!-- UI Behavior Scripts -->
     <script>
-        // Wait for DOM content to load before attaching event listeners
         document.addEventListener('DOMContentLoaded', () => {
-            // Set Current Year in Footer
             document.getElementById('current-year').textContent = new Date().getFullYear();
-            
-            // Mobile menu toggle functionality
+
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
 
@@ -715,67 +708,55 @@
                 mobileMenuButton.addEventListener('click', () => {
                     const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
                     mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
-                    mobileMenu.classList.toggle('hidden', isExpanded); // Toggle 'hidden' class
-                    
-                    // Update icon for visual feedback
+                    mobileMenu.classList.toggle('hidden', isExpanded);
+
                     const icon = mobileMenuButton.querySelector('i');
                     if (icon) {
-                        if (!isExpanded) {
-                            icon.classList.remove('fa-bars');
-                            icon.classList.add('fa-times');
-                        } else {
-                            icon.classList.remove('fa-times');
-                            icon.classList.add('fa-bars');
-                        }
+                        icon.classList.toggle('fa-bars', isExpanded);
+                        icon.classList.toggle('fa-times', !isExpanded);
                     }
                 });
             }
 
-            // Scrollspy functionality (adjusted for section structure)
-            const sections = document.querySelectorAll('main section[id]'); // Target main sections only
-            const navLinks = document.querySelectorAll('#main-nav a.nav-link'); // Target nav links
+            const sections = document.querySelectorAll('main section[id]');
+            const navLinks = document.querySelectorAll('#main-nav a.nav-link');
 
             const activateNavLink = (id) => {
                 navLinks.forEach(link => {
-                    link.classList.remove('text-blue-700', 'font-bold'); // Remove active styles
-                    link.classList.add('text-gray-600', 'font-medium'); // Add default styles
-
+                    link.classList.remove('text-blue-700', 'font-bold');
+                    link.classList.add('text-gray-600', 'font-medium');
                     if (link.getAttribute('href') === `#${id}`) {
-                        link.classList.add('text-blue-700', 'font-bold'); // Add active styles
-                        link.classList.remove('text-gray-600', 'font-medium'); // Remove default styles
+                        link.classList.add('text-blue-700', 'font-bold');
+                        link.classList.remove('text-gray-600', 'font-medium');
                     }
                 });
             };
 
             const onScroll = () => {
                 let currentSectionId = '';
-                // Adjust scroll position to account for fixed header
-                const scrollPosition = window.pageYOffset + (document.getElementById('main-nav')?.offsetHeight || 0) + 10; 
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionBottom = sectionTop + section.offsetHeight;
+                const scrollPosition = window.pageYOffset + (document.getElementById('main-nav')?.offsetHeight || 0) + 10;
 
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                sections.forEach(section => {
+                    const top = section.offsetTop;
+                    const bottom = top + section.offsetHeight;
+                    if (scrollPosition >= top && scrollPosition < bottom) {
                         currentSectionId = section.getAttribute('id');
                     }
                 });
-                
+
                 if (currentSectionId) {
                     activateNavLink(currentSectionId);
-                } else if (navLinks.length > 0 && sections.length > 0) {
-                    // Fallback to activate the first nav link if no section is in view (e.g., at very top)
+                } else if (sections.length && navLinks.length) {
                     activateNavLink(sections[0].getAttribute('id'));
                 }
             };
 
-            if (sections.length > 0) {
+            if (sections.length) {
                 window.addEventListener('scroll', onScroll, { passive: true });
-                window.addEventListener('load', onScroll); // Trigger on load to set initial active link
+                window.addEventListener('load', onScroll);
             }
         });
 
-        // Add 'loaded' class to body after DOM is fully loaded for fade-in animation
         window.addEventListener('load', () => {
             document.body.classList.add('loaded');
         });
