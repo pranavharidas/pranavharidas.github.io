@@ -139,26 +139,23 @@
     <div class="main-content-wrapper">
         <main class="max-w-screen-lg mx-auto px-4 py-6 space-y-10 text-gray-800">
           <!-- Profile Section -->
-          <section class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-            <!-- Profile Image -->
-            <aside class="bg-white rounded-xl shadow p-4 flex flex-col items-center md:items-start text-center md:text-left space-y-4">
-              <img src="Pranav.png" alt="Pranav Haridas" class="w-32 h-32 rounded-full object-cover border-4 border-sky-200 shadow"
-                   onerror="this.onerror=null; this.src='https://placehold.co/128x128/E0F2FE/334155?text=PH'; this.alt='Pranav Haridas profile placeholder image';">
-            </aside>
-        
-            <!-- Intro and Buttons -->
-            <div class="md:col-span-2 bg-white rounded-xl shadow p-6 space-y-4">
-              <h1 class="text-3xl font-bold text-gray-900">Pranav Haridas</h1>
-              <p class="text-lg text-gray-700">Assistant Professor at Kerala School of Mathematics</p>
-              <div class="flex flex-wrap gap-3">
-                <a href="https://pranavharidas.github.io/research/" class="px-4 py-2 bg-sky-600 text-white rounded-full hover:bg-sky-700 transition" aria-label="View my research work">Research</a>
-                <a href="https://pranavharidas.github.io/teaching/" class="px-4 py-2 border border-sky-600 text-sky-600 rounded-full hover:bg-sky-50 transition" aria-label="View my teaching information">Teaching</a>
+            <section class="bg-white rounded-xl shadow p-6 flex flex-col md:flex-row items-center md:items-start gap-6">
+              <!-- Profile Image -->
+              <div class="flex-shrink-0">
+                <img src="Pranav.png" alt="Pranav Haridas"
+                     class="w-32 h-32 md:w-36 md:h-36 rounded-full object-cover border-4 border-sky-100 shadow-md"
+                     onerror="this.onerror=null; this.src='https://placehold.co/144x144/E0F2FE/334155?text=PH'; this.alt='Pranav Haridas profile placeholder image';">
               </div>
-              <p class="text-gray-700 text-base leading-relaxed">
-                I am currently an Assistant Professor at Kerala School of Mathematics, specializing in Complex Analysis. My research focuses on surface braid groups, mapping class groups of hyperbolic surfaces, and Teichmüller spaces.
-              </p>
-            </div>
-          </section>
+            
+              <!-- Text Content -->
+              <div class="flex-1 space-y-2 text-center md:text-left">
+                <h1 class="text-3xl font-bold text-gray-900">Pranav Haridas</h1>
+                <p class="text-lg text-gray-700">Assistant Professor at Kerala School of Mathematics</p>
+                <p class="text-gray-700 leading-relaxed text-base">
+                  I am currently an Assistant Professor at Kerala School of Mathematics, specializing in Complex Analysis. My research focuses on surface braid groups, mapping class groups of hyperbolic surfaces, and Teichmüller spaces.
+                </p>
+              </div>
+            </section>
         
           <!-- Research Section -->
           <section id="research" class="bg-white rounded-xl shadow p-6 space-y-4">
