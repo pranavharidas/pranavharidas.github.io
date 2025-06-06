@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css">
@@ -692,74 +692,74 @@
         </main>
     </div>
 
-    <footer class="text-center py-6 mt-12 border-t border-slate-200 bg-white">
-        <p class="text-sm text-slate-500">© <span id="current-year"></span> Pranav Haridas. All rights reserved.</p>
-    </footer>
-
-    <!-- UI Behavior Scripts -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-
-            if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', () => {
-                    const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-                    mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
-                    mobileMenu.classList.toggle('hidden', isExpanded);
-
-                    const icon = mobileMenuButton.querySelector('i');
-                    if (icon) {
-                        icon.classList.toggle('fa-bars', isExpanded);
-                        icon.classList.toggle('fa-times', !isExpanded);
-                    }
-                });
-            }
-
-            const sections = document.querySelectorAll('main section[id]');
-            const navLinks = document.querySelectorAll('#main-nav a.nav-link');
-
-            const activateNavLink = (id) => {
-                navLinks.forEach(link => {
-                    link.classList.remove('text-blue-700', 'font-bold');
-                    link.classList.add('text-gray-600', 'font-medium');
-                    if (link.getAttribute('href') === `#${id}`) {
-                        link.classList.add('text-blue-700', 'font-bold');
-                        link.classList.remove('text-gray-600', 'font-medium');
-                    }
-                });
-            };
-
-            const onScroll = () => {
-                let currentSectionId = '';
-                const scrollPosition = window.pageYOffset + (document.getElementById('main-nav')?.offsetHeight || 0) + 10;
-
-                sections.forEach(section => {
-                    const top = section.offsetTop;
-                    const bottom = top + section.offsetHeight;
-                    if (scrollPosition >= top && scrollPosition < bottom) {
-                        currentSectionId = section.getAttribute('id');
-                    }
-                });
-
-                if (currentSectionId) {
-                    activateNavLink(currentSectionId);
-                } else if (sections.length && navLinks.length) {
-                    activateNavLink(sections[0].getAttribute('id'));
-                }
-            };
-
-            if (sections.length) {
-                window.addEventListener('scroll', onScroll, { passive: true });
-                window.addEventListener('load', onScroll);
-            }
-        });
-
-        window.addEventListener('load', () => {
-            document.body.classList.add('loaded');
-        });
-    </script>
-</body>
+      <footer class="text-center py-6 mt-12 border-t border-slate-200 bg-white">
+          <p class="text-sm text-slate-500">© <span id="current-year"></span> Pranav Haridas. All rights reserved.</p>
+      </footer>
+  
+      <!-- UI Behavior Scripts -->
+      <script>
+          document.addEventListener('DOMContentLoaded', () => {
+              document.getElementById('current-year').textContent = new Date().getFullYear();
+  
+              const mobileMenuButton = document.getElementById('mobile-menu-button');
+              const mobileMenu = document.getElementById('mobile-menu');
+  
+              if (mobileMenuButton && mobileMenu) {
+                  mobileMenuButton.addEventListener('click', () => {
+                      const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                      mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                      mobileMenu.classList.toggle('hidden', isExpanded);
+  
+                      const icon = mobileMenuButton.querySelector('i');
+                      if (icon) {
+                          icon.classList.toggle('fa-bars', isExpanded);
+                          icon.classList.toggle('fa-times', !isExpanded);
+                      }
+                  });
+              }
+  
+              const sections = document.querySelectorAll('main section[id]');
+              const navLinks = document.querySelectorAll('#main-nav a.nav-link');
+  
+              const activateNavLink = (id) => {
+                  navLinks.forEach(link => {
+                      link.classList.remove('text-blue-700', 'font-bold');
+                      link.classList.add('text-gray-600', 'font-medium');
+                      if (link.getAttribute('href') === `#${id}`) {
+                          link.classList.add('text-blue-700', 'font-bold');
+                          link.classList.remove('text-gray-600', 'font-medium');
+                      }
+                  });
+              };
+  
+              const onScroll = () => {
+                  let currentSectionId = '';
+                  const scrollPosition = window.pageYOffset + (document.getElementById('main-nav')?.offsetHeight || 0) + 10;
+  
+                  sections.forEach(section => {
+                      const top = section.offsetTop;
+                      const bottom = top + section.offsetHeight;
+                      if (scrollPosition >= top && scrollPosition < bottom) {
+                          currentSectionId = section.getAttribute('id');
+                      }
+                  });
+  
+                  if (currentSectionId) {
+                      activateNavLink(currentSectionId);
+                  } else if (sections.length && navLinks.length) {
+                      activateNavLink(sections[0].getAttribute('id'));
+                  }
+              };
+  
+              if (sections.length) {
+                  window.addEventListener('scroll', onScroll, { passive: true });
+                  window.addEventListener('load', onScroll);
+              }
+          });
+  
+          window.addEventListener('load', () => {
+              document.body.classList.add('loaded');
+          });
+      </script>
+  </body>
 </html>
